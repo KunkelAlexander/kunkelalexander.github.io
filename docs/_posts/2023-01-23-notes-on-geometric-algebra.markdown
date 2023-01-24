@@ -6,6 +6,8 @@ categories: jekyll update
 ---
 In this post, we will take a close look at some concepts in geometric algebra and use them to build a python code that generates `n-dimensional rotations`. 
 
+$$ 2x^3 = \exp(34) $$
+
 {% highlight python %}
 def myfunction(x):
 	return x

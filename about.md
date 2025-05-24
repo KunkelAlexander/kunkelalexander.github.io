@@ -9,7 +9,7 @@ title: About Alexander Kunkel
 	<img src="{{ site.baseurl }}/assets/img/about/2024.png" alt="">
 	</div>
 	<p class="intro">Data analyst at Transport & Environment, based in Brussels.</p>
-	<p>I am passionate about environmental protection, coffee, learning languages, playing guitar, theoretical physics and mathematics.</p>
+	<p>I am passionate about environmental protection, coffee, learning languages, playing the guitar, theoretical physics and mathematics.</p>
 	<h2>Physics publications</h2>
 	<ul>
   		<li><em>A Hybrid Scheme for Fuzzy Dark Matter Simulations Combining the Schrödinger and Hamilton-Jacobi-Madelung Equations</em> authored by Alexander Kunkel, Hei Yin Jowett Chan, Hsi-Yu Schive, Hsinhao Huang, Pin-Yu Liao, <a href="https://arxiv.org/abs/2411.17288">accepted for publication in ApJS, 2025</a></li>
@@ -21,11 +21,12 @@ title: About Alexander Kunkel
   	</ul>
 	<h2>T&E publications</h2>
 	<ul>
-		<li> Expert group - <a href="https://www.transportenvironment.org/articles/down-to-earth"> Down to earth - Why European aviation needs to urgently address its growth problem</a></li>
-		<li> Co-author - <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2025/aviation"> European state of transport 2025 - Aviation</a></li>
-		<li> Main author <a href="https://www.transportenvironment.org/topics/planes/saf-observatory"> SAF Observatory - Interactive dashboard - 12/2024</a></li>
-		<li> Co-author <a href="https://www.transportenvironment.org/articles/implementing-the-eus-e-saf-mandate"> Implementing the EU’s e-SAF mandate - Briefing - 10/2024</a></li>
-		<li> Expert group <a href="https://www.transportenvironment.org/articles/how-sustainable-are-advanced-and-waste-biofuels"> How sustainable are advanced and waste biofuels? - Report - 07/2024</a></li>
-		<li> Co-author <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport/energy"> European state of transport 2024 - Energy</a></li>
+		<li><a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung"> T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem - 4/2025</a>- Reviewer</li>
+		<li><a href="https://www.transportenvironment.org/articles/down-to-earth"> Down to earth - Why European aviation needs to urgently address its growth problem - 1/2025</a> - Reviewer</li>
+		<li><a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2025/aviation"> European state of transport 2025 - Aviation</a> - Co-author</li>
+		<li><a href="https://www.transportenvironment.org/topics/planes/saf-observatory"> SAF Observatory - Interactive dashboard - 12/2024</a> - Co-author</li>
+		<li><a href="https://www.transportenvironment.org/articles/implementing-the-eus-e-saf-mandate"> Implementing the EU’s e-SAF mandate - Briefing - 10/2024</a> - Co-author</li>
+		<li><a href="https://www.transportenvironment.org/articles/how-sustainable-are-advanced-and-waste-biofuels"> How sustainable are advanced and waste biofuels? - Report - 07/2024</a> - Co-author</li>
+		<li><a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport/energy"> European state of transport 2024 - Energy</a> - Co-author</li>
   	</ul>
 </div>

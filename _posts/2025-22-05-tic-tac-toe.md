@@ -28,21 +28,21 @@ We first establish the baseline performance of an agent playing legal, random mo
 ## Minimax algorithm
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_minimax_vs_random_game_play.gif" alt="">
 
-Now, we turn towards a different kind of benchmarking algorithm: the minimax algorithm. A minimax agent assumes that its opponent will play optimally—making the best possible moves to win. Faced with such a formidable adversary, the minimax agent chooses moves that minimize the maximum possible loss—hence the name. If victory is out of reach, the agent aims to at least avoid defeat, opting for the outcome with the least downside.
+Now, we turn towards a different kind of benchmarking algorithm: the minimax algorithm. A minimax agent assumes that its opponent will play optimally—making the best possible moves to win. Faced with such a formidable adversary, the minimax agent chooses moves that minimize its own loss — hence the name. If victory is out of reach, the agent aims to at least avoid defeat.
 
 But how does it decide which move to make?
 
-The minimax algorithm works by evaluating all possible future game states. In a game like Tic-Tac-Toe, this means exploring up to 39=19, ⁣68339=19,683 board configurations—since each of the $$9$$ squares can be in one of three states: X, O, or empty. The algorithm assigns a score to each final state (win, loss, or draw), and then works backwards from these terminal states to the current position, assuming both players choose optimally at every turn. Ultimately, it selects the move that leads to the best achievable outcome.
+The minimax algorithm works by evaluating all possible future game states. In a game like Tic-Tac-Toe, this means exploring up to $$3^9=19683$$ board configurations—since each of the $$9$$ squares can be in one of three states: X, O, or empty. The algorithm assigns a score to each final state (win, loss, or draw), and then works backwards from these terminal states to the current position, assuming both players choose optimally at every turn. Ultimately, it selects the move that leads to the best achievable outcome.
 
 The name "minimax" comes from this interplay: the agent tries to minimize the possible maximum loss, while the opponent tries to maximize its own gain. It’s a game of antagonistic optimization.
 
-This sounds like a perfect strategy for all two-player, turn-based games, right? Well—yes, in theory. But the major drawback is computational cost. Even in a simple game like Tic-Tac-Toe, the number of potential board configurations (though reducible due to symmetries) is non-trivial. In complex games like chess, the explosion in possibilities is extreme. If we imagined each square having exactly $$6$$ possible states (empty, rook, bishop, knight, queen, pawn), we get $$6^64\propto 10^{49} combinations.
+This sounds like a perfect strategy for all two-player, turn-based games, right? Well—yes, in theory. But the major drawback is computational cost. Even in a simple game like Tic-Tac-Toe, the number of potential board configurations (though reducible due to symmetries) is non-trivial. In complex games like chess, the explosion in possibilities is extreme. If we imagined each square having exactly $$6$$ possible states (empty, rook, bishop, knight, queen, pawn), we get $$6^64\propto 10^{49}$$ combinations.
 
 To make minimax tractable in such cases, practical implementations use optimizations such as pruning (e.g., alpha-beta pruning) and heuristics to evaluate only a subset of promising positions.
 
 Returning to Tic-Tac-Toe: how well does a minimax agent perform against a random player?
 
-Unsurprisingly, the minimax agent is nearly unbeatable. A random agent might occasionally stumble into a draw, but it has virtually no chance of winning - a situation shown in the above animation. The minimax strategy guarantees either victory or a draw, depending on who moves first and how the game unfolds.
+Unsurprisingly, the minimax agent is nearly unbeatable. A random agent might occasionally stumble into a draw, but it has no chance of winning - a situation shown in the above animation. The minimax strategy guarantees either victory or a draw, depending on who moves first and how the game unfolds.
 
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_minimax_vs_random.png" alt="">
 
@@ -51,6 +51,8 @@ Going first helps the random agent to achieve slightly more draws.
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/3_random_vs_minimax.png" alt="">
 
 
-But only another minimax agent manages to achieve the 100% desired draws.
+But only another agent playing ideally manages to achieve the desired 100% draws.
 
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/4_minimax_vs_minimax.png" alt="">
+
+## Q-Learning

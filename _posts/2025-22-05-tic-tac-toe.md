@@ -1,17 +1,17 @@
 ---
 layout: post
-title:  "Computers learning Tic-Tac-Toe"
+title:  "Computers learning Tic-Tac-Toe - Pt. 1"
 date:   2025-05-22
 description: Learn how to make computers play Tic-Tac-Toe
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n today's post, we study ways to play Tic-Tac-Toe using different (machine-learning) algorithms. </p>
+<p class="intro"><span class="dropcap">I</span>n today's post, we study ways to play Tic-Tac-Toe using the minimax and Q-learning algorithms. </p>
 
 ## Intro
 
-This post introduces a number of (machine-learning) algorithms including the minimax algorithm, tabular Q-learning and deep Q-learning (using dual networks, duelling networks, convolutional networks and prioritised experience replay) to play the game Tic-Tac-Toe. It essentially reproduces <a href="https://github.com/fcarsten/tic-tac-toe/"> Carsten Friedrich's excellent notebook series</a>.  I will gloss over some details, so please refer to Carsten's post for some more explanations.  To spice things up a bit, I also describe the profiling of the code using flame diagrams and hyperparameter optimisation using 'optuna'. You may find the accompanying <a href="https://github.com/KunkelAlexander/tictactoe_rl"> Python code on GitHub</a>.
+This series of post introduces a number of (machine-learning) algorithms including the minimax algorithm, tabular Q-learning and deep Q-learning (using dual networks, duelling networks, convolutional networks and prioritised experience replay) to play the game Tic-Tac-Toe. It essentially reproduces <a href="https://github.com/fcarsten/tic-tac-toe/"> Carsten Friedrich's excellent notebook series</a>.  In today's posts we are looking at the minimax and Q-learning algorithms. I will gloss over some details, so please refer to Carsten's post for some more explanations. You may find the accompanying <a href="https://github.com/KunkelAlexander/tictactoe_rl"> Python code on GitHub</a>.
 
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_random_game_play.gif" alt="">
 
@@ -72,8 +72,3 @@ We train a Q-learning agent by letting it play up to 10000 thousand games and ob
 Surprisingly, it achieves close to 90% victories playing second against the random agent whereas the minimax agent only achieved 80%. How is this possible?  Unlike minimax, which assumes the opponent plays perfectly, Q-learning can adapt to the behavior of different opponents—making it well-suited for environments where opponents are unpredictable or not fully rational. In this case,  it has observed that the random agent makes a lot of silly mistakes. And it takes full advantage of these by playing riskier than the minimax agent. That means it cannot avoid the occasional loss, but it performs better against the random agent. Interestingly, its risky strategies still seem to work against the minmax agent where it achieves 100% draws in my tests. Alternatively, we can also train the Q-agent directly with the minmax agent and it also learns how to play draws reliably.
 
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/7_minmax_vs_q.png" alt="">
-
-The size of the table is determined by the number of possible states and moves. Given that there are 9 possible moves on an empty board and 19683 board configurations, the table will have $$9\times19683$$ entries.
-
-
-

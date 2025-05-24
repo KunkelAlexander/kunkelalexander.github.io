@@ -28,7 +28,7 @@ We first establish the baseline performance of an agent playing legal, random mo
 ## Minimax algorithm
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_minimax_vs_random_game_play.gif" alt="">
 
-Now, we turn towards a different kind of benchmarking algorithm: the minimax algorithm. A minimax agent assumes that its opponent will play optimally—making the best possible moves to win. Faced with such a formidable adversary, the minimax agent chooses moves that minimize its own loss — hence the name. If victory is out of reach, the agent aims to at least avoid defeat.
+Now, we turn towards a different kind of benchmarking algorithm: the (minimax algorithm)[https://en.wikipedia.org/wiki/Minimax]. A minimax agent assumes that its opponent will play optimally—making the best possible moves to win. Faced with such a formidable adversary, the minimax agent chooses moves that minimize its own loss — hence the name. If victory is out of reach, the agent aims to at least avoid defeat.
 
 But how does it decide which move to make?
 
@@ -56,3 +56,20 @@ But only another agent playing ideally manages to achieve the desired 100% draws
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/4_minimax_vs_minimax.png" alt="">
 
 ## Q-Learning
+
+Now, that we know what performance an agent needs to achieve to be better than a random agent and to play optimally, we can turn towards (Q-learning)[https://en.wikipedia.org/wiki/Q-learning]. While Minimax works by exhaustively simulating all future outcomes, Q-learning takes a very different approach: instead of reasoning through every possible scenario, it learns from experience. More specifically, it learns which actions lead to better outcomes over time by interacting with the environment and updating a table of values—called a Q-table—that estimates the value of taking a given action in a given state.
+
+In the context of Tic-Tac-Toe, a tabular Q-learning agent builds up a table where each entry maps:
+- a board configuration (the state),
+- and a move (the action),
+- a numerical score: the Q-value.
+
+These Q-values are updated as the agent plays games and receives feedback. The feedback is user-defined through rewards and can be adapted at different training stages. Over time, the agent learns to prefer actions that are more likely to lead to positive rewards, even without knowing all the possible outcomes of the game. This makes Q-learning especially powerful in larger environments where minimax is computationally infeasible.
+
+
+In the next section, we’ll train a Q-learning agent by letting it play thousands of games and observe how it gradually improves.
+
+
+
+
+Unlike minimax, which assumes the opponent plays perfectly, Q-learning can adapt to the behavior of different opponents—making it well-suited for environments where opponents are unpredictable or not fully rational.

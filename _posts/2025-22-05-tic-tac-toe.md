@@ -16,17 +16,12 @@ This series of post introduces a number of (machine-learning) algorithms includi
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_minimax_vs_minimax_game_play.gif" alt="">
 
 
-### Setup
-I test the different algorithms using a $$3\times3$$-Tic-Tac-Toe board with two players. I implement every algorithm as a separate agent so that we can assess their performance by having them play against one another in different settings.
-
-
 ## Minimax algorithm
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_minimax_vs_random_game_play.gif" alt="">
 
 First, we turn towards a benchmarking algorithm: the <a href="https://en.wikipedia.org/wiki/Minimax">minimax algorithm</a>. A minimax agent assumes that its opponent will play optimally—making the best possible moves to win. Faced with such a formidable adversary, the minimax agent chooses moves that minimize its own loss — hence the name. If victory is out of reach, the agent aims to at least avoid defeat.
 
 We will pitch the minimax agent against a random agent making random, legal moves to see how it performs.
-
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_random_minimax_comparison.png" alt="">
 
 The above chart shows the results of 10000 games between the different agents. When two random agents play against one another, it turns out that the first player making a move has a significant advantage. The minimax agent playing first against the random agent is therefore nearly unbeatable. Going second, it stumbles into draws 20% of the time, but will never lose. Finally, the minimax agent achieves 100% draws when playing against itself. You can marvel at its performance in the introductory animation.

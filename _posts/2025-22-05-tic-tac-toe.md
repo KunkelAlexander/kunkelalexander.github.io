@@ -13,31 +13,23 @@ description: Learn how to make computers play Tic-Tac-Toe
 
 This series of post introduces a number of (machine-learning) algorithms including the minimax algorithm, tabular Q-learning and deep Q-learning (using dual networks, duelling networks, convolutional networks and prioritised experience replay) to play the game Tic-Tac-Toe. It essentially reproduces <a href="https://github.com/fcarsten/tic-tac-toe/"> Carsten Friedrich's excellent notebook series</a>.  In today's posts we are looking at the minimax and Q-learning algorithms. I will gloss over some details, so please refer to Carsten's post for some more explanations. You may find the accompanying <a href="https://github.com/KunkelAlexander/tictactoe_rl"> Python code on GitHub</a>.
 
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_random_game_play.gif" alt="">
+<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_minimax_vs_minimax_game_play.gif" alt="">
 
 
 ### Setup
 I test the different algorithms using a $$3\times3$$-Tic-Tac-Toe board with two players. I implement every algorithm as a separate agent so that we can assess their performance by having them play against one another in different settings.
 
-## Random play
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_random_vs_random.png" alt="">
-
-We first establish the baseline performance of an agent playing legal, random moves against itself. The above chart shows the results of $$3000$$ games for ten runs.  It turns out that the first player making a move has a significant advantage. This will be important to keep in mind for further benchmarking. The introductory animation shows what five typical games between two random agents might look like.
-
 
 ## Minimax algorithm
 <img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_minimax_vs_random_game_play.gif" alt="">
 
-Now, we turn towards a different kind of benchmarking algorithm: the <a href="https://en.wikipedia.org/wiki/Minimax">minimax algorithm</a>. A minimax agent assumes that its opponent will play optimally—making the best possible moves to win. Faced with such a formidable adversary, the minimax agent chooses moves that minimize its own loss — hence the name. If victory is out of reach, the agent aims to at least avoid defeat.
+First, we turn towards a benchmarking algorithm: the <a href="https://en.wikipedia.org/wiki/Minimax">minimax algorithm</a>. A minimax agent assumes that its opponent will play optimally—making the best possible moves to win. Faced with such a formidable adversary, the minimax agent chooses moves that minimize its own loss — hence the name. If victory is out of reach, the agent aims to at least avoid defeat.
 
+We will pitch the minimax agent against a random agent making random, legal moves to see how it performs.
 
-You would like to know how well does minimax agent performs against a random player?
+<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_random_minimax_comparison.png" alt="">
 
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_minimax_vs_random.png" alt="">
-
-It turns out that the minimax agent is nearly unbeatable. Going second against a random agent, it stumbles into draws 20% of the time, but will never lose.
-
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/3_random_vs_minimax.png" alt="">
+The above chart shows the results of 10000 games between the different agents. When two random agents play against one another, it turns out that the first player making a move has a significant advantage. The minimax agent playing first against the random agent is therefore nearly unbeatable. Going second, it stumbles into draws 20% of the time, but will never lose. Finally, the minimax agent achieves 100% draws when playing against itself. You can marvel at its performance in the introductory animation.
 
 But how does this black magic work? How does the minmax agent decide which move to make?
 
@@ -49,9 +41,8 @@ This sounds like a perfect strategy for all two-player, turn-based games, right?
 
 To make minimax tractable in such cases, practical implementations use optimizations such as pruning (e.g., alpha-beta pruning) and heuristics to evaluate only a subset of promising positions.
 
-And what can stop a minmax agent? Well, another minmax agent. But it turns out that we can also do better against a random agent. We will see how in the next section.
+And what can stop a minmax agent? Well, another minmax agent as we have seen above. But it turns out that we can also do better against a random agent. We will see how in the next section.
 
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/4_minimax_vs_minimax.png" alt="">
 
 ## Q-Learning
 
@@ -67,8 +58,12 @@ These Q-values are updated as the agent plays games and receives feedback. The f
 
 We train a Q-learning agent by letting it play up to 10000 thousand games and observe how it gradually improves.
 
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/5_random_vs_q.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_random_vs_q.png" alt="">
 
 Surprisingly, it achieves close to 90% victories playing second against the random agent whereas the minimax agent only achieved 80%. How is this possible?  Unlike minimax, which assumes the opponent plays perfectly, Q-learning can adapt to the behavior of different opponents—making it well-suited for environments where opponents are unpredictable or not fully rational. In this case,  it has observed that the random agent makes a lot of silly mistakes. And it takes full advantage of these by playing riskier than the minimax agent. That means it cannot avoid the occasional loss, but it performs better against the random agent. Interestingly, its risky strategies still seem to work against the minmax agent where it achieves 100% draws in my tests. Alternatively, we can also train the Q-agent directly with the minmax agent and it also learns how to play draws reliably.
 
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/7_minmax_vs_q.png" alt="">
+So, what is going on under the hood? Let us take a look at the Q-table that we learned.
+
+<iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/3_q_table.html" width="100%" height="600" frameborder="0"></iframe>
+
+There are many things to discover here. First of all, we observe that most of the table appears in orange. These are invalid states, e.g. two crosses and no naught, that the training algorithm did not visit. Therefore, the initial Q-values, which I set to $$0.6$$ were not updated. After roughly 15,000 invalid states, we encounter the first interesting state at position 15499: A position with exactly one cross in the bottom right.

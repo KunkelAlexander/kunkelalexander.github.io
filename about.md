@@ -20,13 +20,29 @@ title: About Alexander Kunkel
 		<li> My Bachelor's thesis in mathematical physics about consistent symmetry reduction of action principles, especially with respect to Kaluza-Klein reduction in string theory <a href="{{ site.baseurl }}/assets/pdfs/kunkel_bachelors_thesis.pdf"> can be found here.</a></li>
   	</ul>
 	<h2>T&E publications</h2>
+	<h3>Co-author</h3>
 	<ul>
-		<li><a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung"> T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem - 4/2025</a>- Reviewer</li>
-		<li><a href="https://www.transportenvironment.org/articles/down-to-earth"> Down to earth - Why European aviation needs to urgently address its growth problem - 1/2025</a> - Reviewer</li>
-		<li><a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2025/aviation"> European state of transport 2025 - Aviation</a> - Co-author</li>
-		<li><a href="https://www.transportenvironment.org/topics/planes/saf-observatory"> SAF Observatory - Interactive dashboard - 12/2024</a> - Co-author</li>
-		<li><a href="https://www.transportenvironment.org/articles/implementing-the-eus-e-saf-mandate"> Implementing the EU’s e-SAF mandate - Briefing - 10/2024</a> - Co-author</li>
-		<li><a href="https://www.transportenvironment.org/articles/how-sustainable-are-advanced-and-waste-biofuels"> How sustainable are advanced and waste biofuels? - Report - 07/2024</a> - Co-author</li>
-		<li><a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport/energy"> European state of transport 2024 - Energy</a> - Co-author</li>
-  	</ul>
+	<li><a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2025/aviation">
+		European state of transport 2025 – Aviation</a> – 4/2025</li>
+	<li><a href="https://www.transportenvironment.org/topics/planes/contrails">
+		Aviation's little-known pollution problem – Scrollytelling</a> – 3/2025</li>
+	<li><a href="https://www.transportenvironment.org/topics/planes/saf-observatory">
+		SAF Observatory – Interactive dashboard</a> – 12/2024</li>
+	<li><a href="https://www.transportenvironment.org/articles/contrail-avoidance">
+		Contrail avoidance: aviation’s climate opportunity of the decade – Briefing</a> – 11/2024</li>
+	<li><a href="https://www.transportenvironment.org/articles/implementing-the-eus-e-saf-mandate">
+		Implementing the EU’s e-SAF mandate – Briefing</a> – 10/2024</li>
+	<li><a href="https://www.transportenvironment.org/articles/how-sustainable-are-advanced-and-waste-biofuels">
+		How sustainable are advanced and waste biofuels? – Report</a> – 07/2024</li>
+	<li><a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport/energy">
+		European state of transport 2024 – Energy</a> – 01/2024</li>
+	</ul>
+
+	<h3>Reviewer</h3>
+	<ul>
+	<li><a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung">
+		T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem</a> – 4/2025</li>
+	<li><a href="https://www.transportenvironment.org/articles/down-to-earth">
+		Down to earth – Why European aviation needs to urgently address its growth problem</a> – 1/2025</li>
+	</ul>
 </div>

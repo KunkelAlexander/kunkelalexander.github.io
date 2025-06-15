@@ -63,7 +63,7 @@ Still, grid search can be illuminating — especially for **sensitivity analysis
 <figure>
 <img id="plotImage" src="{{ site.baseurl }}/assets/img/tictactoe-python/dqn_hidden_layer_sweep.png" width="100%" alt="Parameter sweep Plot"/>
   <figcaption>
-  Figure 2: Performance and training loss of vanilla DQN agent against random minmax agent as a function of different hyperparameters. The training loss quantifies how well the network fulfills the Bellmann equation. The parameter baseline is set as follows: a 3×3 board, 3000 training episodes, evaluation every 100 episodes across 100 games, a discount factor of 0.8, learning rate of 0.01 without decay, and initial exploration rate of 1.0 with exponential decay of 0.01 per game down to 0.0. The agent uses a batch size of 128, a replay buffer of size 10,000 with a minimum of 1,000 experiences before training, and two gradient updates per training step. The agents only take legal actions, and the same play order is preserved across episodes. Shaded areas show standard deviation of draw rate across ten runs with different random seeds. We use a single hidden layer.
+  Figure 2: Performance and training loss of vanilla DQN agent against random minmax agent as a function of different hyperparameters. The training loss quantifies how well the network fulfills the Bellmann equation. The parameter baseline is set as follows: 3000 training episodes, evaluation every 100 episodes across 100 games, a discount factor of 0.8, learning rate of 0.01 without decay, and initial exploration rate of 1.0 with exponential decay of 0.01 per game down to 0.0. The agent uses a batch size of 128, a replay buffer of size 10,000 with a minimum of 1,000 experiences before training, and two gradient updates per training step. The agents only take legal actions. Shaded areas show standard deviation of draw rate across ten runs with different random seeds. We use a single hidden layer.
 </figcaption>
 </figure>
 
@@ -178,7 +178,7 @@ In this post, we explored techniques for optimizing both the performance and hyp
 
 When it comes to hyperparameter optimization, nothing beats a good initial guess. Simple parameter sweeps are an effective way to check whether you're operating near a "sweet spot." While frameworks like Optuna are powerful and can help develop intuition about parameter sensitivity and interactions, they can also be computationally expensive.
 
-In my experience, it's best to limit the number of tunable parameters to fewer than 10 — ideally around four or five — to avoid the curse of dimensionality, unless you have substantial compute resources at your disposal.
+In any case, it is imperative to limit the number of tunable parameters to fewer than 10 — ideally less than four or five — to avoid the curse of dimensionality.
 
 To speed up experimentation, I recommend building a simplified toy model of your problem. You could, for instance, use a smaller, synthetic training set with a fixed number of transitions to control training time and constrain the state space and reduce network size to further accelerate benchmarking.
 These simplifications can dramatically reduce training time and help you iterate more quickly on model design and parameter tuning.

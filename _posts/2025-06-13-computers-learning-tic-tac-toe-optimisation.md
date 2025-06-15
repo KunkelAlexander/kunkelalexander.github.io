@@ -7,7 +7,7 @@ description: Performance and hyperparameter optimisation for the vanilla DQN alg
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n the <a href="https://kunkelalexander.github.io/blog/deep-tic-tac-toe/">previous post</a> we built a vanilla Deep Q-Network (DQN) agent for Tic-Tac-Toe and compared it to its tabular cousin.
+<p class="intro"><span class="dropcap">I</span>n the <a href="https://kunkelalexander.github.io/blog/computers-learning-tic-tac-toe-deep-q/">previous post</a> we built a vanilla Deep Q-Network (DQN) agent for Tic-Tac-Toe and compared it to its tabular cousin.
 Today, we look at its hyperparameter optimisation as I find that as all the seemingly arbitrary hyperparameter choices in machine learning algorithms are a fascinating but also unsettling topic. We first study a <a href="https://www.brendangregg.com/flamegraphs.html">flame graph</a> of a DQN training run and then use the <a href="https://optuna.org/">Optuna</a> hyperparameter optimisation framework with the vanilla DQN model.</p>
 
 
@@ -44,7 +44,7 @@ Similarly, the `act` function takes time due to TensorFlow inference calls, whic
 
 Hyperparameter tuning is the less glamorous sibling of model design, often feeling like adjusting dials in the dark hoping for gold. With parameters like learning rate, discount factor, batch size, and exploration decay all in play, brute-force grid search quickly becomes infeasible.
 
-Still, grid search can be illuminating — especially for **sensitivity analysis** around a known good configuration. The plot below shows the result of sweeping various hyperparameters individually, with all other parameters held constant from the <a href="https://kunkelalexander.github.io/blog/deep-tic-tac-toe/">previous post</a>.
+Still, grid search can be illuminating — especially for **sensitivity analysis** around a known good configuration. The plot below shows the result of sweeping various hyperparameters individually, with all other parameters held constant from the <a href="https://kunkelalexander.github.io/blog/computers-learning-tic-tac-toe-deep-q/">previous post</a>.
 
 
 <!-- Elegant Sweep Variable Selector -->

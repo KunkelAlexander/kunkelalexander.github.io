@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Computers learning Tic-Tac-Toe using neural networks"
+title:  "Computers learning Tic-Tac-Toe Pt. 2: Deep Q-learning"
 date:   2025-05-31
-description: Learn how to make computers play Tic-Tac-Toe using different deep Q-learning algorithms
+description: Learn how to make computers play Tic-Tac-Toe using deep Q-learning algorithm
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>

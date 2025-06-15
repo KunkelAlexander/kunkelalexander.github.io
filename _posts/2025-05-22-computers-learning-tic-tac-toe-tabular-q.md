@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Computers learning Tic-Tac-Toe using tables"
+title:  "Computers learning Tic-Tac-Toe Pt. 1: Tabular Q-learning"
 date:   2025-05-22
 description: Learn how to make computers play Tic-Tac-Toe using the minimax and Q-learning algorithms
 ---

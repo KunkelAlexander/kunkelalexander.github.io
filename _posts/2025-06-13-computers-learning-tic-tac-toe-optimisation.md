@@ -145,7 +145,8 @@ Following our earlier results, I focused on three parameters I deemed interestin
   <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/15_optuna_slice_lr.html" width="100%" height="600" frameborder="0"></iframe>
   <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/15_optuna_slice_hidden_units.html" width="100%" height="600" frameborder="0"></iframe>
   <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/15_optuna_slice_discount.html" width="100%" height="600" frameborder="0"></iframe>
-  <figcaption><strong>Figure 4:</strong> Slice plot showing the relationship between the learning rate and the resulting objective value.</figcaption>
+  <figcaption><strong>Figure 4:</strong> Slice plot showing the relationship between the different hyperparameters and the resulting objective value.</figcaption>
+  <figcaption><strong>Figure 4:</strong> Slice plot showing the relationship between the different hyperparameters and the resulting objective value.</figcaption>
 </figure>
 
 The plot suggests some trends that we can verify with a linear regression:

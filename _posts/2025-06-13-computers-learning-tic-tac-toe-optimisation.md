@@ -139,11 +139,13 @@ To answer this, I turned to the elegant <a href="https://optuna.org/">Optuna</a>
 </figure>
 
 
-Following our earlier results, I focused on three parameters I deemed interesting: the learning rate, the discount and the number of neurons in the hidden layer where we keep one hidden layer. The following plot shows the breakdown of the optimisation results by these three variables.
+Following our earlier results, I focused on three parameters I deemed interesting: the learning rate, the discount and the number of neurons in the hidden layer where we keep one hidden layer. The following plots show the breakdown of the optimisation results by these three variables.
 
 <figure>
-  <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/15_optuna_slice.html" width="100%" height="600" frameborder="0"></iframe>
-  <figcaption><strong>Figure 4:</strong> Slice plot showing the relationship between each individual hyperparameter and the resulting objective value.</figcaption>
+  <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/15_optuna_slice_lr.html" width="100%" height="600" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/15_optuna_slice_hidden_units.html" width="100%" height="600" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/15_optuna_slice_discount.html" width="100%" height="600" frameborder="0"></iframe>
+  <figcaption><strong>Figure 4:</strong> Slice plot showing the relationship between the learning rate and the resulting objective value.</figcaption>
 </figure>
 
 The plot suggests some trends that we can verify with a linear regression:
@@ -154,16 +156,15 @@ where $$\text{objective}$$ is the average draw rate across evaluation games, $$\
 
 The table below summarizes the model coefficients and global fit statistics:
 
-| Term/Metric           | Coefficient (β) | Std. Error | p-value    | Interpretation |
-|------------------------|-----------------|------------|------------|----------------|
-| **Intercept**          | **0.56**        | 0.08      | < 0.1%     | Baseline performance when all params are 0.|
-| **Learning Rate**      | **9.8**         | 3.5        | 0.7%      | Increasing the learning rate leads to a strong improvement of the result — as long as it’s not too high and unstable |
-| **Discount Factor**    | **0.18**        | 0.01       | 7.5%      | Moderate effect. Not statistically significant at 5% level, but borderline. |
-| **Hidden Units**       | **0.043**       | 0.011      | < 0.1%    | More hidden units improve the results. |
-| **R-squared**          | **0.275**       | —          | —          | 27.5% of the variation in draw rate explained by the model. |
-| **Adjusted R-squared** | **0.245**       | —          | —          | Adjusts for the number of predictors. |
-| **F-statistic**        | **9.348**       | —          | —          | Tests if at least one predictor has a non-zero effect. |
-| **F-statistic p-value**| —               | —          | **2.58e-05** | Very low: the overall model is statistically significant. |
+| Term/Metric            | Value             | p-value       | Interpretation |
+|------------------------|-------------------|---------------|----------------|
+| **Intercept**          | 0.56 ± 0.08       | < 0.1%        | Baseline performance when all params are 0.|
+| **Learning Rate**      | 9.8 ± 3.5         | 0.7%          | Increasing the learning rate leads to a strong improvement of the result — as long as it’s not too high and unstable |
+| **Discount Factor**    | 0.18 ± 0.01       | 7.5%          | Moderate effect. Not statistically significant at 5% level, but borderline. |
+| **Hidden Units**       | 0.043 ± 0.011     | < 0.1%        | More hidden units improve the results. |
+| **R-squared**          | 0.275             | —             | 27.5% of the variation in draw rate explained by the model. |
+| **Adjusted R-squared** | 0.245             | —             | Adjusts for the number of predictors. |
+| **F-statistic**        | 9.348             | < 0.1%        | Tests if at least one predictor has a non-zero effect. p-value is low - the model is statistically significant |
 
 Finally, we can also try to understand more non-linear effects with a parallel coordinate plot, for instance. You can select parameter ranges like the one for 32 hidden units, for instance, and it becomes obvious that 32 hidden neurons give bad results regardless of the learning rate and discount.
 <figure>

@@ -20,7 +20,7 @@ The idea of Deep Q-Network (DQN) is simple: Instead of having a table that direc
 - **Generalization**: NNs can generalize from seen to unseen states, rather than memorizing exact values. This is crucial in environments where each state is encountered at most once.
 - **End-to-end learning**: They can learn directly from raw input without the need for manual feature engineering, making them ideal for tasks like vision-based control.
 
-Compared to tabular Q-learning, DQN-learning can become unstable or even diverge and it may misestimate Q-values, especially in underexplored regions. So, whenever you have the option to use tabular Q-learning, go for it. It is more stable and often provides better results – even if you have to manually craft features to describe the state-space in my experience.
+Compared to tabular Q-learning, DQN-learning can become unstable or even diverge and it may misestimate Q-values, especially in underexplored regions. So, whenever you have the option to use tabular Q-learning, go for it. In my experience, it is more stable and often provides better results – even if you have to manually craft features to describe the state-space. ChatGPT described the problems of DQN to me as follows:
 
 > You’re not just learning from experience — you’re trusting an approximator that you don't understand to make up values you haven’t seen.
 
@@ -52,7 +52,7 @@ $$
 y = r + \gamma \max_{a'} Q_{\theta^-}(s', a')
 $$
 
-Here, $$ Q_{\theta^-} $$ is the **target network** (a periodically updated copy of the Q-network) used to stabilize learning.
+Here, $$ Q_{\theta^-} $$ is the **target network** (a periodically updated copy of the so-called **online** Q-network) used to stabilize learning. However, in this post, we actually set the target network equal to the online network for simplicity.
 
 Compared to tabular Q-learning, DQN introduces additional design decisions and hyperparameters:
 

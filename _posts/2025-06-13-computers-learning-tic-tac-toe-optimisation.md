@@ -135,7 +135,7 @@ To answer this, I turned to the elegant <a href="https://optuna.org/">Optuna</a>
 
 <figure>
   <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/13_optuna_optimisation_history.html" width="100%" height="600" frameborder="0"></iframe>
-  <figcaption><strong>Figure 2:</strong> Optimization history across 77 trials. Several parameter combinations consistently achieved average draw rates of around 0.98.</figcaption>
+  <figcaption><strong>Figure 3:</strong> Optimization history across 77 trials. Several parameter combinations consistently achieved average draw rates of around 0.98.</figcaption>
 </figure>
 
 

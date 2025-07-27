@@ -17,7 +17,7 @@ First, we turn towards a benchmarking algorithm: the <a href="https://en.wikiped
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_random_minimax_comparison.png" alt="Win rates of random and minimax agents">
-  <figcaption>Figure 1: Win rates across 10,000 games. The minimax agent dominates the random agent when playing first, never loses when second, and always draws when playing against itself.</figcaption>
+  <figcaption>Figure 1: Win rates of minimax agent vs random agent across 10,000 games. The minimax agent dominates the random agent when playing first, never loses when second, and always draws when playing against itself.</figcaption>
 </figure>
 
 
@@ -33,7 +33,7 @@ The name `minimax` comes from this interplay: the agent tries to minimize the po
 To make minimax tractable in such cases, practical implementations use optimizations such as pruning (e.g., alpha-beta pruning) and heuristics to evaluate only a subset of promising positions. And what can stop a minmax agent? Well, another minmax agent as we have seen above. But it turns out that we can also do better against a random agent. We will see how in the next section.
 ## Q-Learning
 
-Now that we know what performance an agent needs to achieve to be better than a random agent and to play optimally, we can turn towards [Q-Learning](https://en.wikipedia.org/wiki/Q-learning). While minimax works by exhaustively simulating all future outcomes, Q-learning takes a very different approach: instead of reasoning through every possible scenario, it learns from experience. More specifically, it learns **how good a move is**, so it can choose the best one at each step. But how do we measure that?
+Now that we know what performance an agent needs to achieve to be better than a random agent and to play optimally, we can turn towards [Q-Learning](https://en.wikipedia.org/wiki/Q-learning). While minimax works by exhaustively simulating all future outcomes, Q-learning takes a very different approach: instead of reasoning through every possible scenario, it learns from experience. More specifically, **it learns how good a move is**, so it can choose the best one at each step. But how do we measure that?
 
 We define the Q-value as the total expected reward an agent will get by taking an action in a given state and then always acting optimally after that. Let’s say you're in a certain board position  and you decide to place your mark in the center. You might not win immediately, but this move might lead to a win 3 turns later. The Q-value reflects that.
 
@@ -54,7 +54,7 @@ Before we dive into the details of Q-learning, let's train a Q-learning agent by
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/tictactoe-python/2_random_vs_q.png" alt="Q-learning agent vs random agent performance">
-  <figcaption>Figure 2: Performance of a Q-learning agent against a random opponent. After training, the Q-agent wins ~90% of games even when playing second.</figcaption>
+  <figcaption>Figure 2: Performance of a Q-learning agent against a random opponent across 10,000 games. After training, the Q-agent wins ~90% of games even when playing second.</figcaption>
 </figure>
 
 

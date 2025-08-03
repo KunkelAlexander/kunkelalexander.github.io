@@ -2,17 +2,17 @@
 layout: post
 title:  "Computers learning Tic-Tac-Toe Pt. 3: Optimisation"
 date:   2025-06-13
-description: Performance and hyperparameter optimisation for the vanilla DQN algorithm for Tic-Tac-Toe
+description: Performance and hyperparameter optimisation for the single-network DQN algorithm for Tic-Tac-Toe
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n the <a href="https://kunkelalexander.github.io/blog/computers-learning-tic-tac-toe-deep-q/">previous post</a> we built a vanilla Deep Q-Network (DQN) agent for Tic-Tac-Toe and compared it to its tabular cousin.
-Today, we look at its hyperparameter optimisation as I find that as all the seemingly arbitrary hyperparameter choices in machine learning algorithms are a fascinating but also unsettling topic. We first study a <a href="https://www.brendangregg.com/flamegraphs.html">flame graph</a> of a DQN training run and then use the <a href="https://optuna.org/">Optuna</a> hyperparameter optimisation framework with the vanilla DQN model.</p>
+<p class="intro"><span class="dropcap">I</span>n the <a href="https://kunkelalexander.github.io/blog/computers-learning-tic-tac-toe-deep-q/">previous post</a> we built a simple Deep Q-Network (DQN) agent for Tic-Tac-Toe and compared it to its tabular cousin.
+Today, we look at its hyperparameter optimisation as I find that as all the seemingly arbitrary hyperparameter choices in machine learning algorithms are a fascinating but also unsettling topic. We first study a <a href="https://www.brendangregg.com/flamegraphs.html">flame graph</a> of a DQN training run and then use the <a href="https://optuna.org/">Optuna</a> hyperparameter optimisation framework with the single-network DQN model.</p>
 
 
 ## Performance optimisation
-In the following, we study whether the performance of our vanilla DQN algorithm can be improved. Before we start, it is important that highlight that you should not waste your time or sacrifice the readability of your code for optimisations that turn out to be worthless. In the words of <a href="https://web.archive.org/web/20130731202547/http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf">Donald Knuth</a>:
+In the following, we study whether the performance of our simple single-network DQN algorithm can be improved. Before we start, it is important that highlight that you should not waste your time or sacrifice the readability of your code for optimisations that turn out to be worthless. In the words of <a href="https://web.archive.org/web/20130731202547/http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf">Donald Knuth</a>:
 > We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.
 
 <a href="https://www.brendangregg.com/flamegraphs.html">Flame graphs</a> are a visualisation of the stack trace of a profiled software created by Brendan Gregg. They allow you to identify performance bottlenecks in your code visually with minimal effort. And flame graphs help to identify the 3% of opportunities Knuth talked about! Let us take a look at a flame graph of my DQN learning routine created with the wonderful
@@ -27,7 +27,7 @@ In the following, we study whether the performance of our vanilla DQN algorithm 
   Your browser does not support SVGs. You can view it <a href="{{ site.baseurl }}/assets/img/tictactoe-python/12_profiling.svg">here</a>.
 </object>
   <figcaption>
-      Figure 1: Flame graph for training of vanilla DQN agent. The x-axis represents the stack frame population, while the y-axis shows the call depth. Each rectangle is a stack frame; its width corresponds to the time spent in that function.
+      Figure 1: Flame graph for training of single-network DQN agent. The x-axis represents the stack frame population, while the y-axis shows the call depth. Each rectangle is a stack frame; its width corresponds to the time spent in that function.
     </figcaption>
 </figure>
 
@@ -63,7 +63,7 @@ Still, grid search can be illuminating — especially for **sensitivity analysis
 <figure>
 <img id="plotImage" src="{{ site.baseurl }}/assets/img/tictactoe-python/dqn_hidden_layer_sweep.png" width="100%" alt="Parameter sweep Plot"/>
   <figcaption>
-  Figure 2: Performance and training loss of vanilla DQN agent against random minmax agent as a function of different hyperparameters. The training loss quantifies how well the network fulfills the Bellmann equation. The parameter baseline is set as follows: 3000 training episodes, evaluation every 100 episodes across 100 games, a discount factor of 0.8, learning rate of 0.01 without decay, and initial exploration rate of 1.0 with exponential decay of 0.01 per game down to 0.0. The agent uses a batch size of 128, a replay buffer of size 10,000 with a minimum of 1,000 experiences before training, and two gradient updates per training step. The agents only take legal actions. Shaded areas show standard deviation of draw rate across ten runs with different random seeds. We use a single hidden layer.
+  Figure 2: Performance and training loss of single-network DQN agent against random minmax agent as a function of different hyperparameters. The training loss quantifies how well the network fulfills the Bellmann equation. The parameter baseline is set as follows: 3000 training episodes, evaluation every 100 episodes across 100 games, a discount factor of 0.8, learning rate of 0.01 without decay, and initial exploration rate of 1.0 with exponential decay of 0.01 per game down to 0.0. The agent uses a batch size of 128, a replay buffer of size 10,000 with a minimum of 1,000 experiences before training, and two gradient updates per training step. The agents only take legal actions. Shaded areas show standard deviation of draw rate across ten runs with different random seeds. We use a single hidden layer.
 </figcaption>
 </figure>
 
@@ -120,11 +120,11 @@ Still, grid search can be illuminating — especially for **sensitivity analysis
 
 We observe several things:
 
-- **Hidden Layer Size**: At least 64 neurons are needed for good performance. Larger networks reduce training loss due to more degrees of freedom but risk overfitting.
-- **Learning Rate**: Even with Adam optimiser, this hyperparameter is critical. Too high, and training diverges. Too low, and it crawls. The best-performing configuration also yields the lowest loss.
-- **Gradient Steps**: The number of updates per training step has a limited effect. Fewer updates slow convergence slightly, but the final performance remains largely unchanged.
-- **Discount Factor**: Affects convergence speed but not end performance — at least in this setup. It is correlated with the learning rate, likely due to their joint influence on value estimation.
-- **Exploration Decay**: Too low a decay hampers training, as the agent stays random for too long. Otherwise, it has little effect — slower decay could simply require more training.
+- **Hidden Layer Size**: At least 64 neurons are needed for good performance. Larger networks reduce training loss due to more degrees of freedom but risk overfitting. In the following, I will use a single layer with 128 neurons.
+- **Learning Rate**: Even with Adam optimiser, this hyperparameter is critical. Too high, and training diverges. Too low, and it crawls. The best-performing configuration also yields the lowest loss. In the following, I will use a learning rate of 0.003 as default.
+- **Gradient Steps**: The number of updates per training step has a limited effect. Fewer updates slow convergence slightly, but the final performance remains largely unchanged. In the following, I will use two gradient steps.
+- **Discount Factor**: Affects convergence speed but not end performance — at least in this setup. It is correlated with the learning rate, likely due to their joint influence on value estimation. In the following, I will use a discount factor of 0.8.
+- **Exploration Decay**: Too low a decay hampers training, as the agent stays random for too long. Otherwise, it has little effect — slower decay could simply require more training. In the following, I will use an exploration decay of 0.01 to a minimum exploration of 0.1.
 - **Batch Size**: Has minimal influence on performance but impacts training loss. Larger batches reduce variance in gradient updates and thus loss, but may lead to overfitting in more complex environments.
 
 
@@ -175,7 +175,7 @@ Finally, we can also try to understand more non-linear effects with a parallel c
 
 ## Conclusion
 
-In this post, we explored techniques for optimizing both the performance and hyperparameters of a vanilla DQN agent. For performance tuning, I strongly recommend using flame graphs — they’re an excellent way to spot bottlenecks and inefficiencies in your implementation.
+In this post, we explored techniques for optimizing both the performance and hyperparameters of a single-network DQN agent. For performance tuning, I strongly recommend using flame graphs — they’re an excellent way to spot bottlenecks and inefficiencies in your implementation.
 
 When it comes to hyperparameter optimization, nothing beats a good initial guess. Simple parameter sweeps are an effective way to check whether you're operating near a "sweet spot." While frameworks like Optuna are powerful and can help develop intuition about parameter sensitivity and interactions, they can also be computationally expensive.
 

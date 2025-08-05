@@ -84,7 +84,7 @@ Only this change is required in code — but it makes a significant difference i
 
 <!-- Elegant Sweep Variable Selector -->
 <div class="sweep-selector">
-  <select id="plotSelector" onchange="updateImage()">
+  <select id="plotSelector1" onchange="updateImage()">
     <option value="target_update_freq">Hard Update: Frequency</option>
     <option value="target_update_tau">Soft Update: Tau</option>
   </select>
@@ -93,7 +93,7 @@ Only this change is required in code — but it makes a significant difference i
 
 <!-- Display the selected plot -->
 <figure>
-<img id="plotImage" src="{{ site.baseurl }}/assets/img/tictactoe-python/vanilla_dqn_target_update_freq_sweep.png" width="100%" alt="Parameter sweep Plot"/>
+<img id="plotImage1" src="{{ site.baseurl }}/assets/img/tictactoe-python/vanilla_dqn_target_update_freq_sweep.png" width="100%" alt="Parameter sweep Plot"/>
   <figcaption>
  <strong>Figure 1</strong>: Performance and training loss of vanilla DQN agent against random minmax agent as a function of target network update strategy. The parameter baseline is set as follows: 3000 training episodes, evaluation every 100 episodes across 100 games, a discount factor of 0.8, learning rate of 0.01 without decay, and initial exploration rate of 1.0 with exponential decay of 0.01 per game down to 0.1. The agent uses a batch size of 128, a replay buffer of size 10,000 with a minimum of 1,000 experiences before training, and two gradient updates per training step. The agents only take legal actions. Shaded areas show standard deviation of draw rate across ten runs with different random seeds. The algorithm uses a network with a single hidden layer with 128 neurons.
 </figcaption>
@@ -102,9 +102,9 @@ Only this change is required in code — but it makes a significant difference i
 
 <script>
   function updateImage() {
-    const variable = document.getElementById("plotSelector").value;
+    const variable = document.getElementById("plotSelector1").value;
     const imagePath = `{{ site.baseurl }}/assets/img/tictactoe-python/vanilla_dqn_${variable}_sweep.png`;
-    const img = document.getElementById("plotImage");
+    const img = document.getElementById("plotImage1");
     img.src = imagePath;
     img.alt = `${variable} Sweep Plot`;
   }
@@ -141,8 +141,8 @@ Only this one‑line change is required in the learning update. While the perfor
 ### Duelling DQN – separate value from advantage
 
 The introduction of duelling networks by <a href="https://arxiv.org/abs/1511.06581">Wang et al. (2016)</a> was guided by the realisation that on many steps the choice of action barely matters (think: standing still in *Pong* between bounces).
-Yet the vanilla Q‑network must still back‑propagate a distinct value for every one of those near‑equivalent actions.
-They proposed a network that first produces a **state‑value** $$V_\phi(s)$$ and an **advantage** vector $$A_\psi(s,a)$$; it then recombines them into Q‑values:
+Yet, the vanilla Q‑network must still back‑propagate a distinct value for every one of those near‑equivalent actions.
+Wang et al. proposed a network that first produces a **state‑value** $$V_\phi(s)$$ and an **advantage** vector $$A_\psi(s,a)$$; it then recombines them into Q‑values:
 
 $$
 Q(s,a) \;=\; V_\phi(s)
@@ -250,7 +250,7 @@ The interactive sweep below shows how they matter in the Tic‑Tac‑Toe experim
 
 <!-- Elegant Sweep Variable Selector -->
 <div class="sweep-selector">
-  <select id="plotSelector" onchange="updateImage()">
+  <select id="plotSelector2" onchange="updateImage2()">
     <option value="prb_alpha">Error prioritisation: Alpha</option>
     <option value="prb_beta0">Initial bias correction: Beta</option>
     <option value="prb_beta_steps"># Gradient updates until beta is 1</option>
@@ -260,25 +260,24 @@ The interactive sweep below shows how they matter in the Tic‑Tac‑Toe experim
 
 <!-- Display the selected plot -->
 <figure>
-<img id="plotImage" src="{{ site.baseurl }}/assets/img/tictactoe-python/per_dqn_prb_alpha_sweep.png" width="100%" alt="Parameter sweep Plot"/>
+<img id="plotImage2" src="{{ site.baseurl }}/assets/img/tictactoe-python/per_dqn_prb_alpha_sweep.png" width="100%" alt="Parameter sweep Plot"/>
   <figcaption>
-  <strong>Figure 7</strong>: Performance and training loss of PER agent against random minmax agent as a function of PER hyperparameters. Hyperparameters as in Figure 1 with the newly added error priorisation of 0.6, an initial bias correction of 0.4 and 3000, training steps until beta is annealed.
+  <strong>Figure 7</strong>: Performance and training loss of PER agent against random minmax agent as a function of PER hyperparameters. Hyperparameters as in Figure 1 with the newly added error priorisation of 0.6, an initial bias correction of 0.4 and 3,000 training steps until beta is annealed.
 </figcaption>
 </figure>
 
 
 <script>
-  function updateImage() {
-    const variable = document.getElementById("plotSelector").value;
+  function updateImage2() {
+    const variable = document.getElementById("plotSelector2").value;
     const imagePath = `{{ site.baseurl }}/assets/img/tictactoe-python/per_dqn_${variable}_sweep.png`;
-    const img = document.getElementById("plotImage");
+    const img = document.getElementById("plotImage2");
     img.src = imagePath;
     img.alt = `${variable} Sweep Plot`;
   }
 </script>
 
-
-On Tic‑Tac‑Toe both vanilla DQN and PER‑DQN quickly discover a near‑draw policy, leaving few hard situations to learn from.  To make the difference visible we therefore froze a dataset of **10 000 random‑play transitions** and trained both agents *offline*.  The tables in Figure 8 show how often each board state is replayed.
+As you can see, the differences between different hyperparameters are marginal. This is because on Tic‑Tac‑Toe both vanilla DQN and PER‑DQN quickly discover a near‑draw policy, leaving few hard situations to learn from. To make the difference between the algorithms visible I therefore freeze a dataset of **10 000 random‑play transitions** and train both agents *offline*.  The tables in Figure 8 show how often each board state is replayed.
 
 <figure>
   <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/22_vanilla_dqn_visit_table.html" width="100%" height="600" frameborder="0"></iframe>
@@ -286,7 +285,7 @@ On Tic‑Tac‑Toe both vanilla DQN and PER‑DQN quickly discover a near‑dr
   <figcaption><strong>Figure 8</strong>: Number of state visits per state for vanilla DQN (top) and PER DQN (bottom) during offline training on static set of 10,000 transitions of two random agents playing against one another. PER quickly down‑weights the trivial opening position (state 0) and spends more time on deeper, more decisive boards.Training for 1000 training steps with 2 gradient updates per step and a batch size of 128 on a static training set let to a total of 256,000 state visits. Figure shows the subset of states shown in Figure 1.</figcaption>
 </figure>
 
-The corresponding TD‑error histograms in Figure 4 confirm the intuition: by replaying high‑error transitions more often PER flattens the right tail of the error distribution and equalises the visitation count across bins.
+The figure suggests that PER visits the trivial opening position less often and spends more time on deeper boards. The corresponding TD‑error histograms in Figure 4 confirm the intuition: by replaying high‑error transitions more often PER flattens the right tail of the error distribution and equalises the visitation count across bins.
 <figure>
   <iframe src="{{ site.baseurl }}/assets/img/tictactoe-python/24_td_error_distributions.html" width="100%" height="620" frameborder="0"></iframe>
   <figcaption><strong>Figure 9</strong>: TD error distributions for vanilla DQN and PER DQN during offline training on static set of 10,000 transitions of two random agents playing against one another. Training for 1000 training steps with 2 gradient updates per step and a batch size of 128. Darker colours indicate that states in the bin were visited more frequently.</figcaption>
@@ -302,6 +301,12 @@ Double DQN, Dueling networks and Prioritized replay complement each other neat
 2. swap the value‑function head for a Dueling head, and
 3. replace the FIFO buffer with the PER sum‑tree.
 
-On large, noisy tasks this trio is usually both **faster to learn** and **better at convergence** than plain DQN.  On tiny tabular games such as Tic‑Tac‑Toe the gains are minimal—linear programming or even exhaustive search still win.
+On large, noisy tasks this trio is usually both **faster to learn** and **better at convergence** than plain DQN.  On tiny tabular games such as Tic‑Tac‑Toe the gains are minimal—a tabular Q-agent still wins.
+
+<figure>
+<img src="{{ site.baseurl }}/assets/img/tictactoe-python/25_triple_dqn_agent_comparison.png" width="100%" alt="Double Duelling PER agent performance"/>
+<figcaption>Figure 10: Win rates across 1,000 games. The Double Duelling DQN using Prioritised Experience Replay performs only slightly better than the single-network DQN agent and is still slightly worse than the tabular Q-agent. It loses roughly 3% of the games going second against the random agent after around 25 minutes of training on a desktop CPU. Going first against the random player, it actually plays slightly worse and loses 5% of the time.</figcaption>
+</figure>
+
 
 In the next post we will take the upgraded agent to a tougher arena: *Bomberman*.  From there the road leads toward the full **Rainbow** combination with multi‑step returns, noisy nets and distributional value functions.

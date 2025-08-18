@@ -118,32 +118,32 @@ Offline learning with a demonstrator allows the agent to explore useful game sta
 
 The key speed gain comes from the fact that we only need to compute the computationally expensive game state to integer state embedding **once**. These embeddings can then be reused across multiple hyperparameter runs.
 
+## Training hyperparameters
+
+Throughout training, I keep the hyperparameters fixed to the values given below:
+
+* **Discount factor (γ)**: 0.8
+* **Constant Learning rate (α)**: 1e-3
+* **Initial Q-values**: 0.0
+
+I did experiment with an adaptive learning rate $$\alpha = lr_0 / (1 + N_{visits}(state, action)).$$ This formulation decreases the learning rate as the agent gathers more experience with a specific `(state, action)` pair. Early in training, updates are larger and help the agent adapt quickly. Later, as visit counts increase, the learning rate decays, stabilizing the learned Q-values and reducing variance. This strategy can help avoid overfitting to noisy or rare transitions and provides **better convergence guarantees**.
+I performed a hyperparameter search using `optuna` and did not find that the adaptive learning rate improved performance for the agent presented here, but I might have made a mistake, so you should definitely try it out. You can also change the decay to a non-linear function or introduce a floor.
+
 ## Money, money, money
 
 We start training in a simplified environment without enemies or crates, a small $$9\times9$$ board and coins everywhere.
 
-### Hyperparameters
+Since we’re using off-policy learning (based on demonstrator trajectories), the agent may not explore all available states. Initializing Q-values to a **high value** would encourage the agent to explore, but also risks overestimating actions not demonstrated. Instead, I found that initialising the Q-values to zero or a negative value is better. My understanding is that a pessimistic agent better learns to value good actions based on demonstrator input.
 
-* **Discount factor (γ)**: 0.8
-* **Learning rate (α)**: 1e-2
-* **Initial Q-values**: -1
-
-Since we’re using off-policy learning (based on demonstrator trajectories), the agent may not explore all available states. Initializing Q-values to a **high value** would encourage the agent to explore, but also risks overestimating actions not demonstrated. Instead, by initializing Q-values to a **negative number**, the agent is pessimistic by default, and learns to value good actions based on demonstrator input.
-
-### Adaptive Learning Rate
-
-We further improve convergence using an adaptive learning rate $$\alpha = lr_0 / (1 + N_{visits}(state, action)).$$ This formulation decreases the learning rate as the agent gathers more experience with a specific `(state, action)` pair. Early in training, updates are larger and help the agent adapt quickly. Later, as visit counts increase, the learning rate decays, stabilizing the learned Q-values and reducing variance. This strategy helps avoid overfitting to noisy or rare transitions and provides **better convergence guarantees**.
-
-### Performance
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/4_coin_grabber.gif"  width="100%" alt="">
   <figcaption>Figure 3: Tabular Q-agent successfully collecting coins. The agent comfortably navigates the map and reliably collects all coins.</figcaption>
 </figure>
 
-The agent reliably collects all coins. However, its path is not fully optimized: it always moves toward one of the nearest coins but doesn't plan multi-step routes that could reduce total steps. This is due to the BFS algorithm, which only targets the next closest coin and ignores multi-coin path efficiency.
+The agent reliably collects all coins. However, its path is not fully optimised: it always moves toward one of the nearest coins but doesn't plan multi-step routes that could reduce total steps. This is due to the BFS algorithm, which only targets the next closest coin and ignores multi-coin path efficiency.
 
-Additionally, the agent’s behavior reflects a **design choice**: the pathfinding algorithm always prefers the closest object of interest following the fixed order: **Up → Right → Down → Left**.
+Additionally, the agent’s behavior reflects a **design choice**: the pathfinding algorithm always prefers the closest object of interest following a fixed order of directions.
 
 ## Loot Crate
 
@@ -156,7 +156,7 @@ Next, we train on a more complex board configuration with crates but still witho
 
 ## Free Game
 
-In the final training phase, we simulate a full game with multiple agents:
+In the final training phase, I simulate a full game with multiple agents:
 
 * One **rule-based agent** (demonstrator)
 * One **peaceful agent** that moves randomly and doesn't place bombs
@@ -166,3 +166,5 @@ In the final training phase, we simulate a full game with multiple agents:
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/6_allstar.gif"  width="100%" alt="">
   <figcaption>Figure 5: Tabular Q-agent (pink) playing against two rule-based and one peaceful agent.</figcaption>
 </figure>
+
+To be continued...

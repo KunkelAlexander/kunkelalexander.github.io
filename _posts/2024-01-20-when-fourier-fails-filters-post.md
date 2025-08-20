@@ -13,7 +13,7 @@ description: Learn how to interpolate non-periodic, uniform data using filters!
 ## Intro
 This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. Usually, one will opt for polynomial interpolation when dealing with non-periodic, smooth data. In this case, the accuracy of the interpolation is determined by the order of the polynomial interpolants. Yet, the interpolant order cannot become arbitrarily high on a uniform grid. The accuracy of polynomial interpolation on uniform grids is usually limited by instabilities such as [Runge's phenomenon][runge-wiki].
 
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/runge.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/runge.png" alt="" width="100%">
 
 Runge's phenomenon shows that high-order polynomial interpolation [is unstable][fd-post]. Fourier methods for periodic data do not share this limitation and achieve spectral accuracy: Exponential convergence of the interpolant to the data with the number of grid points. Yet, Fourier methods expect smooth, periodic data and otherwise suffer from [Gibbs's phenomenon][gibbs-wiki].
 
@@ -41,10 +41,10 @@ When we compute the Fourier transform of a non-periodic function, the Fourier co
 ### Filters reduce Gibb's phenomenon
 
 When the spectrum is filtered with a constant function, the decay of the Fourier coefficients is not modified. Accordingly, we can observe Gibb's phenomenon.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/filter_1.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/filter_1.png" alt="" width="100%">
 
 Filtering with a smoothly decaying filter function significantly reduces oscillations and increases the accuracy of the reconstruction.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/filter_2.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/filter_2.png" alt="" width="100%">
 
 
 ### Code

@@ -13,7 +13,7 @@ description: Finite difference stencils fail because of the Runge phenomenon!
 ## Intro
 This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. For an introduction, see the <a href="https://kunkelalexander.github.io/blog/when-fourier-fails-filters-post/">first post of this series</a>. In the following, we will show that high-order finite differences and accordingly Taylor expansions are not a viable solution.  You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python"> Python code on GitHub </a>. We will create the following beautiful plot:
 
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/finite_difference_instability.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/finite_difference_instability.png" alt="" width="100%">
 
 
 ## Arbitrary-order finite difference stencils

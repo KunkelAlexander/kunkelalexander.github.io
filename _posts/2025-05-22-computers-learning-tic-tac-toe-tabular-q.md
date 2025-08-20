@@ -9,7 +9,7 @@ description: Learn how to make computers play Tic-Tac-Toe using the minimax and 
 
 <p class="intro"><span class="dropcap">I</span>n today's post, we study ways to play Tic-Tac-Toe using the minimax and Q-learning algorithms. We heavily draw on <a href="https://github.com/fcarsten/tic-tac-toe/"> Carsten Friedrich's excellent notebook series</a> to explore ways to make a computer play games such as Tic-Tac-Toe. I will gloss over some details, so please refer to Carsten's post for some more explanations. You may find the accompanying <a href="https://github.com/KunkelAlexander/tictactoe_rl"> Python code on GitHub</a>.</p>
 
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_minimax_vs_minimax_game_play.gif" alt="">
+<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_minimax_vs_minimax_game_play.gif" alt="" width="100%">
 
 
 ## Minimax algorithm

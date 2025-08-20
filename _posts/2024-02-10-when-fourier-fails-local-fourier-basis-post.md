@@ -19,7 +19,7 @@ Mollifiers involve convolving non-periodic functions with suitable smooth bell f
 
 
 The mollifier we are going to is the bell function $$B(x)$$:
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_bell.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_bell.png" alt="" width="100%">
 It is the identity function in the domain $$[a, b]$$ and smoothly decays to zero in the boundary regions $$[a_1, a]$$ and $$[b, b_1]$$. Moreover, it assumes the value $$\frac{1}{\sqrt{2}}$$ at the points $$\bar{a}$$ and $$\bar{b}$$.
 
 ### Antisymmetric extension
@@ -27,18 +27,18 @@ One could naively multiply the bell function $$B(x)$$ with the input function $$
 
 $$F(x) = B(x)f(x) - B(2\hat{a} - x) f(2\hat{a} - x)  - B(2\hat{b} - x) f(2\hat{b} - x)$$
 
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_folding.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_folding.png" alt="" width="100%">
 
 $$F(x)$$ can be antisymmetrically extended to produce a periodic function, where the original unmodified function $$f(x)$$ resides in the shaded domain shown below.
 
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_extension.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_extension.png" alt="" width="100%">
 
 It is important to note that in this process, the boundary regions $$[a_1, a]$$ and $$[b, b_1]$$ are discarded. The larger these regions are, the higher the accuracy of the periodic extension.
 
 ### Accuracy
 
 For a domain of size $$N=100$$ and additional ghost boundaries of size $$N_{gh} = 32$$ we obtain the following accuracies for the derivatives of $$f(x) = \exp(x)$$ in $$[0, \pi]$$.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_accuracy.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/lfb_accuracy.png" alt="" width="100%">
 
 While the accuracy is acceptable, it falls short of expectations when sacrificing more than one-third of the input data for obtaining a periodic extension. However, mollifiers offer the advantage of not requiring the solution of linear systems of equations, making them computationally efficient. They can be a viable option for large domains where having a ghost boundary of a few dozen points is feasible.
 

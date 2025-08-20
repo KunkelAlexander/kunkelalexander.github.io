@@ -33,18 +33,18 @@ Schematically, the process looks as follows:
 ### Extension
 It is useful to construct an antisymmetric extension because the $$0^{th}$$ order derivatives, i.e. the function values, are known already.
 Ideally, a sine transform should be used instead of the of the antisymmetric extension. It has the same analytical properties as the antisymmetric extension and is twice as fast as a DFT. The following figure demonstrates the latter process using an exponential function.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_trigonometric_extension.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_trigonometric_extension.png" alt="" width="100%">
 
 
 ### Accuracy
 
 Computing derivatives by summing analytical derivatives of cosine functions with the appropriate coefficients and numerical derivatives of the Fourier transform, we see that while the first derivate can be computed very accurately, higher derivatives become less and less accurate.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_trigonometric_accuracy.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_trigonometric_accuracy.png" alt="" width="100%">
 
 
 ### Decay of Fourier Coefficients
 Finally, the decay of the Fourier coefficients can be beautifully visualised. The stability and complexity of the algorithm is determined by how many derivatives are estimated. All odd derivatives of the antisymmetric extension are continuous at the domain boundary for smooth input data. Therefore, ensuring continuity of the function at the domain boundary implies that the Fourier coefficients decay like $$\mathcal{O}(N^{-3})$$, faster than without the antisymmetric extension. This can be done by subtracting a linear combination of two cosine functions such that the remainder satisfies Dirichlet boundary conditions. Every further pair of trigonometric functions subtracted increases the order of convergence by $$2$$. Note that there are additional discretisation errors from the DFT and the approximation of the boundary derivatives discussed in the above references.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_trigonometric_decay.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_trigonometric_decay.png" alt="" width="100%">
 
 
 ## Polynomial Subtraction
@@ -54,20 +54,20 @@ For the polynomial subtraction, I demonstrate a slightly different approach. Ins
 ### Extension
 
 The following figure demonstrates the subtraction of a 9th-order polynomial from an exponential function. It is evident that a high-order polynomial can approximate exponential functions well, and the remainder is close to zero.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_extension.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_extension.png" alt="" width="100%">
 
 ### Accuracy
 
 A suitably chosen 9th-order subtraction polynomial ensures that the homogeneous remainder is continuously differentiable four times. Accordingly, we expect order unity oscillation from the fifth derivative onwards, as confirmed by plotting the error of the reconstructed derivatives:
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_accuracy.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_accuracy.png" alt="" width="100%">
 
 It is worth noting that, in my experience, all spectral methods acting on non-periodic data (including Chebyshev methods on Chebyshev grids) share one drawback: reconstruction errors at the domain boundaries close to the discontinuities are often orders of magnitude higher than in the domain center. This is also demonstrated in the following figure, where the logarithm of the reconstruction error is shown in blue, and the reconstructed function is in red.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_log_accuracy.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_log_accuracy.png" alt="" width="100%">
 
 ### Decay of Fourier Coefficients
 
 Studying the decay of the polynomial coefficients reveals that every pair of polynomials subtracted increases the order of convergence by $$1$$, not by $$2$$ as in the case of the antisymmetric extension. Comparing the decay of coefficients between the two methods shows that the polynomial subtraction method decays to machine precision faster than the trigonometric subtraction method despite the same order of convergence. This is one of the reasons why I do not think one of the two methods is to be preferred over the other necessarily.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_decay.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/subtraction_polynomial_decay.png" alt="" width="100%">
 
 
 ## Code

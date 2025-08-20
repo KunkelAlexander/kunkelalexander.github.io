@@ -9,7 +9,7 @@ description: Learn how to make computers play Tic-Tac-Toe using deep Q-learning 
 
 <p class="intro"><span class="dropcap">I</span>n today's post, we study ways to play Tic-Tac-Toe using different deep Q-learning algorithms using dual networks, duelling networks, convolutional networks and prioritised experience replay. Just as in the <a href="https://kunkelalexander.github.io/blog/tic-tac-toe/">previous post</a>, we heavily draw on <a href="https://github.com/fcarsten/tic-tac-toe/"> Carsten Friedrich's excellent notebook series</a> to explore some reinforcement learning algorithms in more depth. I will gloss over some details, so please refer to Carsten's post for some more explanations. You may find the accompanying <a href="https://github.com/KunkelAlexander/tictactoe_rl"> Python code on GitHub</a>.</p>
 
-<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_minimax_vs_minimax_game_play.gif" alt="">
+<img src="{{ site.baseurl }}/assets/img/tictactoe-python/1_minimax_vs_minimax_game_play.gif" alt="" width="100%">
 
 
 ## Deep Q-Network

@@ -13,7 +13,7 @@ description: One extension to rule them all. How to efficiently reuse accurate S
 ## Intro
 This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. For an introduction, see the <a href="https://kunkelalexander.github.io/blog/when-fourier-fails-filters-post/">first post of this series</a>. In this post, we study Gram-Fourier extensions. This method was first described in Lyon's PhD thesis <a href="https://thesis.library.caltech.edu/2992/1/lyon_thesis_A100Final.pdf"> High-order unconditionally-stable FC-AD PDE solvers for general domains </a>.
 This method combines the accuracy of SVD extensions with the computational advantages of polynomial expansions. You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python"> Python code on GitHub </a>.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_boundary_polynomials.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_boundary_polynomials.png" alt="" width="100%">
 
 ## The merits of Gram-Fourier extensions
 In the [previous post][svd-post], we looked at SVD extensions: Periodic extensions obtained through solving a least-squares optimisation problem. They can be highly accurate, but are computationally expensive and require many collocation points for good results. The Gram-Fourier extension method remedies these drawbacks. Instead of computing SVD extensions of an interpolant at runtime, one precomputes SVD extensions of a set of polynomial basis functions, so-called Gram polynomials. The interpolant is expanded in terms of this polynomial basis set at the domain boundaries. But instead of summing the original polynomials, one then sums the precomputed periodic extensions of the polynomials and obtains a periodic function. In other words, one precomputes a change-of-basis from a polynomial basis to a periodic basis.
@@ -21,9 +21,9 @@ This has several advantages: Firstly, the SVD extension of an analytically known
 
 ## Gram Polynomials
 In the first step towards Gram-Fourier extensions, we start with a set of $$N$$ polynomials on $$N$$ points defined on the left and right boundary of the physical domain.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_polynomials.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_polynomials.png" alt="" width="100%">
 In order to expand the interpolant in terms of these polynomials, we use the Gram-Schmidt orthogonalisation algorithm to obtain an orthonormal basis set. Since this is a one-off computation, we carry it out in high precision using Python's mpmath library. Alternatively, all of the following computations could be carried out symbolically.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_orthonormal_polynomials.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_orthonormal_polynomials.png" alt="" width="100%">
 
 
 ## SVD Extensions
@@ -34,16 +34,16 @@ Firstly, we choose the size of the boundary domain $$n_{\Delta}$$. It determines
 In the following, I use $$m = n_{\Delta} = 5$$, $$\Lambda = 150$$, $$n_D = 26$$ and $$g=63$$, in agreement with the parameter suggestions in Lyon's thesis. Depending on your application, you may choose different parameters.
 
 The following plot shows the even and odd extensions $$f_{even}$$ and $$f_{odd}$$ (blue graphs on the left and right) alongside the Gram polynomials (pink) of order $$0$$ to $$4$$ (top to bottom). The white, vertical, dashed line at $$x = \Delta$$ denotes the symmetrix axis of the even and odd extensions: $$f_{even}(x) = f_{even}(x+\Delta)$$ and $$f_{odd}(x) = -f_{odd}(x + \Delta)$$.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_even_and_odd_extensions.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_even_and_odd_extensions.png" alt="" width="100%">
 
 The SVD extensions so obtained describe the Gram polynomials in the physical domain very well. One can reliably achieve a maximum approximation error below any desired value on the entire physical domain.
 
 ## Gram-Fourier extension
 Finally, let us take a look at the function $$f(x) = \exp(x)$$ on $$[0, \pi]$$ and compute its Gram-Fourier extension for $$N=32$$. We project the function $$f$$ in the left and right boundary domains onto polynomials of orders $$0$$ to $$4$$ to obtain $$a_{left}$$ and $$a_{right}$$. In the second step, we use these coefficients to compute linear combinations of the even and odd extensions that smoothly decay to zero.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_zero_extension.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_zero_extension.png" alt="" width="100%">
 
 Ignoring the parts where the extension is zero, one obtains the following plot:
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_extension.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_extension.png" alt="" width="100%">
 
 This extension only requires two matrix multiplications by $$m \times m$$ matrices to obtain the coefficients $$a_{left}$$ and $$a_{right}$$ as well as a linear combination of the precomputed extensions.
 
@@ -113,8 +113,8 @@ plt.show()
 ## Accuracy
 The following two plots show the reconstruction errors for derivatives using the Gram-Fourier extension for the same parameters as above with the exception of $$m = n_{\Delta} = 14$$ as well as the decay of the Fourier coefficients for different values of $$m = n_{\Delta}$$.
 Note that the decay of the Fourier coefficients is very different from what I would have naively expected based on the smoothness of the extension at the boundary. So, please just ignore the legend. Instead, the behaviour of the Fourier coefficients seems to be dominated by the extension domain.
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_accuracy.png" alt="">
-<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_decay.png" alt="">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_accuracy.png" alt="" width="100%">
+<img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_decay.png" alt="" width="100%">
 
 ## Conclusion
 This concludes the series of posts on non-periodic interpolation. Out of all the methods presented, the Gram-Fourier extension is the most versatile. It is fast, accurate and stable. Once the extension tables are computed, it allows for an easy and fast implementation using existing matrix multplication and FFT libraries on CPUs and GPUs.

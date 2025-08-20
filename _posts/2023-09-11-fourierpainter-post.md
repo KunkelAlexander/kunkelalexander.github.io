@@ -7,14 +7,13 @@ description: Learn how to draw a neon-style elephant using the complex Fourier t
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n this blog's first post, we are going to visualise a complex Fourier transform as sum of plane waves. </p>
+<p class="intro"><span class="dropcap">I</span>n this blog's first post, we are going to visualise a complex Fourier transform of a 4-parameter elephant as sum of plane waves. You may find the accompanying <a href="https://github.com/KunkelAlexander/fourierpainter-python"> Python code on GitHub </a>. </p>
 
 
 ## Intro
 Discrete Fourier transforms are ubiquitous in image and signal processing. They allow the decomposition of a time-dependent signal into a sum of plane waves with constant frequencies. Today, we are going to visualise them in a cool neon-look using Python. I recommend the the excellent explanatory videos on the Fourier transform by the Youtube channel <em>3Blue1Brown</em> where I first came across this type of visualisation.
 Before diving in, below is a gif showing an animation of our result:
-<img src="{{ site.baseurl }}/assets/img/fourierpainter-python/animation.gif" alt="" width="100%" class="center">
-You may find the accompanying <a href="https://github.com/KunkelAlexander/fourierpainter-python"> Python code on GitHub </a>.
+<img src="{{ site.baseurl }}/assets/img/fourierpainter-python/animation.gif" alt="" width="100%">
 
 
 ## Discrete Fourier transform

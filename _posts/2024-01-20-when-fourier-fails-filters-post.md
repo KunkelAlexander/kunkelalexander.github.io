@@ -7,7 +7,7 @@ description: Learn how to interpolate non-periodic, uniform data using filters!
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n today's post, we study ways to accurately interpolate non-periodic, smooth data on a uniform grid. </p>
+<p class="intro"><span class="dropcap">I</span>n today's post, we study ways to accurately interpolate non-periodic, smooth data on a uniform grid. You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python">Python code on GitHub</a>.</p>
 
 
 ## Intro
@@ -32,7 +32,7 @@ Such alternative approaches include
 - [SVD extensions][svd-post]
 - [Gram-Fourier extensions][gram-fe-post]
 
-In the following, we will look at filters.  You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python"> Python code on GitHub </a>.
+In the following, we will look at filters.
 
 
 ## Filters

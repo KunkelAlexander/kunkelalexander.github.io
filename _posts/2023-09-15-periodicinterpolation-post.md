@@ -7,12 +7,12 @@ description: Learn how to interpolate periodic, uniform data using the Fourier t
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n today's post, we are going to review how to interpolate periodic, uniform data using the discrete Fourier transform. </p>
+<p class="intro"><span class="dropcap">I</span>n today's post, we are going to review how to interpolate periodic, uniform data using the discrete Fourier transform. You may find the accompanying <a href="https://github.com/KunkelAlexander/periodicinterpolation-python">Python code on GitHub</a>. The repository also includes code to up- and downscale images using the Fourier transform.</p>
 
 
 ## Intro
 This is a brief review of three interpolation methods using the Fourier transform with the aim of providing short code snippets that work in $$d=2$$ dimensions with obvious generalisations to higher dimensions for odd input and output sizes. For the definitions of the Discrete Fourier Transform (DFT) and its inverse (IDFT) used in the following see the excellent [NumPy FFT documentation][numpy-fft-documentation]. In the following, we are going to make use of NumPy's fftfreq, ifftfreq, fftshift and ifftshift functions that account for the different spectra for even and odd $$N$$.
-You may find the accompanying <a href="https://github.com/KunkelAlexander/periodicinterpolation-python"> Python code on GitHub </a>. The repository also includes code to up- and downscale images using the Fourier transform.
+
 
 <img src="{{ site.baseurl }}/assets/img/fourierinterpolation-python/header.png" alt="" width="100%">
 

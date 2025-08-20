@@ -7,12 +7,12 @@ description: One extension to rule them all. How to efficiently reuse accurate S
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n today's post, we study the Gram-Fourier extensions. They are a cross between SVD and polynomial expansions and offer high accuracy and stability at the asymptotic cost of a single Fourier transform.</p>
+<p class="intro"><span class="dropcap">I</span>n today's post, we study the Gram-Fourier extensions. They are a cross between SVD and polynomial expansions and offer high accuracy and stability at the asymptotic cost of a single Fourier transform. You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python">Python code on GitHub</a>.</p>
 
 
 ## Intro
 This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. For an introduction, see the <a href="https://kunkelalexander.github.io/blog/when-fourier-fails-filters-post/">first post of this series</a>. In this post, we study Gram-Fourier extensions. This method was first described in Lyon's PhD thesis <a href="https://thesis.library.caltech.edu/2992/1/lyon_thesis_A100Final.pdf"> High-order unconditionally-stable FC-AD PDE solvers for general domains </a>.
-This method combines the accuracy of SVD extensions with the computational advantages of polynomial expansions. You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python"> Python code on GitHub </a>.
+This method combines the accuracy of SVD extensions with the computational advantages of polynomial expansions.
 <img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/gramfe_boundary_polynomials.png" alt="" width="100%">
 
 ## The merits of Gram-Fourier extensions

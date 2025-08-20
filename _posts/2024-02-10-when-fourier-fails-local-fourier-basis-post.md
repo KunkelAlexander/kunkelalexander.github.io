@@ -7,11 +7,11 @@ description: Learn more about mollifiers to obtain periodic extensions.
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n today's post, we introduce mollifiers at the example of the local Fourier basis method. </p>
+<p class="intro"><span class="dropcap">I</span>n today's post, we introduce mollifiers at the example of the local Fourier basis method. You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python">Python code on GitHub</a>.</p>
 
 
 ## Intro
-This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. For an introduction, see the <a href="https://kunkelalexander.github.io/blog/when-fourier-fails-filters-post/">first post of this series</a>. In this post, we delve into the benefits of mollifiers, which involve convolutions of non-periodic data with smooth bell functions around discontinuities to ensure continuity. The method presented here is presented as Fourier extension of the second kind in Boyd's insightful paper <a href="https://www.sciencedirect.com/science/article/abs/pii/S0021999102970233"> A Comparison of Numerical Algorithms for Fourier Extension of the First, Second, and Third Kinds</a>. It also features in the paper <a href="https://link.springer.com/article/10.1007/BF01060869">Spectral multidomain technique with Local Fourier Basis</a> by Israeli et al. who use it to build PDE solvers. You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python"> Python code on GitHub </a>.
+This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. For an introduction, see the <a href="https://kunkelalexander.github.io/blog/when-fourier-fails-filters-post/">first post of this series</a>. In this post, we delve into the benefits of mollifiers, which involve convolutions of non-periodic data with smooth bell functions around discontinuities to ensure continuity. The method presented here is presented as Fourier extension of the second kind in Boyd's insightful paper <a href="https://www.sciencedirect.com/science/article/abs/pii/S0021999102970233"> A Comparison of Numerical Algorithms for Fourier Extension of the First, Second, and Third Kinds</a>. It also features in the paper <a href="https://link.springer.com/article/10.1007/BF01060869">Spectral multidomain technique with Local Fourier Basis</a> by Israeli et al. who use it to build PDE solvers.
 
 
 ### Mollifiers

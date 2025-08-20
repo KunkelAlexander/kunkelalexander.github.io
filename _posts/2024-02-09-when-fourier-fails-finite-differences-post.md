@@ -7,11 +7,11 @@ description: Finite difference stencils fail because of the Runge phenomenon!
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n today's post, we show that high-order finite-difference stencils become inaccurate. </p>
+<p class="intro"><span class="dropcap">I</span>n today's post, we show that high-order finite-difference stencils become inaccurate. You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python">Python code on GitHub</a>.</p>
 
 
 ## Intro
-This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. For an introduction, see the <a href="https://kunkelalexander.github.io/blog/when-fourier-fails-filters-post/">first post of this series</a>. In the following, we will show that high-order finite differences and accordingly Taylor expansions are not a viable solution.  You may find the accompanying <a href="https://github.com/KunkelAlexander/when-fourier-fails-python"> Python code on GitHub </a>. We will create the following beautiful plot:
+This series of posts looks into different strategies for interpolating non-periodic, smooth data on a uniform grid with high accuracy. For an introduction, see the <a href="https://kunkelalexander.github.io/blog/when-fourier-fails-filters-post/">first post of this series</a>. In the following, we will show that high-order finite differences and accordingly Taylor expansions are not a viable solution. We will create the following plot:
 
 <img src="{{ site.baseurl }}/assets/img/nonperiodicinterpolation-python/finite_difference_instability.png" alt="" width="100%">
 

@@ -20,6 +20,8 @@ In BombeRLe, up to four agents compete by collecting coins and placing bombs to 
 - Walking into an obstacle (wall, bomb, crate) results in waiting instead but an agent can stand on its own bomb after placing it.
 - Agents **blow up crates using bombs** and **collect coins by walking through them**.
 - Every player has one life and **dies immediately** when stepping into an explosion. If an agent kills another player and dies at the same time, this counts as kill.
+- If an agent **kills itself, it does not lose points** and no other agent gains point.
+- Explosions are not stopped by crates, but they **do no ignite bombs**.
 - Players can place **only one bomb at a time**. The timeline of a bomb is detailed in the table below and visualised in Figure 1.
 
 
@@ -75,7 +77,7 @@ I define an action as "safe" if, taking into account all current bombs and explo
 These 12 bits allow the agent to perceive its immediate surroundings and assess dangerous situations to some extent. However, the agent still lacks any sense of the wider game board. To remedy this, I introduce **4 more bits that encode the direction and type of the nearest object of interest**. This encoding implies the agent can only pursue a single object of interest at a time. It will not be aware of, say, two coins at equal distance. If the agent is standing adjacent to the object of interest, the directional encoding will be inaccurate, since I chose not to include `WAIT` as a direction. But this is acceptable: the agent "sees" the object and is therefore in a clearly distinct state. In my understanding, this design choice should not negatively affect the performance of the tabular Q-agent.
 
 
-The code runs a breadth-first search (BFS) to locate the nearest coins, crates, and agents. We guide the agent toward the nearest agent not separated by walls or crates. If there is none, then the nearest walkable coin. Failing that, the nearest walkable crate. If none of those are available, the  should generally be over.
+The code runs a breadth-first search (BFS) to locate the nearest coins, crates, and agents. We guide the agent toward the nearest crate if it is within three steps, then the nearest agent not separated by walls or crates if it is within three steps. If there is none, we guide the agent towards the nearest walkable coin. Failing that, the nearest walkable crate. If none of those are available - the board has been blown up and all coints are collected - the agent is guided towards the closest remaining enemy. At first, I always guided the agent towards the closest enemy where available. But that led it to ignore many coins and crates on the way. Since coins are essential to high scores, it turns out that prioritising coins over crates and agents is not a bad strategy.
 
 Once the agent knows where it can go, two final choices remain: Should the agent wait or place a bomb? To answer this question, I added **2 more bits indicating whether waiting and bombs are safe or unsafe** using the same logic as for assessing dangerous direction. Waiting is safe if no bombs can kill the agent in its current position; placing a bomb is safe if waiting is safe and the agent has an escape route before the bomb goes off.
 
@@ -90,12 +92,24 @@ The animation shown in Figure 2 illustrates this encoding in practice. It shows 
   <figcaption>Figure 2: Debug screen for simplified state representation. At every frame, we see the 18 bit representation of the state with a translation back into features. </figcaption>
 </figure>
 
+Another debugging step is to build a rule-based agent based on your state representation. For the state, we can easily define some sensible rules:
+- Move towards the object of interest if possible
+- Drop bombs when next to enemies and crates
+- Do not take dangerous actions
+- Coose randomly among the remaining actions
+By observing such a rule-based agent play as small number of rounds, you can quickly spot bugs in your encoding. For instance, I realised that bombs do not trigger other bombs and that me encoding told the agent that crates shield bombs.
+In addition, it turns out that this rule-based agent plays fairly well and the tabular Q-agent will have to compare itself to it to measure its worth.
+
+<figure>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/4_representator.gif"  width="100%" alt="">
+  <figcaption>Figure 3: Rule-based agent using the simplified state representation. It plays fairly well against the inbuilt rule-based agents. In the end, it dies because the enemy moves into a free field, blocking the agent's move. Having lost one move, the agent cannot escape its own bomb's explosion anymore. This directly highlights a shortcoming of the above representation: The agent does not have a sense of its wider surroundings and situations that are potentially dangerous.</figcaption>
+</figure>
 
 ### A good reward system helps even when in-game rewards are scarce
 
 Ideally, our reward system should mirror the games reward system yielding the same relative rewards for collecting coins and killing players. However, in practice rewards are sparse, especially when the player has to blow up crates to find coins and plays against strong opponents. Therefore, I introduce additional rewards that help the agent learn to explore the game.
 
-I mirror the rewards of the game with coin collected and killed opponent. Additionally, the player is rewarded for surviving the round and destroying crates. It gets punished for killing itself and getting killed and there is a slight penalty for inaction. The latter reflects that the enemy will have an easier time killing a waiting target even when the agent itself thinks that waiting is as good as moving.
+I mirror the rewards of the game with coin collected and killed opponent. Additionally, the player is rewarded for dropping bombs and destroying crates to foster aggressive play. It gets punished for killing itself and getting killed but killing itself is slightly less negative. This is because there is no penalty for suicide whereas getting killed means that the enemy is getting points. In practice, this makes the agent fairly suicidal but looking at the total scores, it seems to be worth it. For if the agent does not kill itself in time, there is always a small risk it gets killed by its opponents in the endgame. Additionaly, there is a slight penalty for inaction. The latter reflects that the enemy will have an easier time killing a waiting target even when the agent itself thinks that waiting is as good as moving.
 
 
 | Event              | Reward  | Description                              |
@@ -103,10 +117,11 @@ I mirror the rewards of the game with coin collected and killed opponent. Additi
 | COIN_COLLECTED     | +0.20   | Agent collected a coin                   |
 | KILLED_OPPONENT    | +1.00   | Agent killed another agent               |
 | CRATE_DESTROYED    | +0.10   | Agent destroyed a crate                  |
-| KILLED_SELF        | −1.00   | Agent killed itself                      |
-| SURVIVED_ROUND     | +1.00   | Agent survived until the end of the round|
-| GOT_KILLED         | −0.10   | Agent got killed by opponent or bomb     |
+| BOMB_DROPPED       | +0.02   | Agent dropped a bomb                     |
+| KILLED_SELF        | −0.90   | Agent killed itself                      |
+| GOT_KILLED         | −1.00   | Agent got killed by opponent             |
 | WAITED             | −0.02   | Agent performed a WAIT action            |
+| INVALID_ACTION     | −0.02   | Agent performed an invalid action        |
 
 ## Faster Training Through Demonstration
 
@@ -114,11 +129,13 @@ For the Tic-Tac-Toe agent, I simply let the agent play games and updated the Q-t
 
 One key opportunity I overlooked in Tic-Tac-Toe was the availability of a near-perfect demonstrator: the Minimax agent. Similarly, in the case of BombeRLe, the developers kindly provide a rule-based agent that performs reasonably well. We can leverage this to speed up training significantly by pre-recording a large number of transitions and using them to pre-train the Q-table before starting real-time learning. This is called **offline learning**. In contrast, sampling training data from the agent while it is learning is called **online learning**.
 
-Offline learning with a demonstrator allows the agent to explore useful game states right from the beginning—states it would otherwise only encounter much later during training. In practice, I record **50,000 transitions** from the demonstrator and use them to update the Q-table before performing any live training or evaluation. For context, a full training run with online updates can take an hour, whereas updating the Q-table with 50k recorded transitions takes **around 60 seconds**. This enables rapid experimentation across different hyperparameter configurations.
+Offline learning with a demonstrator allows the agent to explore useful game states right from the beginning—states it would otherwise only encounter much later during training. In practice, I record **50,000 transitions** from the demonstrator and use them to update the Q-table before performing any live training or evaluation. I also enable exploration for the demonstrator that I let decay from 1 to 0 over the course of the 50,000 transition so that the demonstration is as diverse as possible and contains varied moves even in advanced stages of the game. So, in episode 1 the demonstrator would only take mostly random actions and this exploration decays with a factor $$\epsilon$$ to a floor value, just like in online training. I have not actually verified whether that is necessary but given that we need to extensively explore the state space for offline Q-training to work, I am almost certain it is a good idea.
 
-The key speed gain comes from the fact that we only need to compute the computationally expensive game state to integer state embedding **once**. These embeddings can then be reused across multiple hyperparameter runs.
+The **advantage of offline learning**: While a full training run with online updates can take an hour, updating the Q-table with 50,000 recorded transitions **takes a couple of minutes**. This enables rapid experimentation across different hyperparameter configurations.
 
-## Training hyperparameters
+The key speed gain comes from the fact that we only need to compute the computationally expensive game state to integer state embedding **once**. These embeddings can then be reused across multiple hyperparameter runs. The training process itself is reduced to an iteration over transitions and matrix updates.
+
+## What settings for the training?
 
 Throughout training, I keep the hyperparameters fixed to the values given below:
 
@@ -129,16 +146,18 @@ Throughout training, I keep the hyperparameters fixed to the values given below:
 I did experiment with an adaptive learning rate $$\alpha = lr_0 / (1 + N_{visits}(state, action)).$$ This formulation decreases the learning rate as the agent gathers more experience with a specific `(state, action)` pair. Early in training, updates are larger and help the agent adapt quickly. Later, as visit counts increase, the learning rate decays, stabilizing the learned Q-values and reducing variance. This strategy can help avoid overfitting to noisy or rare transitions and provides **better convergence guarantees**.
 I performed a hyperparameter search using `optuna` and did not find that the adaptive learning rate improved performance for the agent presented here, but I might have made a mistake, so you should definitely try it out. You can also change the decay to a non-linear function or introduce a floor.
 
+
+
 ## Money, money, money
 
-We start training in a simplified environment without enemies or crates, a small $$9\times9$$ board and coins everywhere.
+We start training in a simplified environment without enemies or crates, a small $$9\times9$$ board and coins everywhere - the scenario baptised *coin-heaven* by the game.
 
 Since we’re using off-policy learning (based on demonstrator trajectories), the agent may not explore all available states. Initializing Q-values to a **high value** would encourage the agent to explore, but also risks overestimating actions not demonstrated. Instead, I found that initialising the Q-values to zero or a negative value is better. My understanding is that a pessimistic agent better learns to value good actions based on demonstrator input.
 
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/4_coin_grabber.gif"  width="100%" alt="">
-  <figcaption>Figure 3: Tabular Q-agent successfully collecting coins. The agent comfortably navigates the map and reliably collects all coins.</figcaption>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/5_coin_grabber.gif"  width="100%" alt="">
+  <figcaption>Figure 4: Tabular Q-agent successfully collecting coins after 50,000 rounds of offline training. The agent comfortably navigates the map and reliably collects all coins. The pre-recorded transitions are from a rule-based agent as demonstrator playing by itself in the coin-heaven scenario. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions. </figcaption>
 </figure>
 
 The agent reliably collects all coins. However, its path is not fully optimised: it always moves toward one of the nearest coins but doesn't plan multi-step routes that could reduce total steps. This is due to the BFS algorithm, which only targets the next closest coin and ignores multi-coin path efficiency.
@@ -147,24 +166,60 @@ Additionally, the agent’s behavior reflects a **design choice**: the pathfindi
 
 ## Loot Crate
 
-Next, we train on a more complex board configuration with crates but still without enemies. It learns how to successfully blow up crates. I also experimented with a 16-bit representation dropping the type of the object of interest to save 2 bits. However, the agent would get caught in infinite up-down loops or just wait in that reduced representation. My interpretation is that the agent benefits from being able to distinguish between coins and crates (even though I am not 100% sure why this should matter in tabular Q-learning). My takeaway is that the representation matters more that I thought at first.
+Next, we train on a more complex board configuration with crates but still without enemies - a scenario baptised *loot-crate* by the game. The learns how to successfully blow up crates. I also experimented with a 16-bit representation dropping the type of the object of interest to save 2 bits. However, the agent would get caught in infinite up-down loops or just wait in that reduced representation. My interpretation is that the agent benefits from being able to distinguish between coins and crates (even though I am not 100% sure why this should matter in tabular Q-learning). My takeaway is that the representation matters more that I thought at first. More generally, I tend to suspect hyperparameters when machine learning algorithms underperform, but for tabular Q-learning and Bomberman the **quality of the state representation seemed to be much more important than everything else** once the algorithm was up and running.
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/5_crate_hero.gif"  width="100%" alt="">
-  <figcaption>Figure 4: Tabular Q-agent successfully blowing up crates and collecting coins.</figcaption>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/6_crate_hero.gif"  width="100%" alt="">
+  <figcaption>Figure 5: Tabular Q-agent successfully blowing up crates and collecting coins after 50,000 rounds of offline training. The pre-recorded transitions are from a rule-based agent as demonstrator playing by itself in the loot-crate scenario. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions.</figcaption>
 </figure>
 
 ## Free Game
 
-In the final training phase, I simulate a full game with multiple agents:
+In the final training phase, I simulate a full game in the *classic* scenario with multiple agents:
 
 * One **rule-based agent** (demonstrator)
 * One **peaceful agent** that moves randomly and doesn't place bombs
 * One **tabular Q-learning agent** in classic mode
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/6_allstar.gif"  width="100%" alt="">
-  <figcaption>Figure 5: Tabular Q-agent (pink) playing against two rule-based and one peaceful agent.</figcaption>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/7_allstar.gif"  width="100%" alt="">
+  <figcaption>Figure 6: Tabular Q-agent (pink) playing against two rule-based and one peaceful agent after 50,000 rounds of offline training. The four games shown demonstrate that the agent occasionally wins against the rule-based agent and prefers suicide to getting killed. The pre-recorded transitions are from a rule-based agent as demonstrator playing against a peaceful agent and two other rule-based agents. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions.</figcaption>
 </figure>
 
-To be continued...
+
+## How to understand these results?
+
+Training these agents, I wondered which metrics we could best use to assess the performance of the different tabular Q-agent. An obvious choice is to evaluate the agent periodically and check which average scores they achieve. Figure 8 shows the scores of the three agents: The *coingrabber* in the coin-heaven scenario (40 coins, no crates, no enemies), the *crate hero* in the loot-crate scenario (40 coins, crates, no enemies) and the *allstar* in the classic scenario (9 coins, crates, 3 enemies) as well as the rule-based agent playing agains the tabular Q-agent in the classic scenario for reference.
+
+
+<figure>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/8_high_scores.png"  width="100%" alt="">
+  <figcaption>Figure 7: Game scores across 50,000 offline training rounds with training in sequential batches of 5,000 rounds. The agents were evaluated across 50 games after every batch and the scores - 1 point for every coin collected and 5 points for every enemy killed - averaged. The coin grabber agent consistently collects all 40 coins in the coin-heaven scenario, even after just 5,000 training episodes. The crate hero agent needs slightly more time. After 30,000 training episodes, it converges to a policy that consistently blows up all creates in the loot-crate scenario and also collects all coins. The allstar achieves higher scores than the rule-based agent after 30,000 episodes and improves until the end of the training. Note that the total number of state visits differs between the runs since different scenarios lead to shorter and longer episodes. The 50,000 episodes in the coin-heaven and loot-crate scenarios contain around 2.5M transitions whereas the episodes in the classic scenarios contain around 5M transitions.  </figcaption>
+</figure>
+
+
+To better monitor the training process, it is interesting to review how many unique states are visited during trainin. Figure 8 shows that the training data for both the coin gabber and the crate hero do not contain new unique states after around 500,000 states. In contrast, the allstar training set contains new states until the end of the training, suggesting that the training set should be larger. I did, however, test training with 250,000 episodes and the agent's performance did not improve anymore suggesting that the bottleneck is elsewhere.
+
+<figure>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/9_state_visits.png"  width="100%" alt="">
+  <figcaption>Figure 8: Number of unique state visits as function of number of total state visits for the 3 training scenarios for 50_000 offline training rounds. This plot suggests that the training sets for the coin grabber and create hero do not provide contain new states after around 25_000 training rounds. The training set for the allstar, on the other hand, is not exhaustive of the states the demonstrator agent could visit.</figcaption>
+</figure>
+
+Going beyond that, we could look at how the Q-values or the number of state visits evolves during training but I personally find these metrics hard to interpret. I was hoping to gain insights from studying the Bellmann time difference error distribution over time, but to be honest, I was not able to tell whether the training had converged by looking at the time difference errors even though they are probably the closest counterpart of a training loss in tabular Q-learning. What did turn out to be interesting is looking at the number of policy changes, that is, that number of states where the best action has changed - over the course of the training. Figure 9 shows these policy changes and highlights that the crate hero's and allstar's policy's have not completely converged after 50,000 episodes of offline training and might benefit from more offline training.
+
+
+<figure>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/10_policy_changes.png"  width="100%" alt="">
+  <figcaption>Figure 9: Number of policy changes as function of number of total state visits for the 3 training scenarios for 50,000 offline training rounds. The number of policy changes indicates for how many states the best action changes from one evaluation to the next, i.e. for how many states s the argmax_a Q(s, a) changes every 5,000 training episodes. While the coin grabber policy seems to have converged and the crate hero policy is close to convergence, the allstar agent's policy still changes rapidly after 50,000 training episodes.</figcaption>
+</figure>
+
+You may find some more plots of different distributions such as the Q-value distribution shown in Figure 10 in the accompanying notebooks. It is interesting to see that the distributions are centered around $$Q = 0$$. Using `optuna`, I also found that $$Q_0 = 0$$ is the best initialisation for the Q-table with this reward system.
+
+<figure>
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/11_q_distribution.png"  width="100%" alt="">
+  <figcaption>Figure 10: Normalised frequency of Q-values in Q-tables for the 3 training scenarios after 50,000 offline training rounds. The frequencies are computed by binning the Q-values of all states visisted during training and then normalising with a range from Q=-2 to Q=2 over 100 bins. Most Q-values in all three tables are around 0. The agents becomes increasingly less optimistic about high Q-values, the more challenging their environment becomes. At the same time, the allstar seems to be surprisingly optimistic about not getting killed in most situations.</figcaption>
+</figure>
+
+## Conclusion
+
+In this post, we trained a tabular Q-learning algorithm to play a Bomberman clone. The tabular Q-learning algorithm worked well and the final agent has abundant potential for improvement - more offline training, online training, a better state representation etc. However, I personally find that there is too much handcrafting involved in developing a good state representation - developing a good tabular Q-agent seems to be almost as much work as developing a good rule-based agent. Therefore, we turn towards DQN and convolutional networks for automatically learning good features in the next post.

@@ -11,6 +11,15 @@ description: Learn how to make computers play Bomberman using the Q-learning alg
 
 <img src="{{ site.baseurl }}/assets/img/bomberle-python/1_gameplay.gif" width="100%" alt="">
 
+<style>
+  figure {
+    margin-bottom: 20px;
+  }
+
+  figcaption {
+    margin-top: 10px;
+  }
+</style>
 
 ## BombeRLe: Game Mechanics Explained
 
@@ -37,7 +46,7 @@ In BombeRLe, up to four agents compete by collecting coins and placing bombs to 
 
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/2_explain_bombs.gif"  width="100%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/2_explain_bombs.gif"  width="70%" alt="">
   <figcaption>Figure 1: Bomb game mechanics with default settings. The agent places a bomb, then moves away, waits for three frames and moves back into the smoke once the explosion has subsided.</figcaption>
 </figure>
 
@@ -101,7 +110,7 @@ By observing such a rule-based agent play as small number of rounds, you can qui
 In addition, it turns out that this rule-based agent plays fairly well and the tabular Q-agent will have to compare itself to it to measure its worth.
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/4_representator.gif"  width="100%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/4_representator.gif"  width="70%" alt="">
   <figcaption>Figure 3: Rule-based agent using the simplified state representation. It plays fairly well against the inbuilt rule-based agents. In the end, it dies because the enemy moves into a free field, blocking the agent's move. Having lost one move, the agent cannot escape its own bomb's explosion anymore. This directly highlights a shortcoming of the above representation: The agent does not have a sense of its wider surroundings and situations that are potentially dangerous.</figcaption>
 </figure>
 
@@ -156,7 +165,7 @@ Since we’re using off-policy learning (based on demonstrator trajectories), th
 
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/5_coin_grabber.gif"  width="100%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/5_coin_grabber.gif"  width="70%" alt="">
   <figcaption>Figure 4: Tabular Q-agent successfully collecting coins after 50,000 rounds of offline training. The agent comfortably navigates the map and reliably collects all coins. The pre-recorded transitions are from a rule-based agent as demonstrator playing by itself in the coin-heaven scenario. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions. </figcaption>
 </figure>
 
@@ -169,7 +178,7 @@ Additionally, the agent’s behavior reflects a **design choice**: the pathfindi
 Next, we train on a more complex board configuration with crates but still without enemies - a scenario baptised *loot-crate* by the game. The learns how to successfully blow up crates. I also experimented with a 16-bit representation dropping the type of the object of interest to save 2 bits. However, the agent would get caught in infinite up-down loops or just wait in that reduced representation. My interpretation is that the agent benefits from being able to distinguish between coins and crates (even though I am not 100% sure why this should matter in tabular Q-learning). My takeaway is that the representation matters more that I thought at first. More generally, I tend to suspect hyperparameters when machine learning algorithms underperform, but for tabular Q-learning and Bomberman the **quality of the state representation seemed to be much more important than everything else** once the algorithm was up and running.
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/6_crate_hero.gif"  width="100%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/6_crate_hero.gif"  width="70%" alt="">
   <figcaption>Figure 5: Tabular Q-agent successfully blowing up crates and collecting coins after 50,000 rounds of offline training. The pre-recorded transitions are from a rule-based agent as demonstrator playing by itself in the loot-crate scenario. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions.</figcaption>
 </figure>
 
@@ -181,8 +190,10 @@ In the final training phase, I simulate a full game in the *classic* scenario wi
 * One **peaceful agent** that moves randomly and doesn't place bombs
 * One **tabular Q-learning agent** in classic mode
 
+The tabular Q-agent after 50,000 training rounds plays fairly well and turns out to achieve higher scores than the rule-based agent.
+
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/7_allstar.gif"  width="100%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/7_allstar.gif"  width="70%" alt="">
   <figcaption>Figure 6: Tabular Q-agent (pink) playing against two rule-based and one peaceful agent after 50,000 rounds of offline training. The four games shown demonstrate that the agent occasionally wins against the rule-based agent and prefers suicide to getting killed. The pre-recorded transitions are from a rule-based agent as demonstrator playing against a peaceful agent and two other rule-based agents. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions.</figcaption>
 </figure>
 

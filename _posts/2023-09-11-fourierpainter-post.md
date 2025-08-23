@@ -106,7 +106,7 @@ plt.savefig("elephant.png")
 {%- endhighlight -%}
 
 The final result looks as follows:
-<img src="{{ site.baseurl }}/assets/img/fourierpainter-python/elephant.png" alt="" width="100%" class="center">
+<img src="{{ site.baseurl }}/assets/img/fourierpainter-python/elephant.png" alt="" width="100%">
 If you like you can play around with the code and use different input data. Have fun!
 
 

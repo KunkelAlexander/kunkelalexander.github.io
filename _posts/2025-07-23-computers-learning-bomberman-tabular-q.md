@@ -46,7 +46,7 @@ In BombeRLe, up to four agents compete by collecting coins and placing bombs to 
 
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/2_explain_bombs.gif"  width="70%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/2_explain_bombs.gif"  width="100%" alt="">
   <figcaption>Figure 1: Bomb game mechanics with default settings. The agent places a bomb, then moves away, waits for three frames and moves back into the smoke once the explosion has subsided.</figcaption>
 </figure>
 
@@ -110,7 +110,7 @@ By observing such a rule-based agent play as small number of rounds, you can qui
 In addition, it turns out that this rule-based agent plays fairly well and the tabular Q-agent will have to compare itself to it to measure its worth.
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/4_representator.gif"  width="70%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/4_representator.gif"  width="100%" alt="">
   <figcaption>Figure 3: Rule-based agent using the simplified state representation. It plays fairly well against the inbuilt rule-based agents. In the end, it dies because the enemy moves into a free field, blocking the agent's move. Having lost one move, the agent cannot escape its own bomb's explosion anymore. This directly highlights a shortcoming of the above representation: The agent does not have a sense of its wider surroundings and situations that are potentially dangerous.</figcaption>
 </figure>
 
@@ -165,7 +165,7 @@ Since we’re using off-policy learning (based on demonstrator trajectories), th
 
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/5_coin_grabber.gif"  width="70%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/5_coin_grabber.gif"  width="100%" alt="">
   <figcaption>Figure 4: Tabular Q-agent successfully collecting coins after 50,000 rounds of offline training. The agent comfortably navigates the map and reliably collects all coins. The pre-recorded transitions are from a rule-based agent as demonstrator playing by itself in the coin-heaven scenario. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions. </figcaption>
 </figure>
 
@@ -178,7 +178,7 @@ Additionally, the agent’s behavior reflects a **design choice**: the pathfindi
 Next, we train on a more complex board configuration with crates but still without enemies - a scenario baptised *loot-crate* by the game. The learns how to successfully blow up crates. I also experimented with a 16-bit representation dropping the type of the object of interest to save 2 bits. However, the agent would get caught in infinite up-down loops or just wait in that reduced representation. My interpretation is that the agent benefits from being able to distinguish between coins and crates (even though I am not 100% sure why this should matter in tabular Q-learning). My takeaway is that the representation matters more that I thought at first. More generally, I tend to suspect hyperparameters when machine learning algorithms underperform, but for tabular Q-learning and Bomberman the **quality of the state representation seemed to be much more important than everything else** once the algorithm was up and running.
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/6_crate_hero.gif"  width="70%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/6_crate_hero.gif"  width="100%" alt="">
   <figcaption>Figure 5: Tabular Q-agent successfully blowing up crates and collecting coins after 50,000 rounds of offline training. The pre-recorded transitions are from a rule-based agent as demonstrator playing by itself in the loot-crate scenario. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions.</figcaption>
 </figure>
 
@@ -190,17 +190,18 @@ In the final training phase, I simulate a full game in the *classic* scenario wi
 * One **peaceful agent** that moves randomly and doesn't place bombs
 * One **tabular Q-learning agent** in classic mode
 
-The tabular Q-agent after 50,000 training rounds plays fairly well and turns out to achieve higher scores than the rule-based agent.
+The tabular Q-agent after 50,000 training rounds plays fairly well and tends to achieve higher scores than the rule-based agent.
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/bomberle-python/7_allstar.gif"  width="70%" alt="">
+  <img src="{{ site.baseurl }}/assets/img/bomberle-python/7_allstar.gif"  width="100%" alt="">
   <figcaption>Figure 6: Tabular Q-agent (pink) playing against two rule-based and one peaceful agent after 50,000 rounds of offline training. The four games shown demonstrate that the agent occasionally wins against the rule-based agent and prefers suicide to getting killed. The pre-recorded transitions are from a rule-based agent as demonstrator playing against a peaceful agent and two other rule-based agents. The initial exploration of 100% decays to zero with an exploration decay of 3e-6 per transitions.</figcaption>
 </figure>
 
 
+
 ## How to understand these results?
 
-Training these agents, I wondered which metrics we could best use to assess the performance of the different tabular Q-agent. An obvious choice is to evaluate the agent periodically and check which average scores they achieve. Figure 8 shows the scores of the three agents: The *coin grabber* in the coin-heaven scenario (40 coins, no crates, no enemies), the *crate hero* in the loot-crate scenario (40 coins, crates, no enemies) and the *allstar* in the classic scenario (9 coins, crates, 3 enemies) as well as the rule-based agent playing agains the tabular Q-agent in the classic scenario for reference.
+Training these agents, I wondered which metrics we could best use to assess the training process. An obvious choice is to check the scores the agents achieve. Figure 7 shows the scores of the three agents throughout the training: The *coin grabber* in the coin-heaven scenario (40 coins, no crates, no enemies), the *crate hero* in the loot-crate scenario (40 coins, crates, no enemies) and the *allstar* in the classic scenario (9 coins, crates, 3 enemies) as well as the rule-based agent playing agains the tabular Q-agent in the classic scenario for reference. The croin gabber and crate hero quickly converge to optimal policies. The all star achieves higher scores than the rule-based agents but seems to be still improving.
 
 
 <figure>
@@ -208,12 +209,28 @@ Training these agents, I wondered which metrics we could best use to assess the 
   <figcaption>Figure 7: Game scores across 50,000 offline training rounds with training in sequential batches of 5,000 rounds. The agents were evaluated across 50 games after every batch and the scores - 1 point for every coin collected and 5 points for every enemy killed - averaged. The coin grabber agent consistently collects all 40 coins in the coin-heaven scenario, even after just 5,000 training episodes. The crate hero agent needs slightly more time. After 30,000 training episodes, it converges to a policy that consistently blows up all creates in the loot-crate scenario and also collects all coins. The allstar achieves higher scores than the rule-based agent after 30,000 episodes and improves until the end of the training. Note that the total number of state visits differs between the runs since different scenarios lead to shorter and longer episodes. The 50,000 episodes in the coin-heaven and loot-crate scenarios contain around 2.5M transitions whereas the episodes in the classic scenarios contain around 5M transitions.  </figcaption>
 </figure>
 
+We can assess the performance of the allstar agent in more detail by studying the game results. The following table shows the averaged results of 1,000 games between the allstar agent, a rule-based agent, a peaceful agent and the rule-based agent using the simplified state representation - the *representator* - discussed in Figure 3. I checked that 1,000 games provide sufficient statistics for reproducible results.
 
-To better monitor the training process, it is interesting to review how many unique states are visited during trainin. Figure 8 shows that the training data for both the coin gabber and the crate hero do not contain new unique states after around 500,000 states. In contrast, the allstar training set contains new states until the end of the training, suggesting that the training set should be larger. I did, however, test training with 250,000 episodes and the agent's performance did not improve anymore suggesting that the bottleneck is elsewhere.
+| Category | allstar | peaceful_agent | rule_based_agent | representator |
+|----------|-----------|--------------|----------------|----------------|
+| bombs | 18 | 0 | 8 | 19 |
+| coins | 3.5 | 0.33 | 2.1 | 3 |
+| crates | 6.5 | 0 | 6.3 | 8.1 |
+| invalid | 2.1 | 18 | 4.7 | 3.4 |
+| kills | 0.57 | 0 | 0.48 | 0.62 |
+| moves | 1.3e+02 | 14 | 69 | 1.3e+02 |
+| score | 6.3 | 0.33 | 4.5 | 6.1 |
+| steps | 1.5e+02 | 33 | 84 | 1.5e+02 |
+| suicides | 0.61 | 0 | 0.34 | 0.52 |
+| time | 0.08 | 0.00099 | 0.04 | 0.061 |
+
+In general, the allstar agent **places many more bombs, collects more coins, destroys the same number of crates, makes fewer invalid moves, is a better killer, moves more, achieves 50% higher scores and is far more suicidal than the inbuilt rule-based agent**. What is more interesting is the comparison with the representator: it turns out that the rule-based agent based on the simplified state representation achieves similar scores as the allstar. I am not sure whether I should be disappointed but I guess you reap what you sow: Given that the features were handcrafted with a certain purpose in mind and mostly show the agent its immediate surroundings, it should not be too surprising that the Q-learning process mostly consists in discovering the meaning of the features. The allstar is slightly more suicidal, collects fewer crates and achieves fewer kills but collects more coins than the representator.
+
+Let us focus on the allstar agent's training process next. It is insightful to check how many unique states are visited during trainin. Figure 8 shows that the training data for both the coin gabber and the crate hero do not contain new unique states after around 500,000 states. In contrast, the allstar training set contains new states until the end of the training, suggesting that the training set should be larger. I did, however, test training with 250,000 episodes and the agent's performance did not improve anymore, suggesting that the bottleneck is elsewhere.
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/9_state_visits.png"  width="100%" alt="">
-  <figcaption>Figure 8: Number of unique state visits as function of number of total state visits for the 3 training scenarios for 50_000 offline training rounds. This plot suggests that the training sets for the coin grabber and create hero do not provide contain new states after around 25_000 training rounds. The training set for the allstar, on the other hand, is not exhaustive of the states the demonstrator agent could visit.</figcaption>
+  <figcaption>Figure 8: Number of unique state visits as function of number of total state visits for the 3 training scenarios for 50,000 offline training rounds. This plot suggests that the training sets for the coin grabber and create hero do not provide contain new states after around 25,000 training rounds. The training set for the allstar, on the other hand, is not exhaustive of the states the demonstrator agent could visit.</figcaption>
 </figure>
 
 Going beyond that, we could look at how the Q-values or the number of state visits evolves during training but I personally find these metrics hard to interpret. I was hoping to gain insights from studying the Bellmann time difference error distribution over time, but to be honest, I was not able to tell whether the training had converged by looking at the time difference errors even though they are probably the closest counterpart of a training loss in tabular Q-learning. What did turn out to be interesting is looking at the number of policy changes, that is, that number of states where the best action has changed - over the course of the training. Figure 9 shows these policy changes and highlights that the crate hero's and allstar's policy's have not completely converged after 50,000 episodes of offline training and might benefit from more offline training.

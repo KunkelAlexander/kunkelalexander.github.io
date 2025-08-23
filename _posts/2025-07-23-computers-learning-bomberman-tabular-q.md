@@ -200,7 +200,7 @@ The tabular Q-agent after 50,000 training rounds plays fairly well and turns out
 
 ## How to understand these results?
 
-Training these agents, I wondered which metrics we could best use to assess the performance of the different tabular Q-agent. An obvious choice is to evaluate the agent periodically and check which average scores they achieve. Figure 8 shows the scores of the three agents: The *coingrabber* in the coin-heaven scenario (40 coins, no crates, no enemies), the *crate hero* in the loot-crate scenario (40 coins, crates, no enemies) and the *allstar* in the classic scenario (9 coins, crates, 3 enemies) as well as the rule-based agent playing agains the tabular Q-agent in the classic scenario for reference.
+Training these agents, I wondered which metrics we could best use to assess the performance of the different tabular Q-agent. An obvious choice is to evaluate the agent periodically and check which average scores they achieve. Figure 8 shows the scores of the three agents: The *coin grabber* in the coin-heaven scenario (40 coins, no crates, no enemies), the *crate hero* in the loot-crate scenario (40 coins, crates, no enemies) and the *allstar* in the classic scenario (9 coins, crates, 3 enemies) as well as the rule-based agent playing agains the tabular Q-agent in the classic scenario for reference.
 
 
 <figure>

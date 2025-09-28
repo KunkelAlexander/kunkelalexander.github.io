@@ -7,7 +7,7 @@ description: Learn how to make computers play Bomberman using the Q-learning alg
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<p class="intro"><span class="dropcap">I</span>n today's post, we use the tabular Q-learning algorithm to learn how to play the Bomberman clone <a href="https://github.com/ukoethe/bomberman_rl">BombeRLe</a> designed for reinforcement learning. You may find the accompanying <a href="https://github.com/KunkelAlexander/bomberman_rl"> Python code on GitHub</a>. For an introduction to tabular Q-learning, please refer to the  <a href="https://kunkelalexander.github.io/blog/tic-tac-toe/">Tic-Tac-Toe series</a>.</p>
+<p class="intro"><span class="dropcap">I</span>n today's post, we use the tabular Q-learning algorithm to learn how to play the Bomberman clone <a href="https://github.com/ukoethe/bomberman_rl">BombeRLe</a> designed for reinforcement learning. You may find the accompanying <a href="https://github.com/KunkelAlexander/bomberman_rl"> Python code on GitHub</a>. For an introduction to tabular Q-learning, please refer to the  <a href="https://kunkelalexander.github.io/blog/computers-learning-tic-tac-toe-tabular-q/">Tic-Tac-Toe series</a>.</p>
 
 <img src="{{ site.baseurl }}/assets/img/bomberle-python/1_gameplay.gif" width="100%" alt="">
 
@@ -57,7 +57,7 @@ The game allows for a number of settings that can be found in `settings.py`
 - **Crate density**: Default is `0.75`, can be adjusted by scenario
 - **Number of coins**: Default is `9`, can be adjusted by scenario
 - **Board size**: My default is `9x9` (including walls)
-- **Bombs**: Explode in the `4`th frame after being dropped, explosion affects a radisu of `3` fields and is present for `2` frames
+- **Bombs**: Explode in the `4`th frame after being dropped, explosion affects a radius of `3` fields and is present for `2` frames
 
 ## A good state representation for tabular Q-learning should be small
 
@@ -186,11 +186,11 @@ Next, we train on a more complex board configuration with crates but still witho
 
 In the final training phase, I simulate a full game in the *classic* scenario with multiple agents:
 
-* One **rule-based agent** (demonstrator)
+* Two **rule-based agents**
 * One **peaceful agent** that moves randomly and doesn't place bombs
-* One **tabular Q-learning agent** in classic mode
+* One **tabular Q-learning agent**
 
-The tabular Q-agent after 50,000 training rounds, referred to as *allstar* hereafter, plays fairly well and tends to achieve higher scores than the rule-based agents.
+The tabular Q-agent after 50,000 training episodes, referred to as *allstar* hereafter, plays fairly well and tends to achieve higher scores than the rule-based agents.
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/7_allstar.gif"  width="100%" alt="">

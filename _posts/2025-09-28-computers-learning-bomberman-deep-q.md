@@ -68,7 +68,7 @@ description: Learn how to make computers play Bomberman using the Deep Q-learnin
 
 In the <a href="https://kunkelalexander.github.io/blog/computers-learning-bomberman-tabular-q/">last post</a>, we explored BombeRLe’s game mechanics, its reward system, how to design a feature representation for tabular Q-learning, and what the training process and resulting agent performance looked like. This time, we’ll focus on what needs to change to make Deep Q-Learning (DQN) work. Specifically, we need a suitable state representation, a network architecture, and an optimized training process. For this, we’ll be reusing the DQN implementation from <a href="https://kunkelalexander.github.io/blog/computers-learning-tic-tac-toe-advanced-deep-q/">here</a>, which already includes Prioritized Experience Replay, Double DQN, and Dueling DQN. Let’s start by looking at the state representation and the network architecture.
 
-In Tic-Tac-Toe, Deep Q-learning was straightforward: I simply fed the $$9$$ input fields into a fully connected layer of a neural network, without worrying about feature design. We could take a similar approach in BombeRLe. The board is larger - $$9\times9=81$$ fields in the small version I’ll keep using—but that’s the only real difference. We could label each input state (empty, wall, crate, player, coin, bomb, etc.) and feed those directly into the network. Figure 1 illustrates such an encoding. However, it will probably lead to suboptimal performance as the neural network would need to learn to interpret categorical cell types from continuous numerical inputs.
+In Tic-Tac-Toe, Deep Q-learning was straightforward: I simply fed the $$9$$ input fields into a fully connected layer of a neural network, without worrying about feature design. We could take a similar approach in BombeRLe. The board is larger - $$9\times9=81$$ fields in the small version I’ll keep using - but that’s the only real difference. We could label each input state (empty, wall, crate, player, coin, bomb, etc.) and feed those directly into the network. Figure 1 illustrates such an encoding. However, it will probably lead to suboptimal performance as the neural network would need to learn to interpret categorical cell types from continuous numerical inputs.
 
 
 <figure>
@@ -153,10 +153,6 @@ You can think of convolutional layers as a collection of small “pattern detect
 
 Figure 3 illustrates the neural network architecture I use in the following. The model is built from a stack of convolutional layers, followed by a pooling layer and a duelling head with fully connected layers. The pooling layer averages the spatial output of the last convolutional layer, reducing it to 64 values that serve as high-level features.
 
-I also tried flattening the output of the third convolution directly into a linear array with 64 × 9 × 9 elements. Feeding this into the fully connected layer did work, but it resulted in a layer with over ~600k parameters. The network then showed poor generalisation: it played well against other agents but completely failed in unseen environments such as the coin-heaven scenario (with only coins and no enemies or crates).
-
-Introducing the pooling layer fixed this issue by both improving generalisation and balancing the number of parameters between the convolutional and fully connected layers. Reducing the number of filters in the convolutional layers led to worse performance, so I consider 64 filters the minimum required for this task.
-
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/15_bomberle_cnn_architecture.png"  width="100%" alt="">
   <figcaption>Figure 3: BombeRLe convolutional neural network with duelling head. The input state is represented as a 9 × 9 × 11 tensor, which is processed by three convolutional layers with 64 filters each. I use a stride of 1 to capture every input pixel, a dilation of 1 for simplicity, and 3 × 3 kernels. This results in approximately 6k, 18k, and 37k parameters in the first, second, and third convolutional layers, respectively.
@@ -165,6 +161,10 @@ The output of the third convolutional layer is spatially averaged, leaving only 
 
 In total, the network has roughly 100k parameters, with about 60% in the convolutional layers and 40% in the fully connected layers.</figcaption>
 </figure>
+
+I also tried flattening the output of the third convolution directly into a linear array with 64 × 9 × 9 elements. Feeding this into the fully connected layer did work, but it resulted in a layer with over ~600k parameters. The network then showed poor generalisation: it played well against other agents but completely failed in unseen environments such as the coin-heaven scenario (with only coins and no enemies or crates).
+
+Introducing the pooling layer fixed this issue by both improving generalisation and balancing the number of parameters between the convolutional and fully connected layers. Reducing the number of filters in the convolutional layers led to worse performance, so I consider 64 filters the minimum required for this task.
 
 
 ### The training process
@@ -192,13 +192,13 @@ I also left the reward system unchanged:
 | WAITED             | −0.02   | Agent performed a WAIT action            |
 | INVALID_ACTION     | −0.02   | Agent performed an invalid action        |
 
-Note that the value of *KILLED_SELF* should ideally be slightly positive. In the case of suicide, the agent receives both the *GOT_KILLED* and *KILLED_SELF* rewards. Since suicide is preferable to being killed by an opponent—because no one else scores points—it makes sense to reflect that in the reward structure. However, simplifying the reward scheme actually degraded performance. I found it important to strongly incentivise the agent to drop bombs and destroy crates.
+Note that the value of *KILLED_SELF* should ideally be slightly positive. In the case of suicide, the agent receives both the *GOT_KILLED* and *KILLED_SELF* rewards. Since suicide is preferable to being killed by an opponent - because no one else scores points-it makes sense to reflect that in the reward structure. However, simplifying the reward scheme actually degraded performance. I found it important to strongly incentivise the agent to drop bombs and destroy crates.
 
-I used the following hyperparameters for DQN:
+I used the following hyperparameters specific to DQN:
 
 * **Learning rate (α):** 3e-4. Higher rates led to instability, while lower ones slowed training.
-* **Batch size:** 64.
-* **Gradient steps:** 4. This means four gradient updates per training update. With up to 400 transitions per game episode, we insert 400 transitions into the buffer but only train on 4 × 64 = 256 samples. As a result, each transition is visited at most once, making the replay buffer almost ineffective. I plan to address this in a follow-up post.
+* **Batch size:** 64. I did not experiment with different batch sizes, but for training with a GPU higher batch sizes will probably lead to higher performance.
+* **Gradient steps:** 4. This means four gradient updates per training update. With up to 400 transitions per game episode, we insert 400 transitions into the buffer but only train on 4 × 64 = 256 samples. As a result, each transition is visited at most once, *making the replay buffer almost ineffective*. I plan to address this in a follow-up post.
 * **Exploration:** ε decays from 1 to 0.1 with a per-episode decay factor of 0.999. After ~1,000 episodes, ε is around 0.3, and it reaches 0.1 after ~3,000 episodes.
 * **Prioritised experience replay:** Training starts once the buffer contains 10,000 transitions (roughly 1,000 episodes). The buffer capacity is 100,000 transitions (about 250 full episodes). I anneal toward unbiased updates over 100,000 gradient steps (~25,000 episodes).
 * **Double DQN:** The target network is updated with a hard copy of the online network every 10 gradient updates. Larger intervals, such as 30, also worked well in my experiments.
@@ -215,17 +215,17 @@ I simulate a full game in the *classic* scenario with multiple agents:
 
 Training was run for 100,000 episodes. On my laptop CPU, this translated to about 2–4 episodes per second, meaning several hours of runtime. I suspect there are still performance bottlenecks in the code, but a quick flame graph analysis didn’t reveal anything obvious. A large fraction of computation time is spent in convolutional and fully connected layer updates, specifically matrix multiplications.
 
-Running on a GPU did not noticeably accelerate training, likely because communication overhead dominates execution time for a network of this size (~0.5 MB). After 100,000 training episodes, the DQN agent (*cnn_allstar*) plays reasonably well, often achieving higher scores than both the rule-based agent and the representator.
+Running on a GPU did not noticeably accelerate training, likely because communication overhead dominates execution time for a network of this size (~0.5 MB). After 100,000 training episodes, the *cnn_allstar* plays reasonably well, often achieving higher scores than both the rule-based agent and the representator.
 
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/16_cnn_allstar.gif"  width="100%" alt="">
-  <figcaption>Figure 4: CNN allstar (pink) playing five episodes against the rule-based agent (yellow), the representator (blue) and the tabular-Q allstar (green) after 100,000 rounds of training.</figcaption>
+  <figcaption>Figure 4: *cnn_allstar* (pink) playing five episodes against the rule-based agent (yellow), the *representator* (blue) and the tabular-Q allstar (green) after 100,000 rounds of training.</figcaption>
 </figure>
 
-Next, we assess the performance of the CNN allstar by studying the averaged results of 1,000 games between the CNN allstar agent, a rule-based agent, the tabular-Q allstar agent from the previous post and the representator.
+Next, we assess the performance of the *cnn_allstar* by studying the averaged results of 1,000 games between the *cnn_allstar* agent, a rule-based agent, the tabular-Q allstar agent (*allstar*) from the previous post and the *representator*.
 
-| Category | CNN allstar | Rule-based agent | Tabular-Q allstar | Representator |
+| Category | cnn_allstar | rule-based agent | allstar | representator |
 |----------|-----------------|----------------|----------|----------------|
 | bombs | 35 | 6.9 | 11 | 13 |
 | coins | 2.7 | 1.5 | 2.6 | 2.2 |
@@ -239,31 +239,30 @@ Next, we assess the performance of the CNN allstar by studying the averaged resu
 | time | 0.39 | 0.065 | 0.093 | 0.077 |
 
 
-Overall, the CNN allstar agent **places more bombs and is a stronger killer than the built-in rule-based agent, the representator, and the tabular Q allstar**. It consistently achieves higher scores than the other agents while committing fewer suicides.
+Overall, the *cnn_allstar* agent **places more bombs and is a stronger killer than the built-in rule-based agent, the *representator*, and the *allstar* **. It consistently achieves higher scores than the other agents while committing fewer suicides.
 
-The training process is shown in Figure 5. Without the duelling head—when feeding the one-hot encoding directly into fully connected layers—the DQN agent’s performance plateaued at an average score of about 4. Flattening the convolutional output without pooling allowed the CNN allstar to occasionally reach scores around 8, but training stability was generally poorer.
+The training process is shown in Figure 5. Without the duelling head - when feeding the one-hot encoding directly into fully connected layers - the DQN agent’s performance plateaued at an average score of about 4. Flattening the convolutional output without pooling allowed the *cnn_allstar* to occasionally reach scores around 8, but training stability was generally poorer.
 
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/17_cnn_allstar_training.png"  width="100%" alt="">
-  <figcaption>Figure 5: Average training score of the CNN allstar during 100,000 episodes of training. The CNN allstar consistenly beats the other agents after around 50,000 episodes of training.</figcaption>
+  <figcaption>Figure 5: Average training score of the *cnn_allstar* during 100,000 episodes of training. The *cnn_allstar* consistenly beats the other agents after around 50,000 episodes of training.</figcaption>
 </figure>
 
 
 ## Extrapolate to the unseen?
 One important capability the agent should have, at least in theory, is the ability to extrapolate to unseen situations.
-
-The figure below demonstrates that the CNN allstar, despite never encountering the coin-heaven scenario during training, is sometimes able to collect all coins. This demonstrates that the network architecture does not terribly overfit the training data.
+The figure below demonstrates that the *cnn_allstar*, despite never encountering the coin-heaven scenario during training, is sometimes able to collect all coins. This demonstrates that the network architecture does not terribly overfit the training data.
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/18_cnn_coin_grabber.gif" width="100%" alt="">
-  <figcaption>Figure 6: CNN allstar successfully collecting all coins after 100,000 rounds of training against other agents. Notably, the agent had never seen the coin-heaven scenario during training, yet it still manages to complete the task in this episode. </figcaption>
+  <figcaption>Figure 6: cnn_allstar successfully collecting all coins after 100,000 rounds of training against other agents. Notably, the agent had never seen the coin-heaven scenario during training, yet it still manages to complete the task in this episode. </figcaption>
 </figure>
 
 
 ## What do the convolutional layers actually see?
 
-One thing I’ve been curious about is whether we can actually *see* the high-level features the convolutional layers are pulling out of the one-hot encoded data. As a first step, I plotted the weights of the *cnn_allstar*’s convolutional filters (ignoring biases) after 100,000 episodes of training—shown in Figure 7.
+One thing I’ve been curious about is whether we can actually *see* the high-level features the convolutional layers are pulling out of the one-hot encoded data. As a first step, I plotted the weights of the *cnn_allstar*’s convolutional filters (ignoring biases) after 100,000 episodes of training - shown in Figure 7.
 
 Some of the filters look familiar, with patterns that resemble standard edge detectors. But beyond that, it’s hard to say if the weights are really “reasonable” or interpretable in any intuitive sense.
 
@@ -272,7 +271,7 @@ Some of the filters look familiar, with patterns that resemble standard edge det
   <figcaption>Figure 7: Convolutional weights of the *cnn_allstar* (see also Figure 3) after 100,000 training episodes. The network has three convolutional layers, each with 64 filters of size 3×3. The figure shows all 3 × 64 = 192 convolution heads as 3×3 bitmaps. Rows 1–4 (16 columns each) correspond to the first convolutional layer, rows 5–8 to the second, and rows 9–12 to the third. </figcaption>
 </figure>
 
-To get something more interpretable, we can instead look at **activations**. For example, the first convolutional layer maps the 9 × 9 × 11 input into a 9 × 9 × 64 output. Plotting these 64 activation maps side by side—and overlaying them with the original game state—gives us a sense of what each filter responds to. Figure 8 shows these activation patterns across the layers.
+To get something more interpretable, we can instead look at **activations**. For example, the first convolutional layer maps the 9 × 9 × 11 input into a 9 × 9 × 64 output. Plotting these 64 activation maps side by side - and overlaying them with the original game state - gives us a sense of what each filter responds to. Figure 8 shows these activation patterns across the layers.
 
 <div class="sweep-selector" style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:end;">
   <div style="min-width:300px;">
@@ -444,4 +443,4 @@ To get something more interpretable, we can instead look at **activations**. For
 
 In this post, we trained a DQN algorithm with a convolutional neural network to play a Bomberman clone. The approach proved effective: the final agent outperformed the tabular Q-agent developed earlier, and it did so without heavy reliance on handcrafted features. Training this agent was more complex than training the tabular Q-agent, but in my view the solution is far more elegant.
 
-Looking ahead, I’d like to refine the state encoding—for example, by stacking multiple frames to provide temporal context—and also explore how well the agent can learn directly from raw RGB image input.
+Looking ahead, I’d like to refine the state encoding - for example, by stacking multiple frames to provide temporal context - and also explore how well the agent can learn directly from raw RGB image input.

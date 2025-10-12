@@ -220,7 +220,7 @@ Running on a GPU did not noticeably accelerate training, likely because communic
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/16_cnn_allstar.gif"  width="100%" alt="">
-  <figcaption>Figure 4: *cnn_allstar* (pink) playing five episodes against the rule-based agent (yellow), the *representator* (blue) and the tabular-Q allstar (green) after 100,000 rounds of training.</figcaption>
+  <figcaption>Figure 4: cnn_allstar (pink) playing five episodes against the rule-based agent (yellow), the *representator* (blue) and the tabular-Q allstar (green) after 100,000 rounds of training.</figcaption>
 </figure>
 
 Next, we assess the performance of the *cnn_allstar* by studying the averaged results of 1,000 games between the *cnn_allstar* agent, a rule-based agent, the tabular-Q allstar agent (*allstar*) from the previous post and the *representator*.
@@ -246,7 +246,7 @@ The training process is shown in Figure 5. Without the duelling head - when feed
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/17_cnn_allstar_training.png"  width="100%" alt="">
-  <figcaption>Figure 5: Average training score of the *cnn_allstar* during 100,000 episodes of training. The *cnn_allstar* consistenly beats the other agents after around 50,000 episodes of training.</figcaption>
+  <figcaption>Figure 5: Average training score of the cnn_allstar during 100,000 episodes of training. The *cnn_allstar* consistenly beats the other agents after around 50,000 episodes of training.</figcaption>
 </figure>
 
 
@@ -262,16 +262,19 @@ The figure below demonstrates that the *cnn_allstar*, despite never encountering
 
 ## What do the convolutional layers actually see?
 
-One thing I’ve been curious about is whether we can actually *see* the high-level features the convolutional layers are pulling out of the one-hot encoded data. As a first step, I plotted the weights of the *cnn_allstar*’s convolutional filters (ignoring biases) after 100,000 episodes of training - shown in Figure 7.
+One thing I’ve been curious about is whether we can actually *see* the high-level features the convolutional layers are pulling out of the one-hot encoded data. As a first step, I plotted the weights of the *cnn_allstar*’s first convolutional layer's filters (ignoring biases) after 100,000 episodes of training - shown in Figure 7. The first convolutional layer takes 11 input channels and has 64 filters with 3x3 heads giving a total of 6336 parameters shown here. We can clearly see that the parameters processing crate, bomb, player and opponent channels have the highest magnitudes. We can speculate about the interpretation of some of these filters:
+- *f0* reacts to a situation where there are wall above and below and the agent can walk left and right when there is an explosion on the left
+- *f1* reacts to the absence of a wall, crate, bomb and explosion and has a positive activation for a free field and when a player is around and especially left of the free tile
+- *f2*  reacts to opponents that can move to a free field in the absence of a player
 
-Some of the filters look familiar, with patterns that resemble standard edge detectors. But beyond that, it’s hard to say if the weights are really “reasonable” or interpretable in any intuitive sense.
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/19_conv_weights.png" width="100%" alt="">
-  <figcaption>Figure 7: Convolutional weights of the *cnn_allstar* (see also Figure 3) after 100,000 training episodes. The network has three convolutional layers, each with 64 filters of size 3×3. The figure shows all 3 × 64 = 192 convolution heads as 3×3 bitmaps. Rows 1–4 (16 columns each) correspond to the first convolutional layer, rows 5–8 to the second, and rows 9–12 to the third. </figcaption>
+  <figcaption>Figure 7: Convolutional weights of the cnn_allstar's first convolutional layer (see also Figure 3) after 100,000 training episodes. The columns show the 11 input channels described earlier. The rows show the 64 output filters. The raw, unnormalised weights range from -3.5 to 1.0 and are clipped to the range [-0.75, 0.75] for better visibility.  </figcaption>
 </figure>
 
-To get something more interpretable, we can instead look at **activations**. For example, the first convolutional layer maps the 9 × 9 × 11 input into a 9 × 9 × 64 output. Plotting these 64 activation maps side by side - and overlaying them with the original game state - gives us a sense of what each filter responds to. Figure 8 shows these activation patterns across the layers.
+To verify this intuition based on the convolutional layer weights, we can instead look at **activations**. For example, the first convolutional layer maps the 9 × 9 × 11 input into a 9 × 9 × 64 output. Plotting these 64 activation maps side by side and overlaying them with the original game state gives us a sense of what each filter responds to. Figure 8 shows these activation patterns across the layers. Looking at the first filter of the first layer in frame 1, for instance, we can confirm that the activation indicates a free field to the right the player can move to. Please feel free to explore them in case of interest. But in general, I still find the results hard to interpret. Please reach out to me if there are better ways to visualise and understand CNN activations.
+
 
 <div class="sweep-selector" style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:end;">
   <div style="min-width:300px;">
@@ -292,7 +295,7 @@ To get something more interpretable, we can instead look at **activations**. For
     <select id="layerSelect"></select>
   </label>
 
-  <div style="min-width:300px;">
+  <div style="min-width:400px;">
     <label for="filterSlider">Filter <span id="filterValue">Conv1 · f00</span></label>
     <input id="filterSlider" type="range" min="0" max="63" step="1" value="0" style="width:100%;" list="filterTicks">
     <datalist id="filterTicks">

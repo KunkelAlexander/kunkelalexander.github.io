@@ -22,6 +22,8 @@ title: About Alexander Kunkel
 	<h2>T&E publications</h2>
 	<h3>Co-author</h3>
 	<ul>
+	<li>06/2025 – <a href="https://www.transportenvironment.org/articles/europe-risks-losing-its-early-e-fuels-lead-for-aviation-study-warns">
+		The state e-SAF market – Aviation – Report</a></li>
 	<li>04/2025 – <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2025/aviation">
 		European state of transport 2025 – Aviation – Scrollytelling</a></li>
 	<li>03/2025 – <a href="https://www.transportenvironment.org/topics/planes/contrails">
@@ -39,6 +41,15 @@ title: About Alexander Kunkel
 	</ul>
 
 	<h3>Reviewer</h3>
+	<ul>
+	<li>04/2025 – <a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung">
+		T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem – Report</a></li>
+	<li>01/2025 – <a href="https://www.transportenvironment.org/articles/down-to-earth">
+		Down to earth – Why European aviation needs to urgently address its growth problem – Report</a></li>
+	</ul>
+
+
+	<h2>Games</h2>
 	<ul>
 	<li>04/2025 – <a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung">
 		T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem – Report</a></li>

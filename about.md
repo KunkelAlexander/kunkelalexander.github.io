@@ -64,7 +64,7 @@ title: About Alexander Kunkel
 		T&E Publication Search & Chat</a> - A RAG-powered search and chat bot that lets you explore T&E's publications.</li>
 	<li>05/2025 – <a href="https://kunkelalexander.github.io/neon-sand/">
 		Neon sand</a> - Mindblowing sand experience. You will never want to try another sand simulation again.</li>
-	<li>01/2025 – <a href="https://github.com/KunkelAlexander/flying-turtles">
+	<li>01/2025 – <a href="https://kunkelalexander.github.io/flying-turtles/">
 		Flying turtles</a> - A 2D local multiplayer game created in Godot inspired by a bonus game in Rayman Legends</li>
 	</ul>
 </div>

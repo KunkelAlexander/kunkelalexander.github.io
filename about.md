@@ -22,6 +22,8 @@ title: About Alexander Kunkel
 	<h2>T&E publications</h2>
 	<h3>Co-author</h3>
 	<ul>
+	<li>01/2026 – <a href="https://www.transportenvironment.org/articles/scale_up_contrail_avoidance">
+		How to scale up contrail avoidance in Europe? – Aviation – Report</a></li>
 	<li>11/2025 – <a href="https://www.transportenvironment.org/articles/the-challenge-of-sourcing-sustainable-co2-for-e-fuels">
 		The challenge of sourcing sustainable CO2 for e-fuels – Energy – Briefing</a></li>
 	<li>09/2025 – <a href="https://www.transportenvironment.org/articles/unlocking-e-fuels-for-aviation-and-shipping-and-clean-transport-infrastructure">

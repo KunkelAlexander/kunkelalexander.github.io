@@ -49,7 +49,6 @@ title: About Alexander Kunkel
 	<li>01/2024 – <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport/energy">
 		European state of transport 2024 – Energy</a></li>
 	</ul>
-
 	<h3>Reviewer/Contributor</h3>
 	<ul>
 	<li>11/2025 – <a href="https://www.transportenvironment.org/articles/biofuels-in-cars-a-dead-end-for-europe">
@@ -63,7 +62,6 @@ title: About Alexander Kunkel
 	<li>01/2025 – <a href="https://www.transportenvironment.org/articles/down-to-earth">
 		Down to earth – Why European aviation needs to urgently address its growth problem – Report</a></li>
 	</ul>
-
 	<h2>Tools & Games</h2>
 	<ul>
 	<li>11/2025 – <a href="https://tandesearch.streamlit.app/">

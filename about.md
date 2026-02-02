@@ -52,8 +52,12 @@ title: About Alexander Kunkel
 
 	<h3>Reviewer/Contributor</h3>
 	<ul>
+	<li>11/2025 – <a href="https://www.transportenvironment.org/articles/biofuels-in-cars-a-dead-end-for-europe">
+		Biofuels in cars: A dead end for Europe – Report</a></li>
 	<li>08/2025 – <a href="https://www.aef.org.uk/2025/08/05/double-counting-risks-in-saf-global-supply-chain/">
 		Double counting risks and incomplete documentation in global accounting of emissions reductions from SAF – Interactive chart</a></li>
+	<li>04/2025 – <a href="https://www.transportenvironment.org/articles/palm-oil-in-disguise">
+		Palm oil in disguise? How recent import trends of palm residues raise concerns over a key feedstock for biofuels – Report</a></li>
 	<li>04/2025 – <a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung">
 		T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem – Report</a></li>
 	<li>01/2025 – <a href="https://www.transportenvironment.org/articles/down-to-earth">

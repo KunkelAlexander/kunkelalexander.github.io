@@ -64,6 +64,8 @@ title: About Alexander Kunkel
 	</ul>
 	<h2>Tools & Games</h2>
 	<ul>
+	<li>01/2026 – <a href="https://kunkelalexander.github.io/glide-and-seek/">
+		Glide & Seek - A Pokémon-style ice maze game in Godot: step onto ice and try not to get stuck.</a></li>
 	<li>11/2025 – <a href="https://tandesearch.streamlit.app/">
 		T&E Publication Search & Chat - A RAG-powered search and chat bot that lets you explore T&E's publications.</a></li>
 	<li>05/2025 – <a href="https://kunkelalexander.github.io/neon-sand/">

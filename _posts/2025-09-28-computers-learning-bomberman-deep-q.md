@@ -220,7 +220,7 @@ Running on a GPU did not noticeably accelerate training, likely because communic
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/16_cnn_allstar.gif"  width="100%" alt="">
-  <figcaption>Figure 4: cnn_allstar (pink) playing five episodes against the rule-based agent (yellow), the *representator* (blue) and the tabular-Q allstar (green) after 100,000 rounds of training.</figcaption>
+  <figcaption>Figure 4: cnn_allstar (pink) playing five episodes against the rule-based agent (yellow), the representator (blue) and the tabular-Q allstar (green) after 100,000 rounds of training.</figcaption>
 </figure>
 
 Next, we assess the performance of the *cnn_allstar* by studying the averaged results of 1,000 games between the *cnn_allstar* agent, a rule-based agent, the tabular-Q allstar agent (*allstar*) from the previous post and the *representator*.
@@ -239,14 +239,14 @@ Next, we assess the performance of the *cnn_allstar* by studying the averaged re
 | time | 0.39 | 0.065 | 0.093 | 0.077 |
 
 
-Overall, the *cnn_allstar* agent **places more bombs and is a stronger killer than the built-in rule-based agent, the *representator*, and the *allstar* **. It consistently achieves higher scores than the other agents while committing fewer suicides.
+Overall, the *cnn_allstar* agent **places more bombs and is a stronger killer than the built-in rule-based agent, the** *representator*, **and the** *allstar*. It consistently achieves higher scores than the other agents while committing fewer suicides.
 
 The training process is shown in Figure 5. Without the duelling head - when feeding the one-hot encoding directly into fully connected layers - the DQN agent’s performance plateaued at an average score of about 4. Flattening the convolutional output without pooling allowed the *cnn_allstar* to occasionally reach scores around 8, but training stability was generally poorer.
 
 
 <figure>
   <img src="{{ site.baseurl }}/assets/img/bomberle-python/17_cnn_allstar_training.png"  width="100%" alt="">
-  <figcaption>Figure 5: Average training score of the cnn_allstar during 100,000 episodes of training. The *cnn_allstar* consistenly beats the other agents after around 50,000 episodes of training.</figcaption>
+  <figcaption>Figure 5: Average training score of the cnn_allstar during 100,000 episodes of training. The cnn_allstar consistenly beats the other agents after around 50,000 episodes of training.</figcaption>
 </figure>
 
 

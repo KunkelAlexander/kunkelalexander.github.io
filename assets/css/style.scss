@@ -33,3 +33,21 @@
 }
 
 // If IE support is needed you can add them here or create another stylesheet for specific IE fixes
+
+.guitar-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.guitar-list li {
+  margin-bottom: 1.5rem;
+}
+
+.guitar-audio {
+  margin-top: 8px;
+  max-width: 500px;
+}
+
+.guitar-audio audio {
+  width: 100%;
+}

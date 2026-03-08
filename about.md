@@ -8,8 +8,8 @@ title: About Alexander Kunkel
 	<div class="circular_image">
 	<img src="{{ site.baseurl }}/assets/img/about/2024.png" alt="">
 	</div>
-	<p class="intro">Data analyst at Transport & Environment, based in Brussels.</p>
-	<p>I am passionate about environmental protection, coffee, learning languages, playing the guitar, theoretical physics and mathematics.</p>
+	<p class="intro">Senior Data Analyst at Transport & Environment, based in Brussels.</p>
+	<p>I am passionate about the environment, coffee, learning languages, <a href="#guitar">playing the guitar</a>, theoretical physics and mathematics.</p>
 	<h2>Physics publications</h2>
 	<ul>
   		<li><em>A Hybrid Scheme for Fuzzy Dark Matter Simulations Combining the Schrödinger and Hamilton-Jacobi-Madelung Equations</em> authored by Alexander Kunkel, Hei Yin Jowett Chan, Hsi-Yu Schive, Hsinhao Huang, Pin-Yu Liao, <a href="https://arxiv.org/abs/2411.17288">Published in ApJS, 2025</a></li>
@@ -72,5 +72,18 @@ title: About Alexander Kunkel
 		Neon Sand - Mindblowing sand experience. You will never want to try another sand simulation again.</a></li>
 	<li>01/2025 – <a href="https://kunkelalexander.github.io/flying-turtles/">
 		Flying Turtles - A 2D local multiplayer game created in Godot inspired by a bonus game in Rayman Revolution.</a></li>
+	</ul>
+	<h2 id="guitar">Guitar</h2>
+
+	<ul class="guitar-list">
+	<li>
+		<strong>Carulli – Prelude</strong>
+		<div class="guitar-audio">
+		<audio controls preload="metadata">
+			<source src="{{ site.baseurl }}/assets/audio/guitar/practice/karulli-prelude.m4a" type="audio/mp4">
+			Your browser does not support the audio element.
+		</audio>
+		</div>
+	</li>
 	</ul>
 </div>

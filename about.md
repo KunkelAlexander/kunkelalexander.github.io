@@ -75,12 +75,9 @@ title: About Alexander Kunkel
 	</ul>
 	<h2 id="guitar">Guitar</h2>
 	<ul>
-		<li>
-			03/2026 – Carulli – Prelude – 72 BPM –
-			<audio class="inline-audio" controls preload="metadata">
-			<source src="{{ site.baseurl }}/assets/audio/guitar/karulli-prelude.m4a" type="audio/mp4">
-			Your browser does not support the audio element.
-			</audio>
-		</li>
+		<li>03/2026 – <a href="https://www.jerrysguitarbar.com/guitar-video-lessons/individual-songs/ferdinando-carulli-prelude-op-114-no-3/">Carulli – Prelude – 72 BPM</a> –
+			<audio class="inline-audio" controls preload="metadata"><source src="{{ site.baseurl }}/assets/audio/guitar/karulli-prelude.m4a" type="audio/mp4">Your browser does not support the audio element.</audio></li>
+		<li>03/2026 – <a href="https://www.justinguitar.com/songs/don-mclean-vincent-chords-tabs-guitar-lesson-bs-804">Don McLean – Vincent</a> –
+			<audio class="inline-audio" controls preload="metadata"><source src="{{ site.baseurl }}/assets/audio/guitar/don_mclean-vincent.m4a" type="audio/mp4">Your browser does not support the audio element.</audio></li>
 	</ul>
 </div>

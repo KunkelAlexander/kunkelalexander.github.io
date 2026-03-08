@@ -19,10 +19,16 @@ permalink: /guitar/
 </h3>
 
 <p>
-Capo: {{ piece.capo }} | Tempo: {{ piece.tempo }} BPM
+{% if piece.capo %}Capo: {{ piece.capo }} | {% endif %}
+{% if piece.tempo %}Tempo: {{ piece.tempo }} BPM{% endif %}
 </p>
 
-<p>{{ piece.excerpt | strip_html }}</p>
+{% if piece.audio %}
+<audio class="inline-audio" controls preload="metadata">
+<source src="{{ site.baseurl }}/assets/audio/guitar/{{ piece.audio }}" type="audio/mp4">
+Your browser does not support the audio element.
+</audio>
+{% endif %}
 
 </article>
 

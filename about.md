@@ -76,13 +76,11 @@ title: About Alexander Kunkel
 	<h2 id="guitar">Guitar</h2>
 	<ul class="guitar-list">
 		<li>
-			<strong>Carulli – Prelude</strong>
-			<div class="guitar-audio">
-			<audio controls preload="metadata">
-				<source src="{{ site.baseurl }}/assets/audio/guitar/karulli-prelude.m4a" type="audio/mp4">
-				Your browser does not support the audio element.
+			<strong>03/2026 – Carulli – Prelude – 72 BPM</strong> –
+			<audio class="inline-audio" controls preload="metadata">
+			<source src="{{ site.baseurl }}/assets/audio/guitar/karulli-prelude.m4a" type="audio/mp4">
+			Your browser does not support the audio element.
 			</audio>
-			</div>
 		</li>
 	</ul>
 </div>

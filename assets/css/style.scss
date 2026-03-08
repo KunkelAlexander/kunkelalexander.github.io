@@ -43,11 +43,8 @@
   margin-bottom: 1.5rem;
 }
 
-.guitar-audio {
-  margin-top: 8px;
-  max-width: 500px;
-}
-
-.guitar-audio audio {
-  width: 100%;
+.inline-audio {
+  height: 28px;
+  vertical-align: middle;
+  margin-left: 6px;
 }

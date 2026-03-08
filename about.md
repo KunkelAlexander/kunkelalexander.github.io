@@ -22,68 +22,67 @@ title: About Alexander Kunkel
 	<h2>T&E publications</h2>
 	<h3>Co-author</h3>
 	<ul>
-	<li>01/2026 – <a href="https://www.transportenvironment.org/articles/scale_up_contrail_avoidance">
-		How to scale up contrail avoidance in Europe? – Aviation – Report</a></li>
-	<li>11/2025 – <a href="https://www.transportenvironment.org/articles/the-challenge-of-sourcing-sustainable-co2-for-e-fuels">
-		The challenge of sourcing sustainable CO2 for e-fuels – Energy – Briefing</a></li>
-	<li>09/2025 – <a href="https://www.transportenvironment.org/articles/unlocking-e-fuels-for-aviation-and-shipping-and-clean-transport-infrastructure">
-		Unlocking e-fuels for aviation and shipping and clean transport infrastructure – Aviation – Briefing</a></li>
-	<li>07/2025 – <a href="https://www.transportenvironment.org/te-united-kingdom/articles/saf-bill-future-proofing-the-uks-e-saf-production">
-		SAF Bill: Future-proofing the UK’s e-SAF production – Aviation – Briefing</a></li>
-	<li>06/2025 – <a href="https://www.transportenvironment.org/articles/the-stall-in-aircraft-innovation">
-		The aviation industry and the stall in aircraft innovation – Aviation – Report</a></li>
-	<li>06/2025 – <a href="https://www.transportenvironment.org/articles/europe-risks-losing-its-early-e-fuels-lead-for-aviation-study-warns">
-		The state of the e-SAF market – Aviation – Briefing & Interactive dashboard</a></li>
-	<li>04/2025 – <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2025/aviation">
-		European state of transport 2025 – Aviation – Scrollytelling</a></li>
-	<li>03/2025 – <a href="https://www.transportenvironment.org/topics/planes/contrails">
-		Aviation's little-known pollution problem – Scrollytelling</a></li>
-	<li>12/2024 – <a href="https://www.transportenvironment.org/topics/planes/saf-observatory">
-		SAF Observatory – Briefing & Interactive dashboard</a></li>
-	<li>11/2024 – <a href="https://www.transportenvironment.org/articles/contrail-avoidance">
-		Contrail avoidance: aviation’s climate opportunity of the decade – Report</a></li>
-	<li>10/2024 – <a href="https://www.transportenvironment.org/articles/implementing-the-eus-e-saf-mandate">
-		Implementing the EU’s e-SAF mandate – Briefing</a></li>
-	<li>07/2024 – <a href="https://www.transportenvironment.org/articles/how-sustainable-are-advanced-and-waste-biofuels">
-		How sustainable are advanced and waste biofuels? – Report</a></li>
-	<li>01/2024 – <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport/energy">
-		European state of transport 2024 – Energy</a></li>
+		<li>01/2026 – <a href="https://www.transportenvironment.org/articles/scale_up_contrail_avoidance">
+			How to scale up contrail avoidance in Europe? – Aviation – Report</a></li>
+		<li>11/2025 – <a href="https://www.transportenvironment.org/articles/the-challenge-of-sourcing-sustainable-co2-for-e-fuels">
+			The challenge of sourcing sustainable CO2 for e-fuels – Energy – Briefing</a></li>
+		<li>09/2025 – <a href="https://www.transportenvironment.org/articles/unlocking-e-fuels-for-aviation-and-shipping-and-clean-transport-infrastructure">
+			Unlocking e-fuels for aviation and shipping and clean transport infrastructure – Aviation – Briefing</a></li>
+		<li>07/2025 – <a href="https://www.transportenvironment.org/te-united-kingdom/articles/saf-bill-future-proofing-the-uks-e-saf-production">
+			SAF Bill: Future-proofing the UK’s e-SAF production – Aviation – Briefing</a></li>
+		<li>06/2025 – <a href="https://www.transportenvironment.org/articles/the-stall-in-aircraft-innovation">
+			The aviation industry and the stall in aircraft innovation – Aviation – Report</a></li>
+		<li>06/2025 – <a href="https://www.transportenvironment.org/articles/europe-risks-losing-its-early-e-fuels-lead-for-aviation-study-warns">
+			The state of the e-SAF market – Aviation – Briefing & Interactive dashboard</a></li>
+		<li>04/2025 – <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2025/aviation">
+			European state of transport 2025 – Aviation – Scrollytelling</a></li>
+		<li>03/2025 – <a href="https://www.transportenvironment.org/topics/planes/contrails">
+			Aviation's little-known pollution problem – Scrollytelling</a></li>
+		<li>12/2024 – <a href="https://www.transportenvironment.org/topics/planes/saf-observatory">
+			SAF Observatory – Briefing & Interactive dashboard</a></li>
+		<li>11/2024 – <a href="https://www.transportenvironment.org/articles/contrail-avoidance">
+			Contrail avoidance: aviation’s climate opportunity of the decade – Report</a></li>
+		<li>10/2024 – <a href="https://www.transportenvironment.org/articles/implementing-the-eus-e-saf-mandate">
+			Implementing the EU’s e-SAF mandate – Briefing</a></li>
+		<li>07/2024 – <a href="https://www.transportenvironment.org/articles/how-sustainable-are-advanced-and-waste-biofuels">
+			How sustainable are advanced and waste biofuels? – Report</a></li>
+		<li>01/2024 – <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport/energy">
+			European state of transport 2024 – Energy</a></li>
 	</ul>
 	<h3>Reviewer/Contributor</h3>
 	<ul>
-	<li>11/2025 – <a href="https://www.transportenvironment.org/articles/biofuels-in-cars-a-dead-end-for-europe">
-		Biofuels in cars: A dead end for Europe – Report</a></li>
-	<li>08/2025 – <a href="https://www.aef.org.uk/2025/08/05/double-counting-risks-in-saf-global-supply-chain/">
-		Double counting risks and incomplete documentation in global accounting of emissions reductions from SAF – Interactive chart</a></li>
-	<li>04/2025 – <a href="https://www.transportenvironment.org/articles/palm-oil-in-disguise">
-		Palm oil in disguise? How recent import trends of palm residues raise concerns over a key feedstock for biofuels – Report</a></li>
-	<li>04/2025 – <a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung">
-		T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem – Report</a></li>
-	<li>01/2025 – <a href="https://www.transportenvironment.org/articles/down-to-earth">
-		Down to earth – Why European aviation needs to urgently address its growth problem – Report</a></li>
+		<li>11/2025 – <a href="https://www.transportenvironment.org/articles/biofuels-in-cars-a-dead-end-for-europe">
+			Biofuels in cars: A dead end for Europe – Report</a></li>
+		<li>08/2025 – <a href="https://www.aef.org.uk/2025/08/05/double-counting-risks-in-saf-global-supply-chain/">
+			Double counting risks and incomplete documentation in global accounting of emissions reductions from SAF – Interactive chart</a></li>
+		<li>04/2025 – <a href="https://www.transportenvironment.org/articles/palm-oil-in-disguise">
+			Palm oil in disguise? How recent import trends of palm residues raise concerns over a key feedstock for biofuels – Report</a></li>
+		<li>04/2025 – <a href="https://www.transportenvironment.org/te-deutschland/articles/t-e-warnt-vor-triage-bei-der-brueckensanierung">
+			T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem – Report</a></li>
+		<li>01/2025 – <a href="https://www.transportenvironment.org/articles/down-to-earth">
+			Down to earth – Why European aviation needs to urgently address its growth problem – Report</a></li>
 	</ul>
 	<h2>Tools & Games</h2>
 	<ul>
-	<li>01/2026 – <a href="https://kunkelalexander.github.io/glide-and-seek/">
-		Glide & Seek - A Pokémon-style ice maze game in Godot: step onto ice and try not to get stuck.</a></li>
-	<li>11/2025 – <a href="https://tandesearch.streamlit.app/">
-		T&E Publication Search & Chat - A RAG-powered search and chat bot that lets you explore T&E's publications.</a></li>
-	<li>05/2025 – <a href="https://kunkelalexander.github.io/neon-sand/">
-		Neon Sand - Mindblowing sand experience. You will never want to try another sand simulation again.</a></li>
-	<li>01/2025 – <a href="https://kunkelalexander.github.io/flying-turtles/">
-		Flying Turtles - A 2D local multiplayer game created in Godot inspired by a bonus game in Rayman Revolution.</a></li>
+		<li>01/2026 – <a href="https://kunkelalexander.github.io/glide-and-seek/">
+			Glide & Seek - A Pokémon-style ice maze game in Godot: step onto ice and try not to get stuck.</a></li>
+		<li>11/2025 – <a href="https://tandesearch.streamlit.app/">
+			T&E Publication Search & Chat - A RAG-powered search and chat bot that lets you explore T&E's publications.</a></li>
+		<li>05/2025 – <a href="https://kunkelalexander.github.io/neon-sand/">
+			Neon Sand - Mindblowing sand experience. You will never want to try another sand simulation again.</a></li>
+		<li>01/2025 – <a href="https://kunkelalexander.github.io/flying-turtles/">
+			Flying Turtles - A 2D local multiplayer game created in Godot inspired by a bonus game in Rayman Revolution.</a></li>
 	</ul>
 	<h2 id="guitar">Guitar</h2>
-
 	<ul class="guitar-list">
-	<li>
-		<strong>Carulli – Prelude</strong>
-		<div class="guitar-audio">
-		<audio controls preload="metadata">
-			<source src="{{ site.baseurl }}/assets/audio/guitar/practice/karulli-prelude.m4a" type="audio/mp4">
-			Your browser does not support the audio element.
-		</audio>
-		</div>
-	</li>
+		<li>
+			<strong>Carulli – Prelude</strong>
+			<div class="guitar-audio">
+			<audio controls preload="metadata">
+				<source src="{{ site.baseurl }}/assets/audio/guitar/karulli-prelude.m4a" type="audio/mp4">
+				Your browser does not support the audio element.
+			</audio>
+			</div>
+		</li>
 	</ul>
 </div>

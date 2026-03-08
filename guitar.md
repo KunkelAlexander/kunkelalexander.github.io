@@ -1,53 +1,32 @@
 ---
 layout: default
 title: Guitar
+permalink: /guitar/
 ---
 
-# See You Tomorrow Sunshine
+<div class="home">
 
-## Setup
+<h1 class="pageTitle">Guitar Practice</h1>
 
-* **Capo:** 2
-* **Tempo:** ~75 BPM
-* **Key (relative):** A major
+<div class="posts noList">
 
+{% for piece in site.guitar %}
 
-# Chord Shapes
+<article>
 
-```text
-G shape
-3203
+<h3>
+<a href="{{ piece.url }}">{{ piece.title }}</a>
+</h3>
 
-D shape
-xx0232
+<p>
+Capo: {{ piece.capo }} | Tempo: {{ piece.tempo }} BPM
+</p>
 
-B minor (barre)
-x5777
+<p>{{ piece.excerpt | strip_html }}</p>
 
-Shape 1
-x1212
+</article>
 
-Shape 2
-21033
+{% endfor %}
 
-G variation
-x32000
-
-Add colour
-x5403
-```
-
-
-# Basic Progression
-
-## Main Loop
-
-Play each chord for **1 bar**
-
-```
-3203   →   x1212   →   21033   →   x5777
-```
-
-Repeat.
-
----
+</div>
+</div>

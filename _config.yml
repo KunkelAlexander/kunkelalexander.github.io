@@ -30,3 +30,7 @@ navigation:
 social:
     github: KunkelAlexander
     email: 
+
+collections:
+  guitar:
+    output: true

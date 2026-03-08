@@ -34,17 +34,20 @@
 
 // If IE support is needed you can add them here or create another stylesheet for specific IE fixes
 
-.guitar-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.guitar-list li {
-  margin-bottom: 1.5rem;
-}
 
 .inline-audio {
-  height: 28px;
+  width: 120px;
+  height: 26px;
   vertical-align: middle;
   margin-left: 6px;
+}
+
+/* Hide timeline in WebKit browsers (Chrome, Safari, Edge) */
+.inline-audio::-webkit-media-controls-timeline {
+  display: none;
+}
+
+.inline-audio::-webkit-media-controls-current-time-display,
+.inline-audio::-webkit-media-controls-time-remaining-display {
+  display: none;
 }

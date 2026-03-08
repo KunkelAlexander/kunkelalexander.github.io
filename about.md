@@ -74,9 +74,9 @@ title: About Alexander Kunkel
 			Flying Turtles - A 2D local multiplayer game created in Godot inspired by a bonus game in Rayman Revolution.</a></li>
 	</ul>
 	<h2 id="guitar">Guitar</h2>
-	<ul class="guitar-list">
+	<ul>
 		<li>
-			<strong>03/2026 – Carulli – Prelude – 72 BPM</strong> –
+			03/2026 – Carulli – Prelude – 72 BPM –
 			<audio class="inline-audio" controls preload="metadata">
 			<source src="{{ site.baseurl }}/assets/audio/guitar/karulli-prelude.m4a" type="audio/mp4">
 			Your browser does not support the audio element.

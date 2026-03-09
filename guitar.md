@@ -22,7 +22,7 @@ permalink: /guitar/
 {% if piece.capo %}Capo: {{ piece.capo }} | {% endif %}
 {% if piece.tempo %}Tempo: {{ piece.tempo }} BPM{% endif %}
 {% if piece.audio %}
-<audio controls preload="metadata">
+<audio class="inline-audio" controls preload="metadata">
 <source src="{{ site.baseurl }}/assets/audio/guitar/{{ piece.audio }}" type="audio/mp4">
 Your browser does not support the audio element.
 </audio>

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: System of a Down – Lonely Day
+date: 2026-03-09
 tempo: 75
 capo: -1
 audio: soad-lonely-day.m4a

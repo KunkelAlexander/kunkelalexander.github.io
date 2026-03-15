@@ -8,7 +8,7 @@ audio: piazolla-libertango.m4a
 
 ## Lesson
 
-https://www.youtube.com/watch?v=FaPZ8BrKmUE
+[Smile Guitar -  Libertango - A. Piazzolla](https://www.youtube.com/watch?v=FaPZ8BrKmUE)
 
 ## Setup
 

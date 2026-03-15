@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Yestalgia – See You Tomorrow Sunshine
+date: 2026-03-08
 tempo: 75
 capo: 2
 audio: see-you-tomorrow-sunshine.m4a

@@ -9,4 +9,4 @@ instrument: classical guitar
 ---
 
 ## Lesson
-https://www.jerrysguitarbar.com/guitar-video-lessons/individual-songs/ferdinando-carulli-prelude-op-114-no-3/
+[Carulli – Prelude Op.114 No.3](https://www.jerrysguitarbar.com/guitar-video-lessons/individual-songs/ferdinando-carulli-prelude-op-114-no-3/)

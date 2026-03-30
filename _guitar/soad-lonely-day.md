@@ -7,6 +7,10 @@ capo: -1
 audio: soad-lonely-day.m4a
 ---
 
+## Lesson
+
+[System of a Down – Lonely Day](https://www.youtube.com/watch?v=gGxgmYPlon8)
+
 ## Setup
 
 * **Capo:** -1 (drop by half a step)

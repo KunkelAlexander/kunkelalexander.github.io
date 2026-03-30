@@ -9,7 +9,7 @@ title: About Alexander Kunkel
 	<img src="{{ site.baseurl }}/assets/img/about/2024.png" alt="">
 	</div>
 	<p class="intro">Senior Data Analyst at Transport & Environment, based in Brussels.</p>
-	<p>I am passionate about the environment, coffee, learning languages, <a href="#guitar">playing the guitar</a>, theoretical physics and mathematics.</p>
+	<p>I am passionate about the environment, coffee, learning languages, playing the guitar, theoretical physics and mathematics.</p>
 	<h2>Physics publications</h2>
 	<ul>
   		<li><em>A Hybrid Scheme for Fuzzy Dark Matter Simulations Combining the Schrödinger and Hamilton-Jacobi-Madelung Equations</em> authored by Alexander Kunkel, Hei Yin Jowett Chan, Hsi-Yu Schive, Hsinhao Huang, Pin-Yu Liao, <a href="https://arxiv.org/abs/2411.17288">Published in ApJS, 2025</a></li>
@@ -22,6 +22,7 @@ title: About Alexander Kunkel
 	<h2>T&E publications</h2>
 	<h3>Co-author</h3>
 	<ul>
+		<li>03/2026 – <a href="https://www.transportenvironment.org/state-of-european-transport/state-of-transport-2026/aviation"> European state of transport 2026 – Aviation – Scrollytelling</a></li>
 		<li>01/2026 – <a href="https://www.transportenvironment.org/articles/scale_up_contrail_avoidance">
 			How to scale up contrail avoidance in Europe? – Aviation – Report</a></li>
 		<li>11/2025 – <a href="https://www.transportenvironment.org/articles/the-challenge-of-sourcing-sustainable-co2-for-e-fuels">

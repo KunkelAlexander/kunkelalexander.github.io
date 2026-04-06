@@ -10,4 +10,4 @@ composer: Don McLean
 
 ## Lesson
 
-https://www.justinguitar.com/songs/don-mclean-vincent-chords-tabs-guitar-lesson-bs-804
+[Don McLean - Vincent](https://www.justinguitar.com/songs/don-mclean-vincent-chords-tabs-guitar-lesson-bs-804)

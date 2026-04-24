@@ -184,3 +184,11 @@
     right: auto;
   }
 }
+
+#project-track {
+  cursor: grab;
+}
+
+#project-track:active {
+  cursor: grabbing;
+}

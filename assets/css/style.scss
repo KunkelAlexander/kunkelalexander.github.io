@@ -67,26 +67,24 @@
 
 .project-showcase-inner {
   position: relative;
-  height: 72vh;
+  height: 60vh;
 }
 
-.project-showcase-label {
-  position: absolute;
-  left: max(2rem, calc((100vw - 920px) / 2 + 1.5rem));
-  top: 2rem;
-  z-index: 2;
-  max-width: 420px;
-}
-
-.project-showcase-label h2 {
-  margin: 0 0 0.4rem;
+.project-showcase-header {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1rem;
   color: white;
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
 }
 
-.project-showcase-label p {
+.project-showcase-header h2 {
+  margin: 0 0 0.4rem;
+  font-size: 2rem;
+}
+
+.project-showcase-header p {
   margin: 0;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255,255,255,0.7);
 }
 
 #project-track {
@@ -113,7 +111,7 @@
   border-radius: 14px;
   color: white;
   text-decoration: none;
-  background: #222;
+  background: #000;
 }
 
 #project-track .project-card img {

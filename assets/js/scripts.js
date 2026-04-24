@@ -21,7 +21,7 @@ if (projectTrack) {
   let isDragging = false;
   let hasMoved = false;
 
-  const clampPercentage = value => Math.max(Math.min(value, 0), -75);
+  const clampPercentage = value => Math.max(Math.min(value, 0), -90);
 
   const animateTrack = (nextPercentage, duration = 1200) => {
     projectTrack.dataset.percentage = nextPercentage;

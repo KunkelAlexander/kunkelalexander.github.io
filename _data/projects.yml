@@ -1,23 +1,37 @@
+
+- date: "04/2026"
+  title: "rustiNESs"
+  url: "https://kunkelalexander.github.io/rustiNESs/"
+  text: "NES emulator written in Rust"
+  image: "/assets/img/projects/rustiness.png"
+
+- date: "02/2026"
+  title: "Voxellini"
+  url: "https://kunkelalexander.github.io/voxellini/"
+  text: "Marching cubes voxel editor"
+  image: "/assets/img/projects/voxellini.png"
+
+
 - date: "01/2026"
   title: "Glide & Seek"
   url: "https://kunkelalexander.github.io/glide-and-seek/"
-  text: "A Pokémon-style ice maze game in Godot: step onto ice and try not to get stuck."
+  text: "Pokémon-style ice maze game"
   image: "/assets/img/projects/glide-and-seek.png"
 
 - date: "11/2025"
   title: "T&E Publication Search & Chat"
   url: "https://tandesearch.streamlit.app/"
-  text: "A RAG-powered search and chat bot that lets you explore T&E's publications."
+  text: "RAG-powered chat bot"
   image: "/assets/img/projects/tande-search.png"
 
 - date: "05/2025"
   title: "Neon Sand"
   url: "https://kunkelalexander.github.io/neon-sand/"
-  text: "Mindblowing sand experience. You will never want to try another sand simulation again."
+  text: "Falling sand game"
   image: "/assets/img/projects/neon-sand.png"
 
 - date: "01/2025"
   title: "Flying Turtles"
   url: "https://kunkelalexander.github.io/flying-turtles/"
-  text: "A 2D local multiplayer game created in Godot inspired by a bonus game in Rayman Revolution."
+  text: "Rayman-inspired bonus game"
   image: "/assets/img/projects/flying-turtles.png"

@@ -12,103 +12,95 @@ $(document).ready(function () {
   $(".time").text(function (index, value) {
     return Math.round(parseFloat(value));
   });
+$(".project-showcase").each(function () {
+  const section = this;
+  const list = section.querySelector(".project-list");
+  if (!list) return;
 
-  // Project showcase
-  // Project showcase
-const projectTrack = document.getElementById("project-track");
+  section.classList.add("enhanced");
 
-if (projectTrack) {
-  let isDragging = false;
-  let hasMoved = false;
+  const wrap = document.createElement("div");
+  const track = document.createElement("div");
 
-  const clampPercentage = value => Math.max(Math.min(value, 0), -90);
+  wrap.className = "project-track-wrap";
+  track.className = "project-track";
+  track.dataset.mouseDownAt = "0";
+  track.dataset.prevPercentage = "0";
 
-  const animateTrack = (nextPercentage, duration = 1200) => {
-    projectTrack.dataset.percentage = nextPercentage;
+  list.querySelectorAll("li").forEach(item => {
+    track.innerHTML += `
+      <a class="project-card" href="${item.dataset.url}">
+        <img class="image" src="${item.dataset.image}" draggable="false" alt="">
+        <span>
+          <strong>${item.dataset.title}</strong>
+          <small>${item.dataset.text}</small>
+        </span>
+      </a>`;
+  });
 
-    projectTrack.animate(
-      { transform: `translate(${nextPercentage}%, -50%)` },
-      { duration: duration, fill: "forwards" }
+  wrap.appendChild(track);
+  list.replaceWith(wrap);
+
+  let moved = false;
+
+  const move = pct => {
+    pct = Math.max(Math.min(pct, 0), -90);
+    track.dataset.percentage = pct;
+
+    track.animate(
+      { transform: `translate(${pct}%, -50%)` },
+      { duration: 900, fill: "forwards" }
     );
 
-    for (const image of projectTrack.getElementsByClassName("image")) {
-      image.animate(
-        { objectPosition: `${100 + nextPercentage}% center` },
-        { duration: duration, fill: "forwards" }
+    for (const img of track.getElementsByClassName("image")) {
+      img.animate(
+        { objectPosition: `${100 + pct}% center` },
+        { duration: 900, fill: "forwards" }
       );
     }
   };
 
-  projectTrack.addEventListener("pointerdown", e => {
-    isDragging = true;
-    hasMoved = false;
-
-    projectTrack.dataset.mouseDownAt = e.clientX;
-    projectTrack.setPointerCapture(e.pointerId);
+  track.addEventListener("pointerdown", e => {
+    moved = false;
+    track.dataset.mouseDownAt = e.clientX;
+    track.setPointerCapture(e.pointerId);
   });
 
-  projectTrack.addEventListener("pointerup", e => {
-    isDragging = false;
-    projectTrack.dataset.mouseDownAt = "0";
-    projectTrack.dataset.prevPercentage = projectTrack.dataset.percentage || "0";
-
-    if (projectTrack.hasPointerCapture(e.pointerId)) {
-      projectTrack.releasePointerCapture(e.pointerId);
-    }
+  track.addEventListener("pointerup", e => {
+    track.dataset.mouseDownAt = "0";
+    track.dataset.prevPercentage = track.dataset.percentage || "0";
+    if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId);
   });
 
-  projectTrack.addEventListener("pointercancel", e => {
-    isDragging = false;
-    projectTrack.dataset.mouseDownAt = "0";
+  track.addEventListener("pointermove", e => {
+    if (track.dataset.mouseDownAt === "0") return;
 
-    if (projectTrack.hasPointerCapture(e.pointerId)) {
-      projectTrack.releasePointerCapture(e.pointerId);
-    }
+    const delta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+    if (Math.abs(delta) > 5) moved = true;
+
+    const pct =
+      parseFloat(track.dataset.prevPercentage || "0") +
+      (delta / (window.innerWidth / 2)) * -100;
+
+    move(pct);
   });
 
-  projectTrack.addEventListener("pointermove", e => {
-    if (!isDragging) return;
-
-    const mouseDelta = parseFloat(projectTrack.dataset.mouseDownAt) - e.clientX;
-
-    if (Math.abs(mouseDelta) > 5) {
-      hasMoved = true;
-    }
-
-    const maxDelta = window.innerWidth / 2;
-    const percentage = (mouseDelta / maxDelta) * -100;
-
-    const nextPercentageUnconstrained =
-      parseFloat(projectTrack.dataset.prevPercentage || "0") + percentage;
-
-    const nextPercentage = clampPercentage(nextPercentageUnconstrained);
-
-    animateTrack(nextPercentage, 1200);
+  track.addEventListener("click", e => {
+    if (moved) e.preventDefault();
   });
 
-  projectTrack.addEventListener("click", e => {
-    if (hasMoved) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  });
-
-  projectTrack.addEventListener("wheel", e => {
+  track.addEventListener("wheel", e => {
     e.preventDefault();
 
-    const scrollSpeed = 0.8;
-    const delta = e.deltaY * scrollSpeed;
-    const maxDelta = window.innerWidth / 2;
+    const pct =
+      parseFloat(track.dataset.percentage || "0") +
+      (e.deltaY / (window.innerWidth / 2)) * -100;
 
-    const percentage = (delta / maxDelta) * -100;
-    const currentPercentage = parseFloat(projectTrack.dataset.percentage || "0");
-
-    const nextPercentage = clampPercentage(currentPercentage + percentage);
-
-    projectTrack.dataset.prevPercentage = nextPercentage;
-
-    animateTrack(nextPercentage, 600);
+    track.dataset.prevPercentage = pct;
+    move(pct);
   }, { passive: false });
-}
+
+  track.addEventListener("dragstart", e => e.preventDefault());
+});
 
 });

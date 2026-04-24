@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Image Track Test</title>
+
+<style>
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  margin: 0;
+  overflow: hidden;
+}
+
+#image-track {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  user-select: none;
+}
+
+#image-track > .image {
+  width: 40vmin;
+  height: 56vmin;
+  object-fit: cover;
+  object-position: 100% center;
+}
+</style>
+</head>
+
+<body>
+
+<div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+  <img class="image" src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=1770&q=80" draggable="false" />
+  <img class="image" src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?auto=format&fit=crop&w=1674&q=80" draggable="false" />
+  <img class="image" src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=1770&q=80" draggable="false" />
+  <img class="image" src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=1770&q=80" draggable="false" />
+  <img class="image" src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?auto=format&fit=crop&w=1770&q=80" draggable="false" />
+</div>
+
+<script>
+const track = document.getElementById("image-track");
+
+const handleOnDown = e => {
+  track.dataset.mouseDownAt = e.clientX;
+};
+
+const handleOnUp = () => {
+  track.dataset.mouseDownAt = "0";
+  track.dataset.prevPercentage = track.dataset.percentage || "0";
+};
+
+const handleOnMove = e => {
+  if (track.dataset.mouseDownAt === "0") return;
+
+  const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+  const maxDelta = window.innerWidth / 2;
+
+  const percentage = (mouseDelta / maxDelta) * -100;
+  const nextPercentageUnconstrained =
+    parseFloat(track.dataset.prevPercentage || "0") + percentage;
+
+  const nextPercentage = Math.max(
+    Math.min(nextPercentageUnconstrained, 0),
+    -100
+  );
+
+  track.dataset.percentage = nextPercentage;
+
+  track.animate(
+    {
+      transform: `translate(${nextPercentage}%, -50%)`
+    },
+    { duration: 1200, fill: "forwards" }
+  );
+
+  for (const image of track.getElementsByClassName("image")) {
+    image.animate(
+      {
+        objectPosition: `${100 + nextPercentage}% center`
+      },
+      { duration: 1200, fill: "forwards" }
+    );
+  }
+};
+
+window.onmousedown = e => handleOnDown(e);
+window.onmouseup = e => handleOnUp(e);
+window.onmousemove = e => handleOnMove(e);
+
+window.ontouchstart = e => handleOnDown(e.touches[0]);
+window.ontouchend = e => handleOnUp(e);
+window.ontouchmove = e => handleOnMove(e.touches[0]);
+</script>
+
+</body>
+</html>

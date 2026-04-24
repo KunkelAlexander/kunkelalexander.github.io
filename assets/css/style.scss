@@ -51,3 +51,136 @@
 .inline-audio::-webkit-media-controls-time-remaining-display {
   display: none;
 }
+
+.project-showcase {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background: #050505;
+  color: white;
+  overflow: hidden;
+  min-height: 72vh;
+}
+
+.project-showcase-inner {
+  position: relative;
+  height: 72vh;
+}
+
+.project-showcase-label {
+  position: absolute;
+  left: max(2rem, calc((100vw - 920px) / 2 + 1.5rem));
+  top: 2rem;
+  z-index: 2;
+  max-width: 420px;
+}
+
+.project-showcase-label h2 {
+  margin: 0 0 0.4rem;
+  color: white;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+}
+
+.project-showcase-label p {
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+}
+
+#project-track {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 42%;
+  top: 56%;
+  transform: translate(0%, -50%);
+  user-select: none;
+  cursor: grab;
+}
+
+#project-track:active {
+  cursor: grabbing;
+}
+
+#project-track .project-card {
+  position: relative;
+  display: block;
+  width: 40vmin;
+  height: 56vmin;
+  overflow: hidden;
+  border-radius: 14px;
+  color: white;
+  text-decoration: none;
+  background: #222;
+}
+
+#project-track .project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% center;
+  display: block;
+}
+
+#project-track .project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 55%);
+}
+
+#project-track .project-card span {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+}
+
+#project-track .project-card strong,
+#project-track .project-card small {
+  display: block;
+}
+
+#project-track .project-card small {
+  margin-top: 0.25rem;
+  color: rgba(255,255,255,0.72);
+}
+
+.drag-hint {
+  position: absolute;
+  right: max(2rem, calc((100vw - 920px) / 2 + 1.5rem));
+  bottom: 2rem;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  .project-showcase,
+  .project-showcase-inner {
+    min-height: 64vh;
+    height: 64vh;
+  }
+
+  .project-showcase-label {
+    left: 1.2rem;
+    right: 1.2rem;
+  }
+
+  #project-track {
+    left: 12%;
+    top: 58%;
+  }
+
+  #project-track .project-card {
+    width: 58vmin;
+    height: 78vmin;
+  }
+
+  .drag-hint {
+    left: 1.2rem;
+    right: auto;
+  }
+}

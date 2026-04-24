@@ -63,7 +63,7 @@ title: About Alexander Kunkel
 		<li>01/2025 – <a href="https://www.transportenvironment.org/articles/down-to-earth">
 			Down to earth – Why European aviation needs to urgently address its growth problem – Report</a></li>
 	</ul>
-	<h2>Tools & Games</h2>
+	{% include project-showcase.html %}
 	<ul>
 		<li>01/2026 – <a href="https://kunkelalexander.github.io/glide-and-seek/">
 			Glide & Seek - A Pokémon-style ice maze game in Godot: step onto ice and try not to get stuck.</a></li>

@@ -192,3 +192,13 @@
 #project-track:active {
   cursor: grabbing;
 }
+
+#project-track {
+  touch-action: pan-y;
+}
+
+#project-track .project-card,
+#project-track .image {
+  -webkit-user-drag: none;
+  user-select: none;
+}

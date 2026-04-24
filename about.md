@@ -10,6 +10,9 @@ title: About Alexander Kunkel
 	</div>
 	<p class="intro">Senior Data Analyst at Transport & Environment, based in Brussels.</p>
 	<p>I am passionate about the environment, coffee, learning languages, playing the guitar, theoretical physics and mathematics.</p>
+	
+	{% include project-showcase.html %}
+	
 	<h2>Physics publications</h2>
 	<ul>
   		<li><em>A Hybrid Scheme for Fuzzy Dark Matter Simulations Combining the Schrödinger and Hamilton-Jacobi-Madelung Equations</em> authored by Alexander Kunkel, Hei Yin Jowett Chan, Hsi-Yu Schive, Hsinhao Huang, Pin-Yu Liao, <a href="https://arxiv.org/abs/2411.17288">Published in ApJS, 2025</a></li>
@@ -62,16 +65,5 @@ title: About Alexander Kunkel
 			T&E warnt vor Triage bei der Brückensanierung: Verkehrsministerium unterschätzt Problem – Report</a></li>
 		<li>01/2025 – <a href="https://www.transportenvironment.org/articles/down-to-earth">
 			Down to earth – Why European aviation needs to urgently address its growth problem – Report</a></li>
-	</ul>
-	{% include project-showcase.html %}
-	<ul>
-		<li>01/2026 – <a href="https://kunkelalexander.github.io/glide-and-seek/">
-			Glide & Seek - A Pokémon-style ice maze game in Godot: step onto ice and try not to get stuck.</a></li>
-		<li>11/2025 – <a href="https://tandesearch.streamlit.app/">
-			T&E Publication Search & Chat - A RAG-powered search and chat bot that lets you explore T&E's publications.</a></li>
-		<li>05/2025 – <a href="https://kunkelalexander.github.io/neon-sand/">
-			Neon Sand - Mindblowing sand experience. You will never want to try another sand simulation again.</a></li>
-		<li>01/2025 – <a href="https://kunkelalexander.github.io/flying-turtles/">
-			Flying Turtles - A 2D local multiplayer game created in Godot inspired by a bonus game in Rayman Revolution.</a></li>
 	</ul>
 </div>

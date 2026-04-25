@@ -13,7 +13,7 @@ $(document).ready(function () {
     return Math.round(parseFloat(value));
   });
 
-$(".project-showcase").each(function () {
+  $(".project-showcase").each(function () {
   const section = this;
   const list = section.querySelector(".project-list");
   if (!list) return;
@@ -25,95 +25,154 @@ $(".project-showcase").each(function () {
 
   wrap.className = "project-track-wrap";
   track.className = "project-track";
+
   track.dataset.mouseDownAt = "0";
   track.dataset.prevPercentage = "0";
+  track.dataset.percentage = "0";
 
   list.querySelectorAll("li").forEach(item => {
-    track.innerHTML += `
-      <a class="project-card" href="${item.dataset.url}">
-        <img class="image" src="${item.dataset.image}" draggable="false" alt="">
-        <span>
-          <strong>${item.dataset.title}</strong>
-          <small>${item.dataset.text}</small>
-        </span>
-      </a>`;
+    const panel = document.createElement("a");
+    panel.className = "project-panel";
+    panel.href = item.dataset.url || "#";
+
+    const image = document.createElement("img");
+    image.className = "image";
+    image.src = item.dataset.image;
+    image.alt = "";
+    image.draggable = false;
+
+    panel.appendChild(image);
+    track.appendChild(panel);
   });
 
   wrap.appendChild(track);
   list.replaceWith(wrap);
-  
-	let moved = false;
-	let lastX = 0, velocity = 0;   // NEW
 
-	const move = pct => {
-	const trackW = track.scrollWidth;                          // NEW (dynamic clamp)
-	const wrapW = wrap.clientWidth;                            // NEW
-	const minPct = -((trackW - wrapW) / trackW) * 100;        // NEW
-	pct = Math.max(Math.min(pct, 0), minPct);                 // changed from -90
-	track.dataset.percentage = pct;
-	track.animate(
-		{ transform: `translate(${pct}%, -50%)` },
-		{ duration: 900, fill: "forwards" }
-	);
-	for (const img of track.getElementsByClassName("image")) {
-		img.animate(
-		{ objectPosition: `${100 + pct}% center` },
-		{ duration: 900, fill: "forwards" }
-		);
-	}
-	};
+  let moved = false;
 
-	track.addEventListener("pointerdown", e => {
-	moved = false;
-	velocity = 0;                                              // NEW (reset on new drag)
-	track.dataset.mouseDownAt = e.clientX;
-	lastX = e.clientX;                                        // NEW
-	track.setPointerCapture(e.pointerId);
-	});
+  const getMinPercentage = () => {
+    const trackWidth = track.scrollWidth;
+    const wrapWidth = wrap.clientWidth;
 
-	track.addEventListener("pointerup", e => {
-	track.dataset.mouseDownAt = "0";
-	track.dataset.prevPercentage = track.dataset.percentage || "0";
-	if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId);
+    if (trackWidth <= wrapWidth) return 0;
 
-	// NEW — momentum coast
-	let momentum = velocity * 1.5;
-	const coast = () => {
-		if (Math.abs(momentum) < 0.2) return;
-		momentum *= 0.88;
-		move(parseFloat(track.dataset.percentage || "0") + (momentum / window.innerWidth) * 100);
-		track.dataset.prevPercentage = track.dataset.percentage;
-		requestAnimationFrame(coast);
-	};
-	requestAnimationFrame(coast);
-	});
+    return -((trackWidth - wrapWidth) / trackWidth) * 100;
+  };
 
-	track.addEventListener("pointermove", e => {
-	if (track.dataset.mouseDownAt === "0") return;
-	velocity = e.clientX - lastX;                             // NEW
-	lastX = e.clientX;                                        // NEW
-	const delta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
-	if (Math.abs(delta) > 5) moved = true;
-	const pct =
-		parseFloat(track.dataset.prevPercentage || "0") +
-		(delta / (window.innerWidth / 2)) * -100;
-	move(pct);
-	});
+  const clamp = percentage => {
+    const min = getMinPercentage();
+    return Math.max(Math.min(percentage, 0), min);
+  };
 
-	track.addEventListener("click", e => {
-	if (moved) e.preventDefault();
-	});
+  const moveTo = (percentage, duration = 900) => {
+    const nextPercentage = clamp(percentage);
 
-	track.addEventListener("wheel", e => {
-	e.preventDefault();
-	const pct =
-		parseFloat(track.dataset.percentage || "0") +
-		(e.deltaY / (window.innerWidth / 2)) * -100;
-	track.dataset.prevPercentage = pct;
-	move(pct);
-	}, { passive: false });
+    track.dataset.percentage = nextPercentage;
 
-	track.addEventListener("dragstart", e => e.preventDefault());
+    track.animate(
+      {
+        transform: `translate(${nextPercentage}%, -50%)`
+      },
+      {
+        duration,
+        fill: "forwards",
+        easing: "cubic-bezier(.22,.61,.36,1)"
+      }
+    );
+
+    for (const image of track.getElementsByClassName("image")) {
+      image.animate(
+        {
+          objectPosition: `${100 + nextPercentage}% center`
+        },
+        {
+          duration,
+          fill: "forwards",
+          easing: "cubic-bezier(.22,.61,.36,1)"
+        }
+      );
+    }
+  };
+
+  const handleDown = e => {
+    moved = false;
+
+    track.dataset.mouseDownAt = e.clientX;
+    track.classList.add("is-dragging");
+
+    track.setPointerCapture?.(e.pointerId);
+  };
+
+  const handleUp = e => {
+    track.dataset.mouseDownAt = "0";
+    track.dataset.prevPercentage = track.dataset.percentage || "0";
+    track.classList.remove("is-dragging");
+
+    if (track.hasPointerCapture?.(e.pointerId)) {
+      track.releasePointerCapture(e.pointerId);
+    }
+  };
+
+  const handleMove = e => {
+    if (track.dataset.mouseDownAt === "0") return;
+
+    const mouseDownAt = parseFloat(track.dataset.mouseDownAt);
+    const prevPercentage = parseFloat(track.dataset.prevPercentage || "0");
+
+    const mouseDelta = mouseDownAt - e.clientX;
+    const maxDelta = window.innerWidth / 2;
+
+    if (Math.abs(mouseDelta) > 5) moved = true;
+
+    const percentage = (mouseDelta / maxDelta) * -100;
+    const nextPercentage = prevPercentage + percentage;
+
+    moveTo(nextPercentage, 900);
+  };
+
+  const handleWheel = e => {
+    e.preventDefault();
+
+    const currentPercentage = parseFloat(track.dataset.percentage || "0");
+
+    /*
+      Use whichever wheel direction is stronger.
+      This gives good support for normal mouse wheels,
+      trackpads, and horizontal scrolling gestures.
+    */
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY)
+      ? e.deltaX
+      : e.deltaY;
+
+    const nextPercentage =
+      currentPercentage + (delta / window.innerWidth) * -100;
+
+    track.dataset.prevPercentage = nextPercentage;
+
+    moveTo(nextPercentage, 700);
+  };
+
+  track.addEventListener("pointerdown", handleDown);
+  track.addEventListener("pointerup", handleUp);
+  track.addEventListener("pointercancel", handleUp);
+  track.addEventListener("pointermove", handleMove);
+
+  wrap.addEventListener("wheel", handleWheel, { passive: false });
+
+  track.addEventListener("click", e => {
+    if (moved) {
+      e.preventDefault();
+    }
+  });
+
+  track.addEventListener("dragstart", e => {
+    e.preventDefault();
+  });
+
+  window.addEventListener("resize", () => {
+    moveTo(parseFloat(track.dataset.percentage || "0"), 0);
+    track.dataset.prevPercentage = track.dataset.percentage || "0";
+  });
 });
 
 });

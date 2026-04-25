@@ -21,15 +21,9 @@ title: About Alexander Kunkel
 %}
 
 {% include showcase.html
-  id="te-publications-coauthor"
-  title="T&amp;E publications — Co-author"
+  id="te"
+  title="T&amp;E publications"
   data="te_coauthor"
-%}
-
-{% include showcase.html
-  id="te-publications-contributor"
-  title="T&amp;E publications — Reviewer/Contributor"
-  data="te_contributor"
 %}
 
 {% include showcase.html

@@ -12,7 +12,7 @@ $(document).ready(function () {
   $(".time").text(function (index, value) {
     return Math.round(parseFloat(value));
   });
-$(".project-showcase").each(function () {
+  $(".project-showcase").each(function () {
   const section = this;
   const list = section.querySelector(".project-list");
   if (!list) return;
@@ -44,30 +44,35 @@ $(".project-showcase").each(function () {
   list.replaceWith(wrap);
 
   let moved = false;
+  let activePointerId = null;
 
-  const getBounds = () => {
+  const getCardCenters = () => {
     const cards = track.querySelectorAll(".project-card");
+
     if (!cards.length) {
-      return { minPct: 0, maxPct: 0 };
+      return {
+        firstCenter: 0,
+        lastCenter: 0,
+        trackWidth: 1
+      };
     }
 
     const first = cards[0];
     const last = cards[cards.length - 1];
 
-    const wrapCenter = wrap.clientWidth / 2;
-    const trackWidth = track.scrollWidth;
+    return {
+      firstCenter: first.offsetLeft + first.offsetWidth / 2,
+      lastCenter: last.offsetLeft + last.offsetWidth / 2,
+      trackWidth: track.scrollWidth
+    };
+  };
 
-    const firstCenter = first.offsetLeft + first.offsetWidth / 2;
-    const lastCenter = last.offsetLeft + last.offsetWidth / 2;
-
-    // Because .project-track is left: 50%, translate(0%) puts its left edge
-    // at the center of the wrapper. These pixel offsets center first/last card.
-    const maxPx = wrapCenter - firstCenter;
-    const minPx = wrapCenter - lastCenter;
+  const getBounds = () => {
+    const { firstCenter, lastCenter, trackWidth } = getCardCenters();
 
     return {
-      maxPct: (maxPx / trackWidth) * 100,
-      minPct: (minPx / trackWidth) * 100
+      maxPct: (-firstCenter / trackWidth) * 100,
+      minPct: (-lastCenter / trackWidth) * 100
     };
   };
 
@@ -76,93 +81,130 @@ $(".project-showcase").each(function () {
     return Math.max(Math.min(pct, maxPct), minPct);
   };
 
-  const move = pct => {
+  const setPosition = (pct, animate = true) => {
     const nextPct = clamp(pct);
 
     track.dataset.percentage = nextPct;
 
-    track.animate(
-      {
-        transform: `translate(${nextPct}%, -50%)`
-      },
-      {
-        duration: 1200,
-        fill: "forwards"
-      }
-    );
-
-    for (const img of track.getElementsByClassName("image")) {
-      img.animate(
+    if (animate) {
+      track.animate(
         {
-          objectPosition: `${100 + nextPct}% center`
+          transform: `translate(${nextPct}%, -50%)`
         },
         {
           duration: 1200,
           fill: "forwards"
         }
       );
+
+      for (const img of track.getElementsByClassName("image")) {
+        img.animate(
+          {
+            objectPosition: `${100 + nextPct}% center`
+          },
+          {
+            duration: 1200,
+            fill: "forwards"
+          }
+        );
+      }
+    } else {
+      track.style.transform = `translate(${nextPct}%, -50%)`;
+
+      for (const img of track.getElementsByClassName("image")) {
+        img.style.objectPosition = `${100 + nextPct}% center`;
+      }
     }
   };
 
   const centerFirstCard = () => {
     const { maxPct } = getBounds();
+
     track.dataset.prevPercentage = maxPct;
     track.dataset.percentage = maxPct;
 
-    track.style.transform = `translate(${maxPct}%, -50%)`;
-
-    for (const img of track.getElementsByClassName("image")) {
-      img.style.objectPosition = `${100 + maxPct}% center`;
-    }
+    setPosition(maxPct, false);
   };
 
   requestAnimationFrame(centerFirstCard);
-  window.addEventListener("resize", centerFirstCard);
 
-  const handleDown = e => {
+  window.addEventListener("resize", () => {
+    const currentPct = parseFloat(track.dataset.percentage || "0");
+    setPosition(currentPct, false);
+    track.dataset.prevPercentage = track.dataset.percentage || "0";
+  });
+
+  wrap.addEventListener("pointerdown", e => {
     moved = false;
-    track.dataset.mouseDownAt = e.clientX;
-  };
+    activePointerId = e.pointerId;
 
-  const handleUp = () => {
+    track.dataset.mouseDownAt = e.clientX;
+    track.dataset.prevPercentage = track.dataset.percentage || "0";
+
+    wrap.setPointerCapture(e.pointerId);
+  });
+
+  wrap.addEventListener("pointerup", e => {
+    if (activePointerId !== e.pointerId) return;
+
     track.dataset.mouseDownAt = "0";
     track.dataset.prevPercentage = track.dataset.percentage || "0";
-  };
 
-  const handleMove = e => {
+    if (wrap.hasPointerCapture(e.pointerId)) {
+      wrap.releasePointerCapture(e.pointerId);
+    }
+
+    activePointerId = null;
+  });
+
+  wrap.addEventListener("pointercancel", e => {
+    if (activePointerId !== e.pointerId) return;
+
+    track.dataset.mouseDownAt = "0";
+    track.dataset.prevPercentage = track.dataset.percentage || "0";
+
+    activePointerId = null;
+  });
+
+  wrap.addEventListener("pointermove", e => {
+    if (activePointerId !== e.pointerId) return;
     if (track.dataset.mouseDownAt === "0") return;
 
     const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
     const maxDelta = window.innerWidth / 2;
 
-    if (Math.abs(mouseDelta) > 5) moved = true;
+    if (Math.abs(mouseDelta) > 5) {
+      moved = true;
+    }
 
     const percentage = (mouseDelta / maxDelta) * -100;
-    const nextPercentageUnconstrained =
+    const nextPercentage =
       parseFloat(track.dataset.prevPercentage || "0") + percentage;
 
-    move(nextPercentageUnconstrained);
-  };
-
-  window.addEventListener("mousedown", handleDown);
-  window.addEventListener("mouseup", handleUp);
-  window.addEventListener("mousemove", handleMove);
-
-  window.addEventListener("touchstart", e => handleDown(e.touches[0]), {
-    passive: true
+    setPosition(nextPercentage);
   });
 
-  window.addEventListener("touchend", handleUp);
+  wrap.addEventListener(
+    "wheel",
+    e => {
+      e.preventDefault();
 
-  window.addEventListener("touchmove", e => handleMove(e.touches[0]), {
-    passive: true
-  });
+      const currentPct = parseFloat(track.dataset.percentage || "0");
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      const nextPct = currentPct + (delta / (window.innerWidth / 2)) * -100;
+
+      setPosition(nextPct);
+      track.dataset.prevPercentage = track.dataset.percentage || "0";
+    },
+    { passive: false }
+  );
 
   track.addEventListener("click", e => {
-    if (moved) e.preventDefault();
+    if (moved) {
+      e.preventDefault();
+    }
   });
 
   track.addEventListener("dragstart", e => e.preventDefault());
 });
-
 });

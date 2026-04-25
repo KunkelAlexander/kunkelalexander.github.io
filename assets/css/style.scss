@@ -68,10 +68,27 @@
 }
 
 .project-showcase.enhanced h2 {
+  position: relative;
+  z-index: 2;
   max-width: 920px;
   margin: 0 auto 1.5rem;
   padding: 0 1.5rem;
   color: white;
+}
+
+.project-track-wrap {
+  position: relative;
+  height: 62vh;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.project-track-wrap:active {
+  cursor: grabbing;
 }
 
 .project-track {
@@ -82,22 +99,7 @@
   top: 50%;
   transform: translate(0%, -50%);
   user-select: none;
-  cursor: grab;
-}
-
-.project-track {
-  display: flex;
-  gap: 4vmin;
-  position: absolute;
-  left: max(1.5rem, calc((100vw - 920px) / 2 + 1.5rem));
-  top: 50%;
-  transform: translate(0%, -50%);
-  user-select: none;
-  cursor: grab;
-}
-
-.project-track:active {
-  cursor: grabbing;
+  will-change: transform;
 }
 
 .project-card {
@@ -121,6 +123,7 @@
   display: block;
   -webkit-user-drag: none;
   user-select: none;
+  will-change: object-position;
 }
 
 .project-card::after {

@@ -12,8 +12,7 @@ $(document).ready(function () {
   $(".time").text(function (index, value) {
     return Math.round(parseFloat(value));
   });
-
-  $(".project-showcase").each(function () {
+$(".project-showcase").each(function () {
   const section = this;
   const list = section.querySelector(".project-list");
   if (!list) return;
@@ -31,18 +30,14 @@ $(document).ready(function () {
   track.dataset.percentage = "0";
 
   list.querySelectorAll("li").forEach(item => {
-    const panel = document.createElement("a");
-    panel.className = "project-panel";
-    panel.href = item.dataset.url || "#";
-
-    const image = document.createElement("img");
-    image.className = "image";
-    image.src = item.dataset.image;
-    image.alt = "";
-    image.draggable = false;
-
-    panel.appendChild(image);
-    track.appendChild(panel);
+    track.innerHTML += `
+      <a class="project-card" href="${item.dataset.url}">
+        <img class="image" src="${item.dataset.image}" draggable="false" alt="">
+        <span>
+          <strong>${item.dataset.title}</strong>
+          <small>${item.dataset.text}</small>
+        </span>
+      </a>`;
   });
 
   wrap.appendChild(track);
@@ -50,129 +45,124 @@ $(document).ready(function () {
 
   let moved = false;
 
-  const getMinPercentage = () => {
+  const getBounds = () => {
+    const cards = track.querySelectorAll(".project-card");
+    if (!cards.length) {
+      return { minPct: 0, maxPct: 0 };
+    }
+
+    const first = cards[0];
+    const last = cards[cards.length - 1];
+
+    const wrapCenter = wrap.clientWidth / 2;
     const trackWidth = track.scrollWidth;
-    const wrapWidth = wrap.clientWidth;
 
-    if (trackWidth <= wrapWidth) return 0;
+    const firstCenter = first.offsetLeft + first.offsetWidth / 2;
+    const lastCenter = last.offsetLeft + last.offsetWidth / 2;
 
-    return -((trackWidth - wrapWidth) / trackWidth) * 100;
+    // Because .project-track is left: 50%, translate(0%) puts its left edge
+    // at the center of the wrapper. These pixel offsets center first/last card.
+    const maxPx = wrapCenter - firstCenter;
+    const minPx = wrapCenter - lastCenter;
+
+    return {
+      maxPct: (maxPx / trackWidth) * 100,
+      minPct: (minPx / trackWidth) * 100
+    };
   };
 
-  const clamp = percentage => {
-    const min = getMinPercentage();
-    return Math.max(Math.min(percentage, 0), min);
+  const clamp = pct => {
+    const { minPct, maxPct } = getBounds();
+    return Math.max(Math.min(pct, maxPct), minPct);
   };
 
-  const moveTo = (percentage, duration = 900) => {
-    const nextPercentage = clamp(percentage);
+  const move = pct => {
+    const nextPct = clamp(pct);
 
-    track.dataset.percentage = nextPercentage;
+    track.dataset.percentage = nextPct;
 
     track.animate(
       {
-        transform: `translate(${nextPercentage}%, -50%)`
+        transform: `translate(${nextPct}%, -50%)`
       },
       {
-        duration,
-        fill: "forwards",
-        easing: "cubic-bezier(.22,.61,.36,1)"
+        duration: 1200,
+        fill: "forwards"
       }
     );
 
-    for (const image of track.getElementsByClassName("image")) {
-      image.animate(
+    for (const img of track.getElementsByClassName("image")) {
+      img.animate(
         {
-          objectPosition: `${100 + nextPercentage}% center`
+          objectPosition: `${100 + nextPct}% center`
         },
         {
-          duration,
-          fill: "forwards",
-          easing: "cubic-bezier(.22,.61,.36,1)"
+          duration: 1200,
+          fill: "forwards"
         }
       );
     }
   };
 
-  const handleDown = e => {
-    moved = false;
+  const centerFirstCard = () => {
+    const { maxPct } = getBounds();
+    track.dataset.prevPercentage = maxPct;
+    track.dataset.percentage = maxPct;
 
-    track.dataset.mouseDownAt = e.clientX;
-    track.classList.add("is-dragging");
+    track.style.transform = `translate(${maxPct}%, -50%)`;
 
-    track.setPointerCapture?.(e.pointerId);
+    for (const img of track.getElementsByClassName("image")) {
+      img.style.objectPosition = `${100 + maxPct}% center`;
+    }
   };
 
-  const handleUp = e => {
+  requestAnimationFrame(centerFirstCard);
+  window.addEventListener("resize", centerFirstCard);
+
+  const handleDown = e => {
+    moved = false;
+    track.dataset.mouseDownAt = e.clientX;
+  };
+
+  const handleUp = () => {
     track.dataset.mouseDownAt = "0";
     track.dataset.prevPercentage = track.dataset.percentage || "0";
-    track.classList.remove("is-dragging");
-
-    if (track.hasPointerCapture?.(e.pointerId)) {
-      track.releasePointerCapture(e.pointerId);
-    }
   };
 
   const handleMove = e => {
     if (track.dataset.mouseDownAt === "0") return;
 
-    const mouseDownAt = parseFloat(track.dataset.mouseDownAt);
-    const prevPercentage = parseFloat(track.dataset.prevPercentage || "0");
-
-    const mouseDelta = mouseDownAt - e.clientX;
+    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
     const maxDelta = window.innerWidth / 2;
 
     if (Math.abs(mouseDelta) > 5) moved = true;
 
     const percentage = (mouseDelta / maxDelta) * -100;
-    const nextPercentage = prevPercentage + percentage;
+    const nextPercentageUnconstrained =
+      parseFloat(track.dataset.prevPercentage || "0") + percentage;
 
-    moveTo(nextPercentage, 900);
+    move(nextPercentageUnconstrained);
   };
 
-  const handleWheel = e => {
-    e.preventDefault();
+  window.addEventListener("mousedown", handleDown);
+  window.addEventListener("mouseup", handleUp);
+  window.addEventListener("mousemove", handleMove);
 
-    const currentPercentage = parseFloat(track.dataset.percentage || "0");
+  window.addEventListener("touchstart", e => handleDown(e.touches[0]), {
+    passive: true
+  });
 
-    /*
-      Use whichever wheel direction is stronger.
-      This gives good support for normal mouse wheels,
-      trackpads, and horizontal scrolling gestures.
-    */
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY)
-      ? e.deltaX
-      : e.deltaY;
+  window.addEventListener("touchend", handleUp);
 
-    const nextPercentage =
-      currentPercentage + (delta / window.innerWidth) * -100;
-
-    track.dataset.prevPercentage = nextPercentage;
-
-    moveTo(nextPercentage, 700);
-  };
-
-  track.addEventListener("pointerdown", handleDown);
-  track.addEventListener("pointerup", handleUp);
-  track.addEventListener("pointercancel", handleUp);
-  track.addEventListener("pointermove", handleMove);
-
-  wrap.addEventListener("wheel", handleWheel, { passive: false });
+  window.addEventListener("touchmove", e => handleMove(e.touches[0]), {
+    passive: true
+  });
 
   track.addEventListener("click", e => {
-    if (moved) {
-      e.preventDefault();
-    }
+    if (moved) e.preventDefault();
   });
 
-  track.addEventListener("dragstart", e => {
-    e.preventDefault();
-  });
-
-  window.addEventListener("resize", () => {
-    moveTo(parseFloat(track.dataset.percentage || "0"), 0);
-    track.dataset.prevPercentage = track.dataset.percentage || "0";
-  });
+  track.addEventListener("dragstart", e => e.preventDefault());
 });
 
 });

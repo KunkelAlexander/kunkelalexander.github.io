@@ -62,7 +62,7 @@
   width: 100vw;
   margin-left: -50vw;
   padding: 2rem 0 3rem;
-  background: #000;
+  background: #000000;
   color: white;
   overflow: hidden;
 }
@@ -74,11 +74,15 @@
   color: white;
 }
 
-.project-track-wrap {
-  position: relative;
-  height: 62vh;
-  overflow: hidden;
-  touch-action: pan-y;
+.project-track {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  user-select: none;
+  cursor: grab;
 }
 
 .project-track {
@@ -90,32 +94,58 @@
   transform: translate(0%, -50%);
   user-select: none;
   cursor: grab;
-  will-change: transform;
 }
 
-.project-track.is-dragging {
+.project-track:active {
   cursor: grabbing;
 }
 
-.project-panel {
+.project-card {
+  position: relative;
   display: block;
-  flex: 0 0 auto;
   width: 40vmin;
   height: 56vmin;
+  flex: 0 0 auto;
   overflow: hidden;
-  background: #000;
+  border-radius: 14px;
+  color: white;
+  background: #000000;
   text-decoration: none;
 }
 
-.project-panel img {
+.project-card img {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: cover;
   object-position: 100% center;
-  user-select: none;
-  pointer-events: none;
+  display: block;
   -webkit-user-drag: none;
+  user-select: none;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 55%);
+}
+
+.project-card span {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+}
+
+.project-card strong,
+.project-card small {
+  display: block;
+}
+
+.project-card small {
+  margin-top: 0.25rem;
+  color: rgba(255,255,255,0.72);
 }
 
 @media (max-width: 700px) {
@@ -123,7 +153,7 @@
     height: 66vh;
   }
 
-  .project-panel {
+  .project-card {
     width: 58vmin;
     height: 78vmin;
   }

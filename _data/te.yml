@@ -1,3 +1,18 @@
+- date: "04/26"
+  full_title: "Iran crisis: a moment of reckoning for European aviation"
+  title: "Iran invasion"
+  url: "https://www.transportenvironment.org/articles/iran-crisis-a-moment-of-reckoning-for-european-aviation"
+  text: "04/26 – Report"
+  image: "/assets/img/projects/te-iran.png"
+
+- date: "04/26"
+  full_title: "E-SAF made in Europe - A source of jobs, growth and energy security - Aviation"
+  title: "E-SAF for jobs"
+  url: "https://www.transportenvironment.org/articles/e-saf-made-in-europe-a-source-of-jobs-growth-and-energy-security"
+  text: "04/26 – Briefing"
+  image: "/assets/img/projects/te-opportunity.png"
+
+
 - date: "03/26"
   full_title: "European state of transport 2026 – Aviation"
   title: "Pricing emissions"
@@ -42,7 +57,7 @@
 
 - date: "06/25"
   full_title: "The state of the e-SAF market"
-  title: "e-SAF market"
+  title: "E-SAF market"
   url: "https://www.transportenvironment.org/articles/europe-risks-losing-its-early-e-fuels-lead-for-aviation-study-warns"
   text: "06/25 – Report"
   image: "/assets/img/projects/te-big-oil.png"
@@ -84,10 +99,18 @@
 
 - date: "07/24"
   full_title: "How sustainable are advanced and waste biofuels?"
-  title: "sustainable biofuels"
+  title: "Sustainable biofuels"
   url: "https://www.transportenvironment.org/articles/how-sustainable-are-advanced-and-waste-biofuels"
   text: "07/24 – Report"
   image: "/assets/img/projects/te-biofuels.webp"
+
+- date: "06/24"
+  full_title: "EU walks back on key aviation climate law and excludes long-haul flights from monitoring scheme"
+  title: "Contrail monitoring"
+  url: "https://www.transportenvironment.org/articles/eu-walks-back-on-key-aviation-climate-law-and-excludes-long-haul-flights-from-monitoring-scheme"
+  text: "06/24 – Briefing"
+  image: "/assets/img/projects/te-mrv-24.png"
+
 
 - date: "01/24"
   full_title: "European state of transport 2024 – Energy"

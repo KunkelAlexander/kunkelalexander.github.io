@@ -199,11 +199,23 @@ $(document).ready(function () {
     { passive: false }
   );
 
-  track.addEventListener("click", e => {
-    if (moved) {
-      e.preventDefault();
-    }
-  });
+	track.addEventListener("click", e => {
+	const card = e.target.closest(".project-card");
+	if (!card) return;
+
+	e.preventDefault();
+
+	if (moved) {
+		moved = false;
+		return;
+	}
+
+	if (e.metaKey || e.ctrlKey) {
+		window.open(card.href, "_blank", "noopener");
+	} else {
+		window.location.href = card.href;
+	}
+	});
 
   track.addEventListener("dragstart", e => e.preventDefault());
 });

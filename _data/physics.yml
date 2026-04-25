@@ -1,4 +1,12 @@
 - date: "2025"
+  full_title: "Deciphering the Soliton-Halo Relation in Fuzzy Dark Matter"
+  title: "FDM Soliton-Halo Relation"
+  url: "https://arxiv.org/abs/2412.09908"
+  full_text: "Pin-Yu Liao, Guan-Ming Su, Hsi-Yu Schive, Alexander Kunkel, Hsinhao Huang, Tzihong Chiueh. Published in Physical Review Letters."
+  text: "07/25 - Physical Review Letters"
+  image: "/assets/img/projects/physics-soliton-halo.png"
+
+- date: "2025"
   full_title: "A Hybrid Scheme for Fuzzy Dark Matter Simulations Combining the Schrödinger and Hamilton-Jacobi-Madelung Equations"
   title: "FDM hybrid scheme"
   url: "https://arxiv.org/abs/2411.17288"
@@ -13,14 +21,6 @@
   authors: "Hei Yin Jowett Chan, Hsi-Yu Schive, Victor H Robles, Alexander Kunkel, Guan-Ming Su, Pin-Yu Liao. Published in MNRAS."
   text: "05/25 - MNRAS"
   image: "/assets/img/projects/physics-zoom-fdm.png"
-
-- date: "2025"
-  full_title: "Deciphering the Soliton-Halo Relation in Fuzzy Dark Matter"
-  title: "FDM Soliton-Halo Relation"
-  url: "https://arxiv.org/abs/2412.09908"
-  full_text: "Pin-Yu Liao, Guan-Ming Su, Hsi-Yu Schive, Alexander Kunkel, Hsinhao Huang, Tzihong Chiueh. Published in Physical Review Letters."
-  text: "07/25 - Physical Review Letters"
-  image: "/assets/img/projects/physics-soliton-halo.png"
 
 - date: "2024"
   full_title: "A weak lensing perspective on nonlinear structure formation with fuzzy dark matter"

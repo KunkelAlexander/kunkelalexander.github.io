@@ -5,12 +5,19 @@
   text: "04/26 - NES emulator in Rust"
   image: "/assets/img/projects/projects-rustiness.png"
 
+
+- date: "02/2026"
+  title: "Train a GPT"
+  url: "https://github.com/KunkelAlexander/lets-play-with-gpts"
+  text: "02/26 - Train GPT from scratch"
+  image: "/assets/img/projects/projects-gpt.png"
+
+
 - date: "02/2026"
   title: "Voxellini"
   url: "https://kunkelalexander.github.io/voxellini/"
   text: "02/26 - Voxel editor"
   image: "/assets/img/projects/projects-voxellini.png"
-
 
 - date: "01/2026"
   title: "Glide & Seek"
@@ -24,14 +31,25 @@
   text: "11/25 - T&E chat bot"
   image: "/assets/img/projects/projects-tande-search.png"
 
+- date: "10/2025"
+  title: "BomberLE"
+  url: "https://github.com/KunkelAlexander/bomberman_rl"
+  text: "10/25 - DQN for Bomberman"
+  image: "/assets/img/projects/projects-bomberle.png"
+
+- date: "07/2025"
+  title: "Tic-Tac-Toe RL"
+  url: "https://github.com/KunkelAlexander/tictactoe_rl"
+  text: "07/25 - RL for Tic-Tac-Toe"
+  image: "/assets/img/projects/projects-tic-tac-toe.png"
+
+
 - date: "05/2025"
   title: "Neon Sand"
   url: "https://kunkelalexander.github.io/neon-sand/"
   text: "05/25 - Falling sand game"
   image: "/assets/img/projects/projects-neon-sand.png"
 
-- date: "01/2025"
-  title: "Flying Turtles"
-  url: "https://kunkelalexander.github.io/flying-turtles/"
-  text: "01/25 - Rayman bonus game"
-  image: "/assets/img/projects/projects-flying-turtles.png"
+
+
+

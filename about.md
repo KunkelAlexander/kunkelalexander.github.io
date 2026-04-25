@@ -23,7 +23,7 @@ title: About Alexander Kunkel
 {% include showcase.html
   id="te"
   title="T&amp;E publications"
-  data="te_coauthor"
+  data="te"
 %}
 
 {% include showcase.html

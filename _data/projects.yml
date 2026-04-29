@@ -1,10 +1,10 @@
 
 - date: "04/2026"
   title: "rustiNESs"
-  url: "https://kunkelalexander.github.io/rustiNESs/"
+  url: "https://github.com/KunkelAlexander/rustiNESs/"
+  app_url: "https://kunkelalexander.github.io/rustiNESs/"
   text: "04/26 - NES emulator in Rust"
   image: "/assets/img/projects/projects-rustiness.png"
-
 
 - date: "02/2026"
   title: "Train a GPT"
@@ -12,22 +12,30 @@
   text: "02/26 - Train GPT from scratch"
   image: "/assets/img/projects/projects-gpt.png"
 
-
 - date: "02/2026"
   title: "Voxellini"
-  url: "https://kunkelalexander.github.io/voxellini/"
+  url: "https://github.com/KunkelAlexander/voxellini/"
+  app_url: "https://kunkelalexander.github.io/voxellini/"
   text: "02/26 - Voxel editor"
   image: "/assets/img/projects/projects-voxellini.png"
 
 - date: "01/2026"
+  title: "Sheethon"
+  url: "https://github.com/KunkelAlexander/sheethon/"
+  text: "01/26 - Python & GSheets"
+  image: "/assets/img/projects/projects-sheethon.png"
+
+- date: "01/2026"
   title: "Glide & Seek"
-  url: "https://kunkelalexander.github.io/glide-and-seek/"
+  url: "https://github.com/KunkelAlexander/glide-and-seek/"
+  app_url: "https://kunkelalexander.github.io/glide-and-seek/"
   text: "01/26 - Ice maze game"
   image: "/assets/img/projects/projects-glide-and-seek.png"
 
 - date: "11/2025"
   title: "TEnviRAG"
-  url: "https://tandesearch.streamlit.app/"
+  url: "https://github.com/KunkelAlexander/tenvirag"
+  app_url: "https://tandesearch.streamlit.app/"
   text: "11/25 - T&E chat bot"
   image: "/assets/img/projects/projects-tande-search.png"
 
@@ -43,10 +51,10 @@
   text: "07/25 - RL for Tic-Tac-Toe"
   image: "/assets/img/projects/projects-tic-tac-toe.png"
 
-
 - date: "05/2025"
   title: "Neon Sand"
-  url: "https://kunkelalexander.github.io/neon-sand/"
+  url: "https://github.com/KunkelAlexander/neon-sand/"
+  app_url: "https://kunkelalexander.github.io/neon-sand/"
   text: "05/25 - Falling sand game"
   image: "/assets/img/projects/projects-neon-sand.png"
 

@@ -13,6 +13,7 @@ permalink: /guitar/
 {% for piece in site.guitar %}
 
 <article>
+<span class="date">{{ post.date | date_to_string }}</span>
 
 <h3>
 <a href="{{ piece.url }}">{{ piece.title }}</a>

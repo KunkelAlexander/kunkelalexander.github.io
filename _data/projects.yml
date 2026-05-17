@@ -1,6 +1,15 @@
 
+
+- date: "05/2026"
+  title: "Trigosynth"
+  url: "https://github.com/KunkelAlexander/trigosynth/"
+  app_url: "https://kunkelalexander.github.io/trigosynth/"
+  text: "05/26 - Listen to formulas"
+  image: "/assets/img/projects/projects-trigosynth.png"
+
+
 - date: "04/2026"
-  title: "rustiNESs"
+  title: "RustiNESs"
   url: "https://github.com/KunkelAlexander/rustiNESs/"
   app_url: "https://kunkelalexander.github.io/rustiNESs/"
   text: "04/26 - NES emulator in Rust"

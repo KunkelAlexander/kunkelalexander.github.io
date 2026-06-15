@@ -6,7 +6,9 @@ tempo: 70
 capo: 0
 audio: offspring-pretty-fly.m4a
 composer: Justin Sandercoe
---------------------------
+---
+
+<script src="{{ '/assets/js/chordscale.js' | relative_url }}"></script>
 
 # Justin Guitar - Music Theory Cheatsheet
 
@@ -586,15 +588,10 @@ Dreamy, smooth, jazzy
 
 Guitar shape:
 
-```text
-Cmaj7: x32000
-
-e|---0---
-B|---0---
-G|---0---
-D|---2---
-A|---3---
-E|---x---
+```chord
+name: Cmaj7
+frets: x 3 2 0 0 0
+fingers: x 3 2 0 0 0
 ```
 
 ---
@@ -1443,7 +1440,7 @@ Natural minor: b6
 
 ---
 
-# 23. Quick reference
+# Scale reference
 
 ## Major scale
 
@@ -1528,3 +1525,10 @@ Natural minor: b6
 ```text
 1 b3 b5 b7
 ```
+
+# Chord reference 
+
+Chords with Chord tones and chord shapes 
+Open C, D, A, G
+Shift open C to D, F, G6, A7 to get new chords
+Try the same with other chords

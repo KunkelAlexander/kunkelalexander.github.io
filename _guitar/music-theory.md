@@ -8,6 +8,9 @@ audio: offspring-pretty-fly.m4a
 ---
 
 <script src="{{ '/assets/js/chordscale.js' | relative_url }}"></script>
+<style>
+.chordscale-figure { display: block; margin: 1.5em auto; text-align: center; }
+</style>
 
 # Justin Guitar - Music Theory Cheatsheet
 
@@ -623,15 +626,10 @@ Bluesy, tense, wants to resolve
 
 Guitar shape:
 
-```text
-G7: 320001
-
-e|---1---
-B|---0---
-G|---0---
-D|---0---
-A|---2---
-E|---3---
+```chord
+name: G7
+frets: 3 2 0 0 0 1
+fingers: 3 2 0 0 0 1
 ```
 
 ---
@@ -664,15 +662,10 @@ Soft, soulful, mellow
 
 Guitar shape:
 
-```text
-Am7: x02010
-
-e|---0---
-B|---1---
-G|---0---
-D|---2---
-A|---0---
-E|---x---
+```chord
+name: Am7
+frets: x 0 2 0 1 0
+fingers: x 0 2 0 1 0
 ```
 
 ---
@@ -705,15 +698,10 @@ Unstable, jazzy, tense
 
 Guitar shape:
 
-```text
-Bm7b5: x2323x
-
-e|---x---
-B|---3---
-G|---2---
-D|---3---
-A|---2---
-E|---x---
+```chord
+name: Bm7b5
+frets: x 2 3 2 3 x
+fingers: x 1 3 2 4 x
 ```
 
 ---
@@ -742,15 +730,10 @@ Dsus2 = D E A
 
 Shape:
 
-```text
-Dsus2: xx0230
-
-e|---0---
-B|---3---
-G|---2---
-D|---0---
-A|---x---
-E|---x---
+```chord
+name: Dsus2
+frets: x x 0 2 3 0
+fingers: x x 0 1 3 0
 ```
 
 ---
@@ -771,15 +754,10 @@ Dsus4 = D G A
 
 Shape:
 
-```text
-Dsus4: xx0233
-
-e|---3---
-B|---3---
-G|---2---
-D|---0---
-A|---x---
-E|---x---
+```chord
+name: Dsus4
+frets: x x 0 2 3 3
+fingers: x x 0 1 3 4
 ```
 
 Suspended chords often want to resolve:
@@ -817,13 +795,11 @@ A C D E G
 
 ### A minor pentatonic box 1
 
-```text
-e|----------------5--8--
-B|------------5--8------
-G|--------5--7----------
-D|----5--7--------------
-A|5--7------------------
-E|5--8------------------
+```scale
+name: A Minor Pentatonic — Box 1
+frets: 5-8
+dots: 6:5 6:8 5:5 5:7 4:5 4:7 3:5 3:7 2:5 2:8 1:5 1:8
+roots: 6:5 4:7 1:5
 ```
 
 Scale degrees:
@@ -861,13 +837,11 @@ A C D Eb E G
 
 A minor blues scale box:
 
-```text
-e|----------------5--8--
-B|------------5--8------
-G|--------5--7--8-------
-D|----5--7--------------
-A|5--6--7---------------
-E|5--8------------------
+```scale
+name: A Minor Blues Scale — Box 1
+frets: 5-8
+dots: 6:5 6:8 5:5 5:6 5:7 4:5 4:7 3:5 3:7 3:8 2:5 2:8 1:5 1:8
+roots: 6:5 4:7 1:5
 ```
 
 The b5 creates tension. Do not sit on it for too long at first. Use it like hot sauce: a little can sound amazing.
@@ -890,13 +864,11 @@ A B C# E F#
 
 A major pentatonic box:
 
-```text
-e|----------------5--7--
-B|------------5--7------
-G|--------4--6----------
-D|----4--7--------------
-A|4--7------------------
-E|5--7------------------
+```scale
+name: A Major Pentatonic — Box 1
+frets: 4-7
+dots: 6:5 6:7 5:4 5:7 4:4 4:7 3:4 3:6 2:5 2:7 1:5 1:7
+roots: 6:5 4:7 1:5
 ```
 
 ### Minor pentatonic vs major pentatonic

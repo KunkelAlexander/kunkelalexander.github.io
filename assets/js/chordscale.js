@@ -95,6 +95,122 @@
     return { start: parseInt(m[1], 10), end: parseInt(m[2], 10) };
   }
 
+  // ---------- pitch / tuning ----------
+  var STD6 = [40, 45, 50, 55, 59, 64]; // E2 A2 D3 G3 B3 E4 (low -> high)
+  var SEMI = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+
+  // "E2" -> 40, "Bb3" -> 58, "45" -> 45 (raw MIDI passthrough)
+  function noteToMidi(tok) {
+    if (/^\d+$/.test(tok)) return parseInt(tok, 10);
+    var m = tok.match(/^([A-Ga-g])([#b]*)(-?\d+)$/);
+    if (!m) return null;
+    var acc = 0;
+    for (var i = 0; i < m[2].length; i++) acc += (m[2][i] === '#') ? 1 : -1;
+    return 12 * (parseInt(m[3], 10) + 1) + SEMI[m[1].toUpperCase()] + acc;
+  }
+
+  function midiToFreq(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+
+  // Open-string MIDI per string (index 0 = lowest string). Defaults to standard
+  // 6-string guitar; otherwise all-fourths from E2. Override with `tuning:`.
+  function tuningFor(cfg, n) {
+    if (cfg && cfg.tuning) {
+      var toks = cfg.tuning.trim().split(/\s+/).map(noteToMidi).filter(function (x) { return x != null; });
+      if (toks.length) {
+        while (toks.length < n) toks.push(toks[toks.length - 1] + 5);
+        return toks.slice(0, n);
+      }
+    }
+    if (n === 6) return STD6.slice();
+    var t = [];
+    for (var i = 0; i < n; i++) t.push(40 + 5 * i);
+    return t;
+  }
+
+  // Frequencies for a chord, low string -> high (natural downstrum order).
+  function chordNotes(cfg) {
+    var n = clampInt(cfg.strings, 6, 3, 12);
+    var frets = parseFrets(cfg.frets);
+    var tun = tuningFor(cfg, n);
+    var out = [];
+    for (var i = 0; i < n; i++) {
+      if (frets[i] === null || frets[i] === undefined) continue; // muted
+      out.push(midiToFreq(tun[i] + frets[i]));
+    }
+    return out;
+  }
+
+  // Frequencies for a scale's dots, sorted low -> high.
+  function scaleNotes(cfg) {
+    var n = clampInt(cfg.strings, 6, 3, 12);
+    var tun = tuningFor(cfg, n);
+    var out = parseDots(cfg.dots)
+      .filter(function (d) { return d.s >= 1 && d.s <= n; })
+      .map(function (d) { return midiToFreq(tun[n - d.s] + d.f); }); // string 1 = highest
+    out.sort(function (a, b) { return a - b; });
+    return out;
+  }
+
+  // ---------- audio engine (Karplus-Strong plucked string) ----------
+  var AC = null;
+  function ensureCtx() {
+    if (typeof window === 'undefined') return null;
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    if (!AC) AC = new Ctx();
+    if (AC.state === 'suspended' && AC.resume) AC.resume();
+    return AC;
+  }
+
+  function pluck(ctx, freq, when, dur, gain) {
+    var sr = ctx.sampleRate;
+    var N = Math.max(2, Math.round(sr / freq));
+    var len = Math.ceil(sr * dur);
+    var buf = ctx.createBuffer(1, len, sr);
+    var out = buf.getChannelData(0);
+    var ring = new Float32Array(N);
+    var i;
+    for (i = 0; i < N; i++) ring[i] = Math.random() * 2 - 1;
+    for (i = 0; i < N; i++) ring[i] = 0.5 * (ring[i] + ring[(i + 1) % N]); // warm the pluck
+    var idx = 0, decay = 0.996;
+    for (i = 0; i < len; i++) {
+      var cur = ring[idx];
+      out[i] = cur;
+      ring[idx] = 0.5 * (cur + ring[(idx + 1) % N]) * decay;
+      idx = (idx + 1) % N;
+    }
+    var src = ctx.createBufferSource(); src.buffer = buf;
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(gain, when);
+    g.gain.setTargetAtTime(0.0001, when + dur * 0.65, 0.25); // smooth tail
+    src.connect(g).connect(ctx.destination);
+    src.start(when);
+    src.stop(when + dur);
+  }
+
+  // Strum a chord (slight per-string delay = downstroke).
+  function play(freqs, opts) {
+    opts = opts || {};
+    var ctx = ensureCtx();
+    if (!ctx || !freqs || !freqs.length) return;
+    var t0 = ctx.currentTime + 0.02;
+    if (opts.arpeggio) {
+      var step = opts.step || 0.18;
+      var g = 0.22;
+      freqs.forEach(function (f, i) { pluck(ctx, f, t0 + i * step, 1.1, g); });
+    } else {
+      var spread = (opts.spread != null) ? opts.spread : 0.028;
+      var gc = Math.min(0.25, 0.9 / Math.max(1, freqs.length));
+      freqs.forEach(function (f, i) { pluck(ctx, f, t0 + i * spread, 2.6, gc); });
+    }
+  }
+
+  function audioEnabled(cfg, opts) {
+    if (opts && opts.audio === false) return false;
+    if (cfg && /^(off|false|no|0)$/i.test(cfg.audio || '')) return false;
+    return typeof window !== 'undefined' && !!(window.AudioContext || window.webkitAudioContext);
+  }
+
   // ---------- chord diagram ----------
   function renderChord(cfg) {
     var ROOT = DEFAULTS.rootColorVar;
@@ -323,8 +439,14 @@
     var st = document.createElement('style');
     st.id = 'chordscale-styles';
     st.textContent =
-      '.chordscale-figure{display:inline-block;margin:0.6em 0.8em 0.6em 0;vertical-align:top;text-align:center}' +
-      '.chordscale-svg{display:block;overflow:visible}';
+      '.chordscale-figure{display:inline-block;margin:0.6em 0.8em 0.6em 0;vertical-align:top;text-align:center;transition:transform .1s ease}' +
+      '.chordscale-svg{display:block;overflow:visible}' +
+      '.chordscale-figure.cs-playable{cursor:pointer;-webkit-user-select:none;user-select:none}' +
+      '.chordscale-figure.cs-playable:hover{opacity:.85}' +
+      '.chordscale-figure.cs-playable:focus{outline:2px solid var(--chordscale-root,#d6452c);outline-offset:4px;border-radius:4px}' +
+      '.chordscale-figure.cs-active{transform:scale(.97)}' +
+      '.cs-play{display:block;font-size:11px;line-height:1;opacity:.5;margin-top:1px}' +
+      '.chordscale-figure.cs-playable:hover .cs-play{opacity:.85}';
     document.head.appendChild(st);
   }
 
@@ -350,6 +472,28 @@
     fig.setAttribute('data-cs-done', '1');
     fig.innerHTML = svg;
     node.parentNode.replaceChild(fig, node);
+    return fig;
+  }
+
+  function makePlayable(fig, name, onPlay) {
+    fig.classList.add('cs-playable');
+    fig.setAttribute('role', 'button');
+    fig.setAttribute('tabindex', '0');
+    fig.setAttribute('aria-label', 'Play ' + (name || 'diagram'));
+    var badge = document.createElement('span');
+    badge.className = 'cs-play';
+    badge.setAttribute('aria-hidden', 'true');
+    badge.textContent = '\u25B6'; // ▶
+    fig.appendChild(badge);
+    var go = function () {
+      onPlay();
+      fig.classList.add('cs-active');
+      setTimeout(function () { fig.classList.remove('cs-active'); }, 180);
+    };
+    fig.addEventListener('click', go);
+    fig.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); go(); }
+    });
   }
 
   function renderAll(opts) {
@@ -360,12 +504,24 @@
     var scaleSel = opts.scaleSelector || DEFAULTS.scaleSelector;
 
     targetsFor(chordSel).forEach(function (t) {
-      try { replaceWith(t.node, renderChord(parseConfig(t.text))); }
-      catch (e) { if (global.console) console.error('chordscale (chord):', e); }
+      try {
+        var cfg = parseConfig(t.text);
+        var fig = replaceWith(t.node, renderChord(cfg));
+        if (audioEnabled(cfg, opts)) {
+          var notes = chordNotes(cfg);
+          if (notes.length) makePlayable(fig, cfg.name, function () { play(notes); });
+        }
+      } catch (e) { if (global.console) console.error('chordscale (chord):', e); }
     });
     targetsFor(scaleSel).forEach(function (t) {
-      try { replaceWith(t.node, renderScale(parseConfig(t.text))); }
-      catch (e) { if (global.console) console.error('chordscale (scale):', e); }
+      try {
+        var cfg2 = parseConfig(t.text);
+        var fig2 = replaceWith(t.node, renderScale(cfg2));
+        if (audioEnabled(cfg2, opts)) {
+          var notes2 = scaleNotes(cfg2);
+          if (notes2.length) makePlayable(fig2, cfg2.name, function () { play(notes2, { arpeggio: true }); });
+        }
+      } catch (e) { if (global.console) console.error('chordscale (scale):', e); }
     });
   }
 
@@ -373,7 +529,11 @@
     renderAll: renderAll,
     renderChord: renderChord,
     renderScale: renderScale,
-    parseConfig: parseConfig
+    parseConfig: parseConfig,
+    chordNotes: chordNotes,
+    scaleNotes: scaleNotes,
+    noteToMidi: noteToMidi,
+    play: play
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = ChordScale;

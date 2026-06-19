@@ -14,7 +14,7 @@ audio: offspring-pretty-fly.m4a
 
 # Justin Guitar - Music Theory Cheatsheet
 
-## 1. The stave and note names
+## The stave and note names
 
 On the treble clef stave:
 
@@ -34,7 +34,8 @@ Lines:  Every Good Boy Deserves Food
 ### Mapping the stave to the open guitar strings
 
 ![](https://i0.wp.com/acousticguitar.com/wp-content/uploads/2013/04/Tablature-Guitar.jpg)
-## 2. Sharps, flats, and key signatures
+
+## Sharps, flats, and key signatures
 
 A **sharp** raises a note by one semitone.
 
@@ -52,7 +53,7 @@ A **key signature** tells you which notes are usually sharp or flat in a piece o
 
 Think of it like setting the default weather for the song. If the key signature says “F#”, then every F is automatically F# unless the music tells you otherwise.
 
-## 3. The circle of fifths
+## The circle of fifths
 
 The circle of fifths is a big map of keys.
 
@@ -88,9 +89,8 @@ F C G D A E B
 
 This sequence is the engine behind the circle of fifths.
 
----
 
-# 5. Intervals
+## Intervals
 
 An **interval** is the distance between two notes.
 
@@ -98,9 +98,8 @@ Intervals are the building blocks of melodies, chords, riffs, and bass lines.
 
 Think of intervals like emotional colours. A major 3rd sounds bright, a minor 3rd sounds darker, a perfect 5th sounds strong, and a minor 2nd sounds tense.
 
----
 
-## Common intervals
+### Common intervals
 
 | Interval     | Distance from root | Example from C | Song memory aid                |
 | ------------ | -----------------: | -------------- | ------------------------------ |
@@ -131,9 +130,8 @@ Diatonic notes: those seven notes
 Chromatic notes: C# / Db, D# / Eb, F# / Gb, G# / Ab, A# / Bb
 ```
 
----
 
-# 6. The major scale
+## The major scale
 
 The major scale is the “home base” of Western music theory.
 
@@ -163,7 +161,7 @@ Scale degrees:
 
 Every major scale uses the same pattern. The starting note changes, but the distances stay the same.
 
-## Triads
+### Triads
 
 A **triad** is a three-note chord.
 
@@ -177,9 +175,8 @@ A **triad** is a three-note chord.
 
 A power chord is not technically a full major or minor chord because it has no 3rd. That is why it works so well with distortion: it sounds strong without clearly saying “happy” or “sad”.
 
----
 
-## Essential letter groups
+### Essential letter groups
 
 These are the natural-note triads:
 
@@ -195,25 +192,8 @@ G B D = G major
 
 These come from stacking every other note in C major.
 
----
 
-## Guitar chord diagrams
-
-In these diagrams:
-
-```text
-x = do not play
-0 = open string
-number = fret
-```
-
-Strings are written from thickest to thinnest:
-
-```text
-E A D G B e
-```
-
-## Why D, E, A chords have sharps
+### Why D, E, A chords have sharps
 
 When building major chords from natural letter names, some chords need sharps to keep the major formula:
 
@@ -239,9 +219,7 @@ B major = B D# F#
 
 So B major has a sharp 3rd and a sharp 5th.
 
----
-
-# 8. Inversions
+## Inversions
 
 A chord is in **root position** when the root is the lowest note.
 
@@ -261,9 +239,8 @@ Root position: C E G
 
 Inversions are like taking the same group photo but moving a different person to the front. The people are the same, but the shape feels different.
 
----
 
-# 9. Arpeggios
+## Arpeggios
 
 An **arpeggio** is a chord played one note at a time.
 
@@ -278,9 +255,7 @@ A useful analogy:
 
 They are extremely important for improvising because they let you outline the chord progression instead of just running up and down scales.
 
----
-
-# 10. Chords in a major key
+## Chords in a major key
 
 When you build a chord from each note of the major scale, you always get this pattern:
 
@@ -309,7 +284,6 @@ Major, Minor, Minor, Major, Major, Minor, Diminished
 
 This is one of the most useful patterns in all of music theory.
 
----
 
 ## Diatonic 7th chords in a major key
 
@@ -332,9 +306,7 @@ Formula sequence:
 Maj7, min7, min7, Maj7, 7, min7, min7b5
 ```
 
----
-
-# 11. Common chord progressions
+## Common chord progressions
 
 A **chord progression** is a sequence of chords.
 
@@ -385,9 +357,7 @@ vi = emotional / relative minor
 IV = warm lift
 ```
 
----
-
-## Royal Road progression
+### Royal Road progression
 
 Very popular in Japanese pop and anime music:
 
@@ -403,9 +373,7 @@ F G Em Am
 
 It has a strong emotional pull because it avoids landing on I too early. It keeps the listener floating.
 
----
-
-## Beatles trick
+### Beatles trick
 
 A classic colour move:
 
@@ -430,9 +398,7 @@ F minor = F Ab C
 
 That A dropping to Ab gives the progression its emotional “sigh”.
 
----
-
-# 12. Recognising keys by chords
+## Recognising keys by chords
 
 Some practical clues:
 
@@ -489,9 +455,8 @@ F = IV
 
 These are not absolute rules, but they are useful clues.
 
----
 
-# 13. Non-diatonic chords
+##  Non-diatonic chords
 
 A **diatonic** chord belongs naturally to the key.
 
@@ -517,9 +482,7 @@ The capital Roman numeral shows it is major. The fact that II is normally minor 
 
 Non-diatonic chords are not “wrong”. They are colour.
 
----
-
-# 14. Song structure
+## Song structure
 
 Common sections:
 
@@ -552,17 +515,13 @@ The bridge gives contrast before returning home.
 
 When learning a song, map the structure first. It makes the song easier to memorise.
 
----
-
-# 15. Seventh chords
+## Seventh chords
 
 Seventh chords add another note above the basic triad.
 
 They sound richer than plain major or minor chords.
 
----
-
-## Major 7
+### Major 7
 
 Symbol:
 
@@ -596,9 +555,7 @@ frets: x 3 2 0 0 0
 fingers: x 3 2 0 0 0
 ```
 
----
-
-## Dominant 7
+### Dominant 7
 
 Symbol:
 
@@ -632,9 +589,7 @@ frets: 3 2 0 0 0 1
 fingers: 3 2 0 0 0 1
 ```
 
----
-
-## Minor 7
+### Minor 7
 
 Symbol:
 
@@ -668,9 +623,7 @@ frets: x 0 2 0 1 0
 fingers: x 0 2 0 1 0
 ```
 
----
-
-## Minor 7 flat 5
+### Minor 7 flat 5
 
 Symbol:
 
@@ -703,18 +656,13 @@ name: Bm7b5
 frets: x 2 3 2 3 x
 fingers: x 1 3 2 4 x
 ```
-
----
-
-# 16. Suspended chords
+## Suspended chords
 
 A **suspended chord** replaces the 3rd with either the 2nd or the 4th.
 
 The 3rd tells us whether a chord is major or minor. If we remove it, the chord becomes temporarily unresolved.
 
----
-
-## Sus2
+### Sus2
 
 Formula:
 
@@ -736,9 +684,7 @@ frets: x x 0 2 3 0
 fingers: x x 0 1 3 0
 ```
 
----
-
-## Sus4
+### Sus4
 
 Formula:
 
@@ -769,17 +715,13 @@ Dsus2 -> D
 
 They can also take you outside the key briefly, depending on the note being suspended.
 
----
-
-# 17. Pentatonic scales
+## Pentatonic scales
 
 A **pentatonic scale** has five notes.
 
 Guitarists love pentatonic scales because they are easy to use and hard to make sound bad.
 
----
-
-## Minor pentatonic
+### Minor pentatonic
 
 Formula:
 
@@ -793,7 +735,7 @@ A minor pentatonic:
 A C D E G
 ```
 
-### A minor pentatonic box 1
+#### A minor pentatonic box 1
 
 ```scale
 name: A Minor Pentatonic — Box 1 (1 b3 4 5 b7)
@@ -813,7 +755,7 @@ A|4--5-------------------
 E|1--b3------------------
 ```
 
-### Adding the blue note
+#### Adding the blue note
 
 The **blue note** is the b5.
 
@@ -846,9 +788,7 @@ roots: 6:5 4:7 1:5
 
 The b5 creates tension. Do not sit on it for too long at first. Use it like hot sauce: a little can sound amazing.
 
----
-
-## Major pentatonic
+### Major pentatonic
 
 Formula:
 
@@ -871,7 +811,7 @@ dots: 6:5 6:7 5:4 5:7 4:4 4:7 3:4 3:6 2:5 2:7 1:5 1:7
 roots: 6:5 4:7 1:5
 ```
 
-### Minor pentatonic vs major pentatonic
+#### Minor pentatonic vs major pentatonic
 
 A useful trick:
 
@@ -888,9 +828,7 @@ C major pentatonic: C D E G A
 
 Same notes, different tonal centre.
 
----
-
-## Matching scales to chords
+### Matching scales to chords
 
 A simple rule:
 
@@ -914,17 +852,14 @@ A minor pentatonic over A7
 
 This works because the clash between C and C# gives blues its expressive sound.
 
----
-
-# 18. Minor scales
+## Minor scales
 
 There is not just one minor scale. There are several flavours of minor.
 
 Each one changes a note or two, creating a different mood.
 
----
 
-## Natural minor
+### Natural minor
 
 Formula:
 
@@ -951,9 +886,7 @@ Same notes, different home note.
 
 Natural minor is also called **Aeolian**.
 
----
-
-## Harmonic minor
+### Harmonic minor
 
 Formula:
 
@@ -976,9 +909,7 @@ Harmonic minor: A B C D E F G#
 
 That G# pulls strongly back to A. This is why harmonic minor sounds dramatic, classical, metal, flamenco, or “Eastern” to many ears.
 
----
-
-## Melodic minor
+### Melodic minor
 
 Formula, modern jazz version:
 
@@ -1008,9 +939,7 @@ Descending: 1 b7 b6 5 4 b3 2 1
 
 The reason: composers wanted the strong leading tone from harmonic minor, but the jump between b6 and 7 sounded awkward melodically. Raising the 6th smoothed it out.
 
----
-
-## Dorian
+### Dorian
 
 Formula:
 
@@ -1035,9 +964,7 @@ A Dorian:        A B C D E F# G
 
 Good for funk, soul, rock, folk, and modal jams.
 
----
-
-## Phrygian
+### Phrygian
 
 Formula:
 
@@ -1053,9 +980,7 @@ A Bb C D E F G A
 
 Phrygian is minor with a flattened 2nd. That b2 gives it a dark Spanish/flamenco/metal sound.
 
----
-
-## Locrian
+### Locrian
 
 Formula:
 
@@ -1071,9 +996,7 @@ A Bb C D Eb F G A
 
 Locrian is unstable because it has a b5 instead of a perfect 5th. It is rare as a “home” sound but useful for understanding m7b5 chords.
 
----
-
-# 19. Modes
+## Modes
 
 Modes are scales made by starting the major scale from different degrees.
 
@@ -1113,9 +1036,7 @@ Important point:
 
 For example, D Dorian uses the same notes as C major, but D must feel like the tonal centre.
 
----
-
-# 20. Chord extensions
+## Chord extensions
 
 Chord extensions add notes above the 7th.
 
@@ -1128,8 +1049,6 @@ The basic stack is:
 The 9th is the same letter as the 2nd, but one octave higher.
 The 11th is the same letter as the 4th.
 The 13th is the same letter as the 6th.
-
----
 
 ## Major extensions
 
@@ -1430,8 +1349,6 @@ Natural minor: b6
 8. Dont get discouraged
 9. Compare solo with chords
 10. Enjoy it 
-
----
 
 # Scale reference
 

@@ -796,7 +796,7 @@ A C D E G
 ### A minor pentatonic box 1
 
 ```scale
-name: A Minor Pentatonic — Box 1
+name: A Minor Pentatonic — Box 1 (1 b3 4 5 b7)
 frets: 5-8
 dots: 6:5 6:8 5:5 5:7 4:5 4:7 3:5 3:7 2:5 2:8 1:5 1:8
 roots: 6:5 4:7 1:5
@@ -865,7 +865,7 @@ A B C# E F#
 A major pentatonic box:
 
 ```scale
-name: A Major Pentatonic — Box 1
+name: A Major Pentatonic — Box 1 (1 2 3 5 6)
 frets: 4-7
 dots: 6:5 6:7 5:4 5:7 4:4 4:7 3:4 3:6 2:5 2:7 1:5 1:7
 roots: 6:5 4:7 1:5
@@ -1383,6 +1383,16 @@ Over Am, target:
 A C E
 ```
 
+First step, just play the third or the fifth for a whole bar over every chord. 
+
+For instance over, 
+
+Am (A C E), C (C E G), Em (E G B), G (G B D), 
+
+play E, G, B, D
+
+
+
 Then add notes from A minor pentatonic:
 
 ```text
@@ -1408,6 +1418,18 @@ Dorian: natural 6
 Phrygian: b2
 Natural minor: b6
 ```
+## Practice idea 5: Transcribe
+
+1. Listen until you hear it in your mind
+2. Make sure your guitar is tuned
+3. One note at a time
+4. Write it down
+5. 10 min at a streth
+6. Play transcription with song at low speed
+7. Check online when you're done
+8. Dont get discouraged
+9. Compare solo with chords
+10. Enjoy it 
 
 ---
 
@@ -1499,7 +1521,684 @@ Natural minor: b6
 
 # Chord reference 
 
+
+## Open chords
 Chords with Chord tones and chord shapes 
 Open C, D, A, G
 Shift open C to D, F, G6, A7 to get new chords
-Try the same with other chords
+Try the same with other open chords - shift them up the neck 
+
+## Slash chords
+
+```chord
+name: G/B (x-3-5-R-5-R)
+frets: x 2 0 0 3 3
+fingers: x 1 0 0 3 4
+```
+
+```chord
+name: G/B (x-3-5-R-5-x)
+frets: x 2 0 0 3 x
+fingers: x 1 0 0 3 x
+```
+
+```chord
+name: G/B (x-3-5-R-3-R)
+frets: x 2 0 0 0 3
+fingers: x 1 0 0 0 3
+```
+
+```chord
+name: C/G (5-R-3-5-R-3)
+frets: 3 3 2 0 1 0
+fingers: 4 3 2 0 1 0
+```
+
+```chord
+name: C/B (x-7-3-5-R-3)
+frets: x 2 2 0 1 0
+fingers: x 2 3 0 1 0
+```
+
+```chord
+name: Cadd2/B (x-7-2-5-R-3)
+frets: x 2 0 0 1 0
+fingers: x 2 0 0 1 0
+```
+
+## Dominant 7 chords
+
+The dominant 7 adds a b7 to the major triad, creating tension that wants to resolve to the IV or I.
+
+```chord
+name: E7 (R-5-b7-3-5-R)
+frets: 0 2 0 1 0 0
+fingers: 0 2 0 1 0 0
+```
+
+```chord
+name: E7 alt (R-5-R-3-b7-R)
+frets: 0 2 2 1 3 0
+fingers: 0 2 3 1 4 0
+```
+
+```chord
+name: C7 (x-R-3-b7-R-3)
+frets: x 3 2 3 1 0
+fingers: x 3 2 4 1 0
+```
+
+## Chord extensions
+
+If a 7 is in the chord, we call it a chord extension. If not, it becomes sus4/2.
+
+- Maj9 needs a maj7
+- Min9 needs a b7
+- Dom9 needs a b7
+
+```chord
+name: Maj 9 (x-R-3-7-9-x) — lush lounge sound; try alternating the bass note
+frets: x 2 1 3 2 x
+fingers: x 2 1 4 3 x
+```
+
+```chord
+name: Maj 13 (R-x-7-3-13-x) — atmospheric jazz
+frets: 0 x 1 1 2 x
+fingers: 0 x 1 1 2 x
+```
+
+```chord
+name: Min 9 (x-R-b3-b7-9-x) — bossa nova feel; heard in Polyphia "Playing God"
+frets: x 2 0 2 2 x
+fingers: x 1 0 3 2 x
+```
+
+```chord
+name: Dom 9 (x-R-3-b7-9-5)
+frets: x 2 1 2 2 2
+fingers: x 2 1 3 3 3
+```
+
+```chord
+name: Dom 13 (x-R-3-b7-9-13)
+frets: x 2 1 2 2 4
+fingers: x 2 1 3 3 4
+```
+
+```chord
+name: Maj7 (R-x-7-3-5-x)
+frets: 0 x 1 1 0 x
+fingers: 0 x 1 1 0 x
+```
+
+
+## E-shape barre chords
+
+Moveable shapes — root on the low E string. Shift up the neck to transpose.
+
+```chord
+name: Maj (R-5-R-3-5-R)
+frets: 0 2 2 1 0 0
+fingers: 0 2 3 1 0 0
+```
+
+```chord
+name: Min (R-5-R-b3-5-R)
+frets: 0 2 2 0 0 0
+fingers: 0 2 3 0 0 0
+```
+
+```chord
+name: 7 (R-5-b7-3-5-R)
+frets: 0 2 0 1 0 0
+fingers: 0 2 0 1 0 0
+```
+
+```chord
+name: Min7 (R-5-b7-b3-5-R)
+frets: 0 2 0 0 0 0
+fingers: 0 1 0 0 0 0
+```
+
+```chord
+name: Maj7 (R-x-7-3-5-x)
+frets: 0 x 1 1 0 x
+fingers: 0 x 1 1 0 x
+```
+
+```chord
+name: m7b5 half-dim (R-x-b7-b3-b5-x) — labeled "7b5" but voicing is minor, not dominant
+frets: 1 x 1 1 0 x
+fingers: 3 x 1 1 0 x
+```
+
+```chord
+name: Dim (R-b5-R-b3-x-R)
+frets: 0 1 2 0 x 0
+fingers: 0 1 2 0 x 0
+```
+
+```chord
+name: Maj7 moveable (R-x-R-3-5-7)
+frets: 1 x 3 2 1 0
+fingers: 1 x 3 2 1 0
+```
+
+```chord
+name: Jazz 7 (R-x-b7-3-5-x)
+frets: 0 x 0 1 0 x
+fingers: 0 x 0 1 0 x
+```
+
+```chord
+name: Maj7 "Hendrix shape" (R-x-R-3-7-R) — classic E7#9 is higher: 0 7 6 7 8 0
+frets: 0 x 2 1 4 0
+fingers: 0 x 2 1 4 0
+```
+
+```chord
+name: Nice 7 / F#7sus4 (x-x-R-3-5-b7)
+frets: x x 4 3 2 0
+fingers: x x 4 3 2 0
+```
+
+```chord
+name: 7#5 (R-x-b7-3-#5-x)
+frets: 0 x 0 1 1 x
+fingers: 0 x 0 1 1 x
+```
+
+```chord
+name: Jazz Min7 (R-x-b7-b3-5-R) — original "0x000" has missing digit; assuming 0x0000
+frets: 0 x 0 0 0 0
+fingers: 0 x 0 0 0 0
+```
+
+```chord
+name: Maj6 (R-x-6-3-5-x)
+frets: 1 x 0 2 1 x
+fingers: 3 x 0 2 1 x
+```
+
+```chord
+name: Maj6 alt (x-x-R-3-6-R)
+frets: x x 2 1 2 0
+fingers: x x 2 1 3 0
+```
+
+```chord
+name: Sus4 (R-5-R-4-5-R)
+frets: 0 2 2 2 0 0
+fingers: 0 2 3 4 0 0
+```
+
+```chord
+name: Sus4 practical (x-x-R-4-5-R)
+frets: x x 2 2 0 0
+fingers: x x 1 1 0 0
+```
+
+```chord
+name: Sus2 / Maj7sus2 (R-x-7-2-5-x) — low E adds maj7, making this technically Fmaj7sus2
+frets: 1 x 2 0 1 x
+fingers: 1 x 2 0 1 x
+```
+
+
+## A-shape barre chords
+
+Root sits on the A string.
+
+```chord
+name: Maj (x-R-5-R-3-5)
+frets: x 0 2 2 2 0
+fingers: x 0 1 2 3 0
+```
+
+```chord
+name: Min (x-R-5-R-b3-5)
+frets: x 0 2 2 1 0
+fingers: x 0 2 3 1 0
+```
+
+```chord
+name: Min7 (x-R-5-b7-b3-5)
+frets: x 0 2 0 1 0
+fingers: x 0 2 0 1 0
+```
+
+```chord
+name: 7 (x-R-5-b7-3-5)
+frets: x 0 2 0 2 0
+fingers: x 0 1 0 2 0
+```
+
+```chord
+name: m7b5 half-dim (x-R-b5-b7-b3-x) — "7b5min" and "7b5" both had identical tabs; merged into one
+frets: x 0 1 0 1 x
+fingers: x 0 1 0 2 x
+```
+
+```chord
+name: Min9 (x-R-b3-b7-9-x) — bossa nova feel
+frets: x 2 0 2 2 x
+fingers: x 1 0 3 2 x
+```
+
+```chord
+name: Maj6 (x-R-5-R-3-6)
+frets: x 0 2 2 2 2
+fingers: x 0 1 1 1 1
+```
+
+```chord
+name: Min6 (x-R-5-6-b3-x) — original "x13022x" has 7 chars; high e muted
+frets: x 1 3 0 2 x
+fingers: x 1 3 0 2 x
+```
+
+```chord
+name: Sus4 (x-R-5-R-4-x)
+frets: x 0 2 2 3 x
+fingers: x 0 1 2 3 x
+```
+
+```chord
+name: Sus2 (x-R-5-R-2-5)
+frets: x 0 2 2 0 0
+fingers: x 0 1 2 0 0
+```
+
+
+## D-shape barre chords
+
+Root sits on the D string.
+
+```chord
+name: Maj6 (x-x-R-5-6-3)
+frets: x x 0 2 0 2
+fingers: x x 0 1 0 2
+```
+
+```chord
+name: Min6 (x-x-R-5-6-b3)
+frets: x x 0 2 0 1
+fingers: x x 0 2 0 1
+```
+
+
+## C-shape barre chords
+
+Root typically on the A string.
+
+```chord
+name: Maj6 (x-R-3-6-R-x)
+frets: x 2 1 1 0 x
+fingers: x 2 1 1 0 x
+```
+
+```chord
+name: Min6 (x-R-b3-6-R-x)
+frets: x 2 0 1 0 x
+fingers: x 2 0 1 0 x
+```
+
+```chord
+name: Min6 alt (R-x-6-b3-5-x)
+frets: 1 x 0 1 1 x
+fingers: 3 x 0 1 1 x
+```
+
+
+## G-shape barre chords
+
+Root on the low E string; uses the open G chord fingering pattern.
+
+```chord
+name: Maj (R-3-5-R-3-R)
+frets: 3 2 0 0 0 3
+fingers: 3 2 0 0 0 4
+```
+
+```chord
+name: Min (R-b3-5-R-x-x)
+frets: 3 1 0 0 x x
+fingers: 3 1 0 0 x x
+```
+
+```chord
+name: Sus4(maj7) (7-x-5-R-4-x) — low E adds maj7, making this Gsus4(maj7); omit low E for pure sus4
+frets: 2 x 0 0 1 x
+fingers: 2 x 0 0 1 x
+```
+
+```chord
+name: Sus2 (R-x-5-2-5-x)
+frets: 3 x 0 2 3 x
+fingers: 3 x 0 2 4 x
+```
+
+```chord
+name: Add9 (R-x-5-9-3-x)
+frets: 3 x 0 2 0 x
+fingers: 3 x 0 2 0 x
+```
+
+
+
+Beginner chords everyone should know
+
+```chord
+name: Big G (R-3-5-R-#11-7) — corrected from 320022; the original adds #11 and maj7 extensions
+frets: 3 2 0 0 3 3
+fingers: 3 2 0 0 0 4
+```
+
+```chord
+name: Rock G / Gadd9 (R-9-5-R-5-R) — open A string adds the 9th
+frets: 3 0 0 0 3 3
+fingers: 3 0 0 0 0 4
+```
+
+```chord
+name: Cadd9 (x-R-3-5-9-5) — corrected from x32022 (which gave C#/F#); standard Cadd9 is x32033
+frets: x 3 2 0 3 3
+fingers: x 3 2 0 0 0
+```
+
+```chord
+name: Dsus4 with bass drone (2-5-R-5-R-4) — standard Dsus4 is xx0233; open low strings add a drone
+frets: 0 0 0 2 3 3
+fingers: 0 0 0 1 3 4
+```
+
+```chord
+name: A7sus4 (x-x-5-R-4-b7) — the high e adds b7, making this A7sus4
+frets: x x 2 2 3 3
+fingers: x x 1 1 3 4
+```
+
+```chord
+name: A7sus4 alt (x-x-5-b7-4-b7)
+frets: x x 2 0 3 3
+fingers: x x 1 0 3 4
+```
+
+```chord
+name: Em7 (x-5-R-b3-b7-b3)
+frets: x 2 2 0 3 3
+fingers: x 1 2 0 3 4
+```
+
+```chord
+name: Dadd11/F# (3-x-R-5-R-11)
+frets: 2 x 0 2 3 3
+fingers: 1 x 0 2 3 4
+```
+
+```chord
+name: F6/9 (x-x-R-3-6-9)
+frets: x x 3 2 3 3
+fingers: x x 4 2 3 3
+```
+
+# Scale reference
+
+## Major scales
+
+```scale
+name: A Major — Box 1 (1 2 3 4 5 6 7)
+frets: 5-8
+dots: 6:6 6:8 5:5 5:6 5:8 4:5 4:7 4:8 3:5 3:7 3:8 2:6 2:8 1:5 1:6
+roots: 4:7 1:5
+```
+
+```scale
+name: A Major Pentatonic — Box 1 (1 2 3 5 6)
+frets: 0-3
+dots: 6:1 6:3 5:0 5:3 4:0 4:3 3:0 3:2 2:1 2:3 1:1
+roots: 5:0 3:2
+```
+
+```scale
+name: A Major Pentatonic — Box 5 (1 2 3 5 6)
+frets: 5-8
+dots: 6:8 5:5 5:7 4:5 4:7 3:5 3:7 2:5 2:8 1:5 1:8
+roots: 4:7 1:5
+```
+
+## Minor scales
+
+```scale
+name: A Aeolian (Natural Minor) — Box 1 (1 2 b3 4 5 b6 b7)
+frets: 4-8
+dots: 6:5 6:7 6:8 5:5 5:7 5:8 4:5 4:7 3:4 3:5 3:7 2:5 2:6 2:8 1:5
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Harmonic Minor — Box 1 (1 2 b3 4 5 b6 7)
+frets: 4-8
+dots: 6:5 6:7 6:8 5:5 5:7 5:8 4:6 4:7 3:4 3:5 3:7 2:5 2:6 1:4 1:5
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Melodic Minor — Box 1 (1 2 b3 4 5 6 7)
+frets: 4-8
+dots: 6:6 6:8 5:4 5:6 5:8 4:5 4:7 4:8 3:5 3:6 3:8 2:6 2:8 1:5 1:6
+roots: 4:7 1:5
+```
+
+```scale
+name: A Minor Pentatonic — Box 1 (1 b3 4 5 b7)
+frets: 5-8
+dots: 6:5 6:8 5:5 5:7 4:5 4:7 3:5 3:7 2:5 2:8 1:5 1:8
+roots: 6:5 4:7 1:5
+```
+
+## Major scale modes
+
+```scale
+name: A Ionian (Major) — Box 1 (1 2 3 4 5 6 7)
+frets: 5-8
+dots: 6:6 6:8 5:5 5:6 5:8 4:5 4:7 4:8 3:5 3:7 3:8 2:6 2:8 1:5 1:6
+roots: 4:7 1:5
+```
+
+```scale
+name: A Dorian — Box 1 (1 2 b3 4 5 6 b7)
+frets: 5-8
+dots: 6:8 5:5 5:6 5:8 4:5 4:7 4:8 3:5 3:8 2:6 2:8 1:5 1:6 1:8
+roots: 4:7 1:5
+```
+
+```scale
+name: A Phrygian — Box 1 (1 b2 b3 4 5 b6 b7)
+frets: 5-8
+dots: 6:5 6:6 6:8 5:5 5:6 5:8 4:5 4:7 4:8 3:5 3:7 3:8 2:6 2:8 1:5 1:6 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Lydian — Box 1 (1 2 3 #4 5 6 7)
+frets: 5-8
+dots: 6:5 6:7 6:8 5:6 5:7 4:6 4:7 3:6 3:8 2:5 2:7 1:5 1:7 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Mixolydian — Box 1 (1 2 3 4 5 6 b7)
+frets: 5-8
+dots: 6:5 6:7 6:8 5:5 5:7 4:5 4:7 3:6 3:7 2:5 2:7 2:8 1:5 1:7 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Aeolian (Natural Minor) — Box 1 (1 2 b3 4 5 b6 b7)
+frets: 4-8
+dots: 6:5 6:7 6:8 5:5 5:7 5:8 4:5 4:7 3:4 3:5 3:7 2:5 2:6 2:8 1:5
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Locrian — Box 1 (1 b2 b3 4 b5 b6 b7)
+frets: 5-8
+dots: 6:5 6:6 6:8 5:5 5:6 5:8 4:5 4:7 3:5 3:7 3:8 2:6 2:8 1:5 1:6 1:8
+roots: 6:5 4:7 1:5
+```
+
+## Minor scale modes
+
+### Harmonic minor modes
+
+```scale
+name: A Harmonic Minor — Box 1 (1 2 b3 4 5 b6 7)
+frets: 4-8
+dots: 6:5 6:7 6:8 5:5 5:7 5:8 4:6 4:7 3:4 3:5 3:7 2:5 2:6 1:4 1:5
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Locrian #6 — Box 1 (1 b2 b3 4 b5 6 b7)
+frets: 5-8
+dots: 6:5 6:6 6:8 5:5 5:6 4:5 4:7 3:5 3:7 3:8 2:7 2:8 1:5 1:6 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Ionian #5 — Box 1 (1 2 3 4 #5 6 7)
+frets: 5-8
+dots: 6:5 6:7 5:5 5:8 4:6 4:7 3:6 3:7 2:6 2:7 1:5 1:7
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Dorian #4 — Box 1 (1 2 b3 #4 5 6 b7)
+frets: 5-8
+dots: 6:5 6:7 6:8 5:6 5:7 4:5 4:7 3:5 3:8 2:7 2:8 1:5 1:7 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Phrygian Dominant — Box 1 (1 b2 3 4 5 b6 b7)
+frets: 5-8
+dots: 6:5 6:6 5:5 5:7 5:8 4:5 4:7 3:6 3:7 2:5 2:6 2:8 1:5 1:6
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Lydian #2 — Box 1 (1 #2 3 #4 5 6 7)
+frets: 5-8
+dots: 6:5 6:8 5:6 5:7 4:6 4:7 3:5 3:6 3:8 2:5 2:7 1:5 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Super Locrian bb7 — Box 1 (1 b2 b3 b4 b5 b6 bb7)
+frets: 5-8
+dots: 6:5 6:6 6:8 5:6 5:8 4:7 4:8 3:5 3:6 3:8 2:6 2:7 1:5 1:6 1:8
+roots: 6:5 4:7 1:5
+```
+
+### Melodic minor modes
+
+```scale
+name: A Melodic Minor — Box 1 (1 2 b3 4 5 6 7)
+frets: 4-8
+dots: 6:6 6:8 5:4 5:6 5:8 4:5 4:7 4:8 3:5 3:6 3:8 2:6 2:8 1:5 1:6
+roots: 4:7 1:5
+```
+
+```scale
+name: A Dorian b2 — Box 1 (1 b2 b3 4 5 6 b7)
+frets: 5-8
+dots: 6:5 6:6 6:8 5:5 5:7 4:5 4:7 3:5 3:7 2:5 2:7 2:8 1:5 1:6 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Lydian Augmented — Box 1 (1 2 3 #4 #5 6 7)
+frets: 5-8
+dots: 6:5 6:7 5:6 5:8 4:6 4:7 3:6 3:8 2:6 2:7 1:5 1:7
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Lydian Dominant — Box 1 (1 2 3 #4 5 6 b7)
+frets: 5-8
+dots: 6:5 6:7 5:6 5:7 4:5 4:7 3:6 3:8 2:5 2:7 2:8 1:5 1:7
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Mixolydian b6 — Box 1 (1 2 3 4 5 b6 b7)
+frets: 5-8
+dots: 6:5 6:7 5:5 5:7 5:8 4:5 4:7 3:6 3:7 2:5 2:6 2:8 1:5 1:7
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Locrian #2 — Box 1 (1 2 b3 4 b5 b6 b7)
+frets: 5-8
+dots: 6:5 6:7 6:8 5:5 5:6 5:8 4:5 4:7 3:5 3:7 3:8 2:6 2:8 1:5 1:7 1:8
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Altered Scale — Box 1 (1 b2 #2 3 b5 b6 b7)
+frets: 5-8
+dots: 6:5 6:6 6:8 5:6 5:8 4:5 4:7 4:8 3:5 3:6 3:8 2:6 2:8 1:5 1:6 1:8
+roots: 6:5 4:7 1:5
+```
+
+## Blues
+
+```scale
+name: A Blues — Box 1 (1 b3 4 b5 5 b7)
+frets: 5-8
+dots: 6:5 6:8 5:5 5:6 5:7 5:8 4:5 4:7 3:5 3:6 3:7 3:8 2:5 2:8 1:5
+roots: 6:5 4:7 1:5
+```
+
+```scale
+name: A Hybrid Blues — Box 1 (1 2 b3 3 5 6)
+frets: 5-8
+dots: 6:5 6:8 5:5 5:6 5:7 4:5 4:7 3:5 3:7 3:8 2:5 2:7 2:8 1:5 1:7 1:8
+roots: 6:5 4:7 1:5
+```
+
+The CAGED shapes 
+
+```chord
+name: A Major — A shape (open)
+frets: x 0 2 2 2 0
+fingers: x 0 1 1 1 0
+```
+
+```chord
+name: A Major — G shape
+frets: 5 4 2 2 2 5
+fingers: 4 3 1 1 1 4
+```
+
+```chord
+name: A Major — E shape
+frets: 5 7 7 6 5 5
+fingers: 1 3 4 2 1 1
+```
+
+```chord
+name: A Major — D shape
+frets: x x 7 9 10 9
+fingers: x x 1 2 4 3
+```
+
+```chord
+name: A Major — C shape
+frets: x 12 11 9 10 9
+fingers: x 4 3 1 2 1
+```
+
+

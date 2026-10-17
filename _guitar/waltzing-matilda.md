@@ -2,9 +2,9 @@
 layout: post
 title: Waltzing Matilda
 date: 2026-10-17
-tempo: 100
+tempo: 120
 audio: waltzing-matilda.m4a
-composer: 
+composer: Australians
 instrument: classical guitar
 ---
 

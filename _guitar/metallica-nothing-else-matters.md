@@ -2,7 +2,9 @@
 layout: post
 title: Metallica - Nothing Else Matters
 date: 2026-10-24
+tempo: 120
 audio: metallica-nothing-else-matters.mp3
+composer: Metallica
 ---
 
 - [Justin Guitar - Nothing Else Matters - Intro](https://www.youtube.com/watch?v=mrQcTSzGoVM)

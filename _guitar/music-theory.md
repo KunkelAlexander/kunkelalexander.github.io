@@ -3,7 +3,6 @@ layout: post
 title: Justin Guitar - Music Theory
 date: 2026-06-15
 tempo: 70
-capo: 0
 audio: offspring-pretty-fly.m4a
 ---
 

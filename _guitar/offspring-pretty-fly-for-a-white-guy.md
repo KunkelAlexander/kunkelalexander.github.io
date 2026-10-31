@@ -3,7 +3,6 @@ layout: post
 title: The Offspring - Pretty Fly for a White Guy
 date: 2026-06-16
 tempo: 70
-capo: 0
 audio: the_offspring-pretty_fly_for_a_white_guy.m4a
 composer: The Offspring
 ---

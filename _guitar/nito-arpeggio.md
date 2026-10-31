@@ -1,9 +1,8 @@
 ---
 layout: post
-title: Arpeggio
+title: Ichika Nito - Arpeggio
 date: 2026-10-10
 tempo: 208
-capo: 0
 audio: toss-a-coin-to-your-witcher.m4a
 composer: Ichika Nito
 ---

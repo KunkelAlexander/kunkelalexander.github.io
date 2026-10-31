@@ -3,7 +3,6 @@ layout: post
 title: Sting - Shape of my Heart
 date: 2026-06-15
 tempo: 70
-capo: 0
 audio: sting-shape-of-my-heart.m4a
 ---
 

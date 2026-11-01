@@ -1,0 +1,32 @@
+# type: Interview | Quoted | Article | Audio | Video
+# Newest first. Entries without a date still need to be confirmed.
+
+- date: "05/26"
+  outlet: "Dominik Sipinski (Substack)"
+  type: "Interview"
+  title: "Contrail avoidance, aviation's easiest climate win"
+  url: "https://domsipinski.substack.com/p/contrail-avoidance-aviations-easiest"
+
+- date: "01/26"
+  outlet: "CleanTechnica"
+  type: "Quoted"
+  title: "Avoiding Contrails on Night & Winter Flights Is Aviation's Fastest Climate Win"
+  url: "https://cleantechnica.com/2026/01/19/avoiding-contrails-on-night-winter-flights-is-aviations-fastest-climate-win-new-te-study/"
+
+- date: "05/26"
+  outlet: "Merkur"
+  type: "Article"
+  title: "CO2-Emissionen: Flughafen Frankfurt gehört zu den schlimmsten der Welt"
+  url: "https://www.merkur.de/wissen/co-emissionen-flughafen-frankfurt-gehoert-zu-den-schlimmsten-der-welt-zr-94307805.html"
+
+- date: "05/26"
+  outlet: "MDR"
+  type: "Audio"
+  title: "Airport-Tracker: Hohe Emissionen deutscher Flughäfen"
+  url: "https://www.mdr.de/wissen/audios/audio-airport-tracker-hohe-emissionen-deutscher-flughaefen-100.html"
+
+- date: "05/26"
+  outlet: "Deutsche Welle"
+  type: "Video"
+  title: "Should Cannes Film Festival ban private jets?"
+  url: "https://www.youtube.com/shorts/LEp22L6Vv6M"

@@ -22,8 +22,6 @@ navigation:
       url: /index.html
     - title: About
       url: /about
-    - title: Guitar
-      url: /guitar
     - title: Contact
       url: /contact
 

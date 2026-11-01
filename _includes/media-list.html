@@ -1,0 +1,14 @@
+<section class="media-list">
+  <h2 id="media">In the media</h2>
+
+  <ul>
+    {% for item in site.data.media %}
+      <li>
+        <span class="media-meta">
+          {% if item.date %}{{ item.date }} · {% endif %}{{ item.outlet }} · {{ item.type }}
+        </span>
+        <a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>

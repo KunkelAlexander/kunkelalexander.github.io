@@ -11,7 +11,7 @@ title: About Alexander Kunkel
   </div>
 
   <p class="intro">Senior Data Analyst at Transport &amp; Environment, based in Brussels.</p>
-  <p>I am passionate about the environment, coffee, learning languages, playing the guitar, theoretical physics and mathematics.</p>
+  <p>I am passionate about the environment, coffee, learning languages, playing the <a href="{{ site.baseurl }}/guitar/">guitar</a>, theoretical physics and mathematics.</p>
 </div>
 
 {% include showcase.html
@@ -31,3 +31,5 @@ title: About Alexander Kunkel
   title="Tools &amp; Games"
   data="projects"
 %}
+
+{% include media-list.html %}

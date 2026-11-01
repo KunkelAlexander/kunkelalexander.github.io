@@ -40,8 +40,16 @@ $(document).ready(function () {
       </a>`;
   });
 
+  const hint = document.createElement("div");
+  hint.className = "project-drag-hint";
+  hint.setAttribute("aria-hidden", "true");
+  hint.innerHTML = "<span>&larr;</span> Drag to explore <span>&rarr;</span>";
+
   wrap.appendChild(track);
+  wrap.appendChild(hint);
   list.replaceWith(wrap);
+
+  const hideHint = () => hint.classList.add("hidden");
 
   let moved = false;
   let activePointerId = null;
@@ -175,6 +183,7 @@ $(document).ready(function () {
 
     if (Math.abs(mouseDelta) > 5) {
       moved = true;
+      hideHint();
     }
 
     const percentage = (mouseDelta / maxDelta) * -100;
@@ -187,10 +196,15 @@ $(document).ready(function () {
   wrap.addEventListener(
     "wheel",
     e => {
+      // Vertical wheel scrolls the page; only horizontal gestures
+      // (trackpad swipe, shift+wheel) move the panels.
+      const horizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      if (!horizontal && !e.shiftKey) return;
       e.preventDefault();
+      hideHint();
 
       const currentPct = parseFloat(track.dataset.percentage || "0");
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      const delta = horizontal ? e.deltaX : e.deltaY;
       const nextPct = currentPct + (delta / (window.innerWidth / 2)) * -100;
 
       setPosition(nextPct);

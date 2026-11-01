@@ -7,7 +7,7 @@ title: About Alexander Kunkel
   <h1 class="pageTitle">About Alexander Kunkel</h1>
 
   <div class="circular_image">
-    <img src="{{ site.baseurl }}/assets/img/about/2024.png" alt="">
+    <img src="{{ site.baseurl }}/assets/img/about/2024.webp" width="447" height="447" alt="">
   </div>
 
   <p class="intro">Senior Data Analyst at Transport &amp; Environment, based in Brussels.</p>

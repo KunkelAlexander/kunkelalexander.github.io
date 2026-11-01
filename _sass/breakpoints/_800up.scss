@@ -302,5 +302,10 @@ ALEX' MODIFICATIONS OF THE THEME
 	height: 160pt;
 	margin-left: 100pt;
 	margin-right: 40pt;
-	margin-bottom: 20pt; 
+	margin-bottom: 20pt;
+}
+
+// Keeps text beside the floated image instead of wrapping underneath it
+.about_text {
+	overflow: hidden;
 }

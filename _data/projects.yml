@@ -1,5 +1,33 @@
 
 
+- date: "10/2026"
+  title: "Craftiero"
+  url: "https://kunkelalexander.github.io/craftiero/"
+  app_url: "https://kunkelalexander.github.io/craftiero/"
+  text: "10/26 - 3D Liero-inspired game"
+  image: "/assets/img/projects/projects-craftiero.png"
+
+- date: "09/2026"
+  title: "Bomblero"
+  url: "https://kunkelalexander.github.io/bomblero/"
+  app_url: "https://kunkelalexander.github.io/bomblero/"
+  text: "09/26 - 2D Bomberman-Liero-inspired game"
+  image: "/assets/img/projects/projects-bomblero.png"
+
+- date: "09/2026"
+  title: "Mimikopi"
+  url: "https://kunkelalexander.github.io/mimikopi/"
+  app_url: "https://kunkelalexander.github.io/mimikopi/"
+  text: "09/26 - Guitar transcription"
+  image: "/assets/img/projects/projects-mimikopi.png"
+
+- date: "06/2026"
+  title: "PDF Tool"
+  url: "https://kunkelalexander.github.io/pdf-tool/"
+  app_url: "https://kunkelalexander.github.io/pdf-tool/"
+  text: "06/26 - Merge, split, reorder PDFs"
+  image: "/assets/img/projects/projects-pdf-tool.png"
+
 - date: "05/2026"
   title: "Trigosynth"
   url: "https://github.com/KunkelAlexander/trigosynth/"
